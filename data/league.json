@@ -1,0 +1,25 @@
+{
+  "format": "redraft",
+  "teams": 12,
+  "scoring": "ppr",
+  "roster": {
+    "QB": 1,
+    "RB": 2,
+    "WR": 2,
+    "TE": 1,
+    "FLEX": 2,
+    "DEF": 1,
+    "BENCH": 6
+  },
+  "flex_eligible": ["RB", "WR", "TE"],
+  "no_kicker": true,
+  "replacement_levels": {
+    "_comment": "Used by the L2 VBD engine. Approximate cutoffs for a 12-team PPR league with 2 RB / 2 WR / 1 TE / 2 FLEX starters.",
+    "QB": 12,
+    "RB": 30,
+    "WR": 36,
+    "TE": 15,
+    "DEF": 12
+  },
+  "sleeper_league_id": null
+}
