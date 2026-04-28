@@ -5,18 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="theme-color" content="#0d1b2a" />
-    <title>draft — fantasy football live assistant</title>
+    <title>draft</title>
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
     <main id="app">
       <header>
-        <h1>draft</h1>
-        <p id="status">connecting…</p>
+        <div class="title">
+          <h1>draft</h1>
+          <span id="mode-badge" class="badge">mock</span>
+        </div>
+        <div id="clock" class="clock"></div>
       </header>
-      <section id="board">
-        <p class="muted">Pick recommendations will appear here once the league ID is configured and the draft is live.</p>
-      </section>
+
+      <section id="controls" class="card"></section>
+      <section id="recommendations" class="card"></section>
+      <section id="signals" class="card"></section>
+      <section id="roster" class="card"></section>
+      <section id="board" class="card"></section>
+
+      <p id="status" class="muted"></p>
     </main>
     <script type="module" src="/src/main.js"></script>
   </body>

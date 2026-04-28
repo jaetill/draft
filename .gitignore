@@ -11,3 +11,6 @@ dist/
 spike/samples/players-nfl.json
 spike/samples/league*.json
 spike/samples/draft*.json
+
+# Generated at build time from Sleeper
+public/data/players.json

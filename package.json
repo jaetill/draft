@@ -5,9 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/build-players.mjs",
     "build": "vite build",
     "preview": "vite preview",
-    "probe": "node spike/probe.mjs"
+    "probe": "node spike/probe.mjs",
+    "build-players": "node scripts/build-players.mjs"
   },
   "devDependencies": {
     "vite": "^7.0.0"
