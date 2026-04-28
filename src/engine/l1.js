@@ -1,77 +1,59 @@
-// L1 engine — tier + roster need.
-// Pick the highest projected-value available player at a position you still need.
-// Defers to projection (not raw rank) so DEF/K-style "low ceiling" positions
-// don't get over-prioritized just because you have a starter shortfall there.
+// L1 engine — tier + roster need (simple).
+//
+// Uses VBD as the underlying value (same as L2) so positional scarcity is
+// respected — without scarcity, raw projection makes QB1 look better than
+// RB1, which is wrong in any league with multiple skill-position starters.
+//
+// What makes L1 "simpler" than L2: a flat need multiplier with no flex
+// distinction and no position-specific tweaks. L1 treats every starter
+// shortfall the same; L2 layers in flex preferences and per-position bias
+// (e.g., not over-prioritizing DEF, penalizing TE-as-flex).
 
 import { posLabel } from './labels.js';
 
-/**
- * Multiplier applied to a player's projection based on whether their position
- * fills a starter slot, a flex slot, or just adds depth.
- */
 function needMultiplier(player, state) {
   const needs = state.myNeeds();
-  const pos = player.position;
-  const flexEligible = state.cfg.flex_eligible.includes(pos);
-
-  if (needs.starterShortfall[pos] > 0) {
-    return pos === 'DEF' ? 1.0 : 1.5; // don't reach for DEF on shortfall alone
-  }
-  if (flexEligible && needs.flexShortfall > 0) {
-    if (pos === 'TE') return 0.9; // TE is technically flex-eligible but humans rarely flex TE
-    return 1.2;
-  }
-  if (needs.benchRoom > 0) {
-    if (pos === 'DEF') return 0.2; // never backup DEF early
-    if (pos === 'QB') return 0.55; // backup QB matters but rarely first move
-    return 1.0; // RB/WR/TE depth is gold in PPR
-  }
+  if (needs.starterShortfall[player.position] > 0) return 1.3;
+  if (needs.benchRoom > 0) return 1.0;
   return 0;
 }
 
-/**
- * Rank reasons we'd recommend a player. Used for the UI rationale string.
- */
 function rationale(player, state, rankings) {
-  const needs = state.myNeeds();
   const pos = player.position;
   const r = rankings.posRank.get(player.id);
   const t = rankings.tier(player);
+  const needs = state.myNeeds();
   const reasons = [];
 
-  if (needs.starterShortfall[pos] > 0 && pos !== 'DEF') {
-    reasons.push(`fills ${pos} starter slot`);
-  } else if (state.cfg.flex_eligible.includes(pos) && needs.flexShortfall > 0) {
-    reasons.push('flex-eligible, you still need flex');
+  if (needs.starterShortfall[pos] > 0) {
+    reasons.push(`fills ${pos} starter`);
   } else if (needs.benchRoom > 0) {
     reasons.push(`${posLabel(pos)} depth`);
   }
-
   reasons.push(`${pos}${r} (tier ${t})`);
   return reasons.join(' · ');
 }
 
-/**
- * Recommend top N picks for the team currently on the clock (typically you).
- *
- * @param {DraftState} state
- * @param {object} rankings - from buildRankings()
- * @param {number} n - how many to return
- * @returns {Array<{player, score, rationale, tier, posRank}>}
- */
 export function recommend(state, rankings, n = 5) {
+  const replacement = {};
+  for (const [pos, cutoff] of Object.entries(state.cfg.replacement_levels || {})) {
+    if (pos.startsWith('_')) continue;
+    replacement[pos] = rankings.replacementPoints(pos, cutoff);
+  }
+
   const available = state.available();
   const scored = [];
-
   for (const p of available) {
     const mult = needMultiplier(p, state);
     if (mult === 0) continue;
-    const value = rankings.projection(p);
-    const score = value * mult;
+    const projection = rankings.projection(p);
+    const repl = replacement[p.position] ?? 0;
+    const vbd = Math.max(0, projection - repl);
+    const score = vbd * mult;
     scored.push({
       player: p,
       score,
-      value,
+      vbd,
       mult,
       tier: rankings.tier(p),
       posRank: rankings.posRank.get(p.id) ?? 999

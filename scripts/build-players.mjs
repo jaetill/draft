@@ -26,6 +26,10 @@ let kept = 0;
 for (const [id, p] of Object.entries(raw)) {
   if (!p.active) continue;
   if (!FANTASY_POSITIONS.has(p.position)) continue;
+  // Sleeper leaves `active: true` on retired players (Brady, Brees, Gurley, etc.)
+  // but clears their team. No-team = not on an NFL roster = not draftable.
+  // DEFs are fine because their team field is set to their abbreviation.
+  if (!p.team) continue;
   players[id] = {
     id,
     name: p.full_name || `${p.first_name ?? ''} ${p.last_name ?? ''}`.trim(),

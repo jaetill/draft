@@ -40,13 +40,13 @@ export function renderControls(ui, state) {
       <label>slot
         <select id="slot-select" ${state.picks.length > 0 ? 'disabled' : ''}>${slots.join('')}</select>
       </label>
-      <label>engine
+      <label>base engine
         <select id="level-select">
-          <option value="l2" ${ui.level === 'l2' ? 'selected' : ''}>L2 — VBD</option>
+          <option value="l2" ${ui.level === 'l2' ? 'selected' : ''}>L2 — VBD (default)</option>
           <option value="l1" ${ui.level === 'l1' ? 'selected' : ''}>L1 — tier + need</option>
         </select>
       </label>
-      <label>thesis
+      <label>L4 thesis
         <select id="thesis-select">${thesisOpts}</select>
       </label>
     </div>
@@ -55,7 +55,10 @@ export function renderControls(ui, state) {
       <button id="undo-btn" class="secondary" ${state.picks.length === 0 ? 'disabled' : ''}>undo</button>
       <button id="reset-btn" class="secondary">reset</button>
     </div>
-    ${ui.thesis !== 'none' ? `<div class="muted" style="margin-top:8px;">${esc(THESES[ui.thesis].description)}</div>` : ''}
+    <div class="muted" style="margin-top:8px;">
+      <strong>L3 signals always on</strong> — position runs (≥5 in last 10) and ADP fallers (≥10 picks below ADP) appear inline as ⚡ on each recommendation.
+      ${ui.thesis !== 'none' ? `<br><strong>L4 active:</strong> ${esc(THESES[ui.thesis].description)}` : ''}
+    </div>
   `;
 }
 
