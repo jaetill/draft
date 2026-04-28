@@ -25,17 +25,18 @@ Live fantasy football draft assistant for Jason's redraft league. Polls the Slee
 | Deploy | GitHub Actions (OIDC) | Same pattern as meal-planner / carto. |
 
 ## AWS resources
-*All resources pending provisioning. Follow the "Adding a New App" checklist in workspace `CLAUDE.md`.*
 
 | Resource | ID / ARN | Region | Notes |
 |---|---|---|---|
-| S3 Bucket | `jaetill-draft` (planned) | us-east-2 | Public access blocked; CloudFront OAC only. |
-| CloudFront Distribution | TBD | global | Origin: S3 bucket via OAC. CNAME: draft.jaetill.com. |
-| ACM Certificate | TBD (us-east-1, required for CloudFront) | us-east-1 | For draft.jaetill.com. |
-| OIDC Deploy Role | `draft-github-deploy` (planned) | global | Trust scoped to `repo:jaetill/draft:ref:refs/heads/master`. Permissions: bucket sync + invalidation only. |
-| Route 53 Record | A alias `draft.jaetill.com` → CloudFront | global | Hosted zone ID Z2FDTNDATAQYW2 (always, for CloudFront). |
+| S3 Bucket | `jaetill-draft` | us-east-2 | Public access blocked; CloudFront OAC only. |
+| CloudFront Distribution | `E29VATR5EV095C` (`d2nlqjswb9m35y.cloudfront.net`) | global | Origin: S3 via OAC `E3NDD0LFUQNJ8J`. CNAME: draft.jaetill.com. SPA fallback: 403/404 → /index.html. |
+| ACM Certificate | `arn:aws:acm:us-east-1:214599503944:certificate/ac71c7d9-5a8a-4597-a08c-f1b6bf7d58eb` | us-east-1 | For draft.jaetill.com. DNS-validated. |
+| OIDC Deploy Role | `arn:aws:iam::214599503944:role/draft-github-deploy` | global | Trust scoped to `repo:jaetill/draft:ref:refs/heads/master`. |
+| Route 53 Records | A + AAAA alias `draft.jaetill.com` → CloudFront | global | Hosted zone `Z0736006XR97Z1TWPWN7` (jaetill.com). CloudFront alias zone Z2FDTNDATAQYW2. |
 
 No Lambda, no API Gateway, no Cognito. Sleeper API is hit directly from the browser.
+
+**Infra source-of-truth:** the JSON request bodies used to provision these resources are checked in under `.aws/` for reference and re-application.
 
 ## External APIs
 | Endpoint | Purpose | Polling |
@@ -110,7 +111,11 @@ Manual CSV refresh on draft morning. No scraping infrastructure. The `data/` fil
 - **Outside the SSO / Cognito family.** No portal integration, no group authz. If that decision changes, revisit.
 
 ## Open items
-- AWS resources need provisioning (see workspace `CLAUDE.md` "Adding a New App" checklist).
-- League ID needed once Sleeper league is created.
-- Verify Sleeper API CORS on first fetch.
-- First CSV downloads (FP, Boris Chen, FP projections) — defer until closer to draft; pre-season data is noisy.
+- **GitHub repo not yet created** — `gh` PAT lacks `repo` scope. Run `gh auth refresh -s repo` then `gh repo create jaetill/draft --private --source . --remote origin --push`.
+- **GitHub Actions secret** `AWS_ROLE_ARN` needs to be set to `arn:aws:iam::214599503944:role/draft-github-deploy` once the repo exists. CLI: `gh secret set AWS_ROLE_ARN --body "arn:aws:iam::214599503944:role/draft-github-deploy"`.
+- **Sleeper league ID** — provide once league is created; populate `data/league.json` `sleeper_league_id` and re-run `node spike/probe.mjs <LEAGUE_ID>` to capture league-scoped sample shapes.
+- **First CSV downloads** (FP rankings, Boris Chen tiers, FP projections) — defer until closer to draft; pre-season data is noisy until ~late August.
+
+## Workspace impact
+- Workspace `CLAUDE.md` "Adding a New App" checklist is missing the bootstrap-perms step. The `jaetill-dev` user needed `s3:CreateBucket`, ACM, and CloudFront-Create perms to provision a new app from CLI. Added managed policy `jaetill-dev-app-bootstrap` to fix; the next app will have it automatically. Worth folding back into the workspace checklist.
+- `jaetill-dev-s3` managed policy updated to v3 to include `jaetill-draft` bucket (per checklist item 7).

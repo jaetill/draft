@@ -15,7 +15,7 @@ jobs:
     env:
       AWS_REGION: us-east-2
       S3_BUCKET: jaetill-draft
-      CLOUDFRONT_DISTRIBUTION_ID: TBD_AFTER_PROVISIONING
+      CLOUDFRONT_DISTRIBUTION_ID: E29VATR5EV095C
 
     steps:
       - uses: actions/checkout@v4
