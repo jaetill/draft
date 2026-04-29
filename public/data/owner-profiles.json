@@ -1,0 +1,1097 @@
+{
+  "generated_at": "2026-04-29T00:17:57.694Z",
+  "seasons": [
+    "2025"
+  ],
+  "latestSeason": "2025",
+  "slotToOwner": {
+    "1": "wfadden",
+    "2": "Bruno2328",
+    "3": "CarstonT",
+    "4": "ForSkins25",
+    "5": "till1025",
+    "6": "PaTilley",
+    "7": "SethYo",
+    "8": "RockNRollDr",
+    "9": "NuttySequel",
+    "10": "cfadden",
+    "11": "Tilleydmt",
+    "12": "jaetill"
+  },
+  "owners": {
+    "wfadden": {
+      "seasons": [
+        "2025"
+      ],
+      "lastSeen": "2025",
+      "picks": {
+        "2025": [
+          {
+            "round": 1,
+            "pick": 1,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 24,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 25,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 48,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 49,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 72,
+            "pos": "TE"
+          },
+          {
+            "round": 7,
+            "pick": 73,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 96,
+            "pos": "QB"
+          },
+          {
+            "round": 9,
+            "pick": 97,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 120,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 121,
+            "pos": "RB"
+          },
+          {
+            "round": 12,
+            "pick": 144,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 145,
+            "pos": "TE"
+          },
+          {
+            "round": 14,
+            "pick": 168,
+            "pos": "DEF"
+          },
+          {
+            "round": 15,
+            "pick": 169,
+            "pos": "QB"
+          }
+        ]
+      },
+      "confidence": {},
+      "archetypes": []
+    },
+    "Bruno2328": {
+      "seasons": [
+        "2025"
+      ],
+      "lastSeen": "2025",
+      "picks": {
+        "2025": [
+          {
+            "round": 1,
+            "pick": 2,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 23,
+            "pos": "QB"
+          },
+          {
+            "round": 3,
+            "pick": 26,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 47,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 50,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 71,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 74,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 95,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 98,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 119,
+            "pos": "QB"
+          },
+          {
+            "round": 11,
+            "pick": 122,
+            "pos": "DEF"
+          },
+          {
+            "round": 12,
+            "pick": 143,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 146,
+            "pos": "WR"
+          },
+          {
+            "round": 14,
+            "pick": 167,
+            "pos": "TE"
+          },
+          {
+            "round": 15,
+            "pick": 170,
+            "pos": "TE"
+          }
+        ]
+      },
+      "confidence": {
+        "EarlyQB": 1,
+        "RobustRB": 1
+      },
+      "archetypes": [
+        "EarlyQB",
+        "RobustRB"
+      ]
+    },
+    "CarstonT": {
+      "seasons": [
+        "2025"
+      ],
+      "lastSeen": "2025",
+      "picks": {
+        "2025": [
+          {
+            "round": 1,
+            "pick": 3,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 22,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 27,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 46,
+            "pos": "TE"
+          },
+          {
+            "round": 5,
+            "pick": 51,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 70,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 75,
+            "pos": "QB"
+          },
+          {
+            "round": 8,
+            "pick": 94,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 99,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 118,
+            "pos": "DEF"
+          },
+          {
+            "round": 11,
+            "pick": 123,
+            "pos": "TE"
+          },
+          {
+            "round": 12,
+            "pick": 142,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 147,
+            "pos": "WR"
+          },
+          {
+            "round": 14,
+            "pick": 166,
+            "pos": "QB"
+          },
+          {
+            "round": 15,
+            "pick": 171,
+            "pos": "RB"
+          }
+        ]
+      },
+      "confidence": {},
+      "archetypes": []
+    },
+    "ForSkins25": {
+      "seasons": [
+        "2025"
+      ],
+      "lastSeen": "2025",
+      "picks": {
+        "2025": [
+          {
+            "round": 1,
+            "pick": 4,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 21,
+            "pos": "TE"
+          },
+          {
+            "round": 3,
+            "pick": 28,
+            "pos": "QB"
+          },
+          {
+            "round": 4,
+            "pick": 45,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 52,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 69,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 76,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 93,
+            "pos": "RB"
+          },
+          {
+            "round": 9,
+            "pick": 100,
+            "pos": "WR"
+          },
+          {
+            "round": 10,
+            "pick": 117,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 124,
+            "pos": "RB"
+          },
+          {
+            "round": 12,
+            "pick": 141,
+            "pos": "TE"
+          },
+          {
+            "round": 13,
+            "pick": 148,
+            "pos": "QB"
+          },
+          {
+            "round": 14,
+            "pick": 165,
+            "pos": "DEF"
+          },
+          {
+            "round": 15,
+            "pick": 172,
+            "pos": "RB"
+          }
+        ]
+      },
+      "confidence": {
+        "AnchorTE": 1,
+        "EarlyQB": 1
+      },
+      "archetypes": [
+        "AnchorTE",
+        "EarlyQB"
+      ]
+    },
+    "till1025": {
+      "seasons": [
+        "2025"
+      ],
+      "lastSeen": "2025",
+      "picks": {
+        "2025": [
+          {
+            "round": 1,
+            "pick": 5,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 20,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 29,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 44,
+            "pos": "TE"
+          },
+          {
+            "round": 5,
+            "pick": 53,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 68,
+            "pos": "QB"
+          },
+          {
+            "round": 7,
+            "pick": 77,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 92,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 101,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 116,
+            "pos": "TE"
+          },
+          {
+            "round": 11,
+            "pick": 125,
+            "pos": "DEF"
+          },
+          {
+            "round": 12,
+            "pick": 140,
+            "pos": "QB"
+          },
+          {
+            "round": 13,
+            "pick": 149,
+            "pos": "RB"
+          },
+          {
+            "round": 14,
+            "pick": 164,
+            "pos": "WR"
+          },
+          {
+            "round": 15,
+            "pick": 173,
+            "pos": "WR"
+          }
+        ]
+      },
+      "confidence": {
+        "RobustRB": 1
+      },
+      "archetypes": [
+        "RobustRB"
+      ]
+    },
+    "PaTilley": {
+      "seasons": [
+        "2025"
+      ],
+      "lastSeen": "2025",
+      "picks": {
+        "2025": [
+          {
+            "round": 1,
+            "pick": 6,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 19,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 30,
+            "pos": "QB"
+          },
+          {
+            "round": 4,
+            "pick": 43,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 54,
+            "pos": "TE"
+          },
+          {
+            "round": 6,
+            "pick": 67,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 78,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 91,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 102,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 115,
+            "pos": "DEF"
+          },
+          {
+            "round": 11,
+            "pick": 126,
+            "pos": "TE"
+          },
+          {
+            "round": 12,
+            "pick": 139,
+            "pos": "QB"
+          },
+          {
+            "round": 13,
+            "pick": 150,
+            "pos": "TE"
+          },
+          {
+            "round": 14,
+            "pick": 163,
+            "pos": "WR"
+          },
+          {
+            "round": 15,
+            "pick": 174,
+            "pos": "RB"
+          }
+        ]
+      },
+      "confidence": {
+        "EarlyQB": 1
+      },
+      "archetypes": [
+        "EarlyQB"
+      ]
+    },
+    "SethYo": {
+      "seasons": [
+        "2025"
+      ],
+      "lastSeen": "2025",
+      "picks": {
+        "2025": [
+          {
+            "round": 1,
+            "pick": 7,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 18,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 31,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 42,
+            "pos": "QB"
+          },
+          {
+            "round": 5,
+            "pick": 55,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 66,
+            "pos": "TE"
+          },
+          {
+            "round": 7,
+            "pick": 79,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 90,
+            "pos": "RB"
+          },
+          {
+            "round": 9,
+            "pick": 103,
+            "pos": "WR"
+          },
+          {
+            "round": 10,
+            "pick": 114,
+            "pos": "RB"
+          },
+          {
+            "round": 11,
+            "pick": 127,
+            "pos": "DEF"
+          },
+          {
+            "round": 12,
+            "pick": 138,
+            "pos": "TE"
+          },
+          {
+            "round": 13,
+            "pick": 151,
+            "pos": "RB"
+          },
+          {
+            "round": 14,
+            "pick": 162,
+            "pos": "QB"
+          },
+          {
+            "round": 15,
+            "pick": 175,
+            "pos": "WR"
+          }
+        ]
+      },
+      "confidence": {},
+      "archetypes": []
+    },
+    "RockNRollDr": {
+      "seasons": [
+        "2025"
+      ],
+      "lastSeen": "2025",
+      "picks": {
+        "2025": [
+          {
+            "round": 1,
+            "pick": 8,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 17,
+            "pos": "QB"
+          },
+          {
+            "round": 3,
+            "pick": 32,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 41,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 56,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 65,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 80,
+            "pos": "RB"
+          },
+          {
+            "round": 8,
+            "pick": 89,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 104,
+            "pos": "WR"
+          },
+          {
+            "round": 10,
+            "pick": 113,
+            "pos": "TE"
+          },
+          {
+            "round": 11,
+            "pick": 128,
+            "pos": "RB"
+          },
+          {
+            "round": 12,
+            "pick": 137,
+            "pos": "RB"
+          },
+          {
+            "round": 13,
+            "pick": 152,
+            "pos": "DEF"
+          },
+          {
+            "round": 14,
+            "pick": 161,
+            "pos": "QB"
+          },
+          {
+            "round": 15,
+            "pick": 176,
+            "pos": "RB"
+          }
+        ]
+      },
+      "confidence": {
+        "EarlyQB": 1
+      },
+      "archetypes": [
+        "EarlyQB"
+      ]
+    },
+    "NuttySequel": {
+      "seasons": [
+        "2025"
+      ],
+      "lastSeen": "2025",
+      "picks": {
+        "2025": [
+          {
+            "round": 1,
+            "pick": 9,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 16,
+            "pos": "TE"
+          },
+          {
+            "round": 3,
+            "pick": 33,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 40,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 57,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 64,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 81,
+            "pos": "RB"
+          },
+          {
+            "round": 8,
+            "pick": 88,
+            "pos": "QB"
+          },
+          {
+            "round": 9,
+            "pick": 105,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 112,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 129,
+            "pos": "QB"
+          },
+          {
+            "round": 12,
+            "pick": 136,
+            "pos": "RB"
+          },
+          {
+            "round": 13,
+            "pick": 153,
+            "pos": "WR"
+          },
+          {
+            "round": 14,
+            "pick": 160,
+            "pos": "RB"
+          },
+          {
+            "round": 15,
+            "pick": 177,
+            "pos": "DEF"
+          }
+        ]
+      },
+      "confidence": {
+        "AnchorTE": 1,
+        "HeroRB": 1
+      },
+      "archetypes": [
+        "AnchorTE",
+        "HeroRB"
+      ]
+    },
+    "cfadden": {
+      "seasons": [
+        "2025"
+      ],
+      "lastSeen": "2025",
+      "picks": {
+        "2025": [
+          {
+            "round": 1,
+            "pick": 10,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 15,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 34,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 39,
+            "pos": "QB"
+          },
+          {
+            "round": 5,
+            "pick": 58,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 63,
+            "pos": "RB"
+          },
+          {
+            "round": 7,
+            "pick": 82,
+            "pos": "TE"
+          },
+          {
+            "round": 8,
+            "pick": 87,
+            "pos": "RB"
+          },
+          {
+            "round": 9,
+            "pick": 106,
+            "pos": "WR"
+          },
+          {
+            "round": 10,
+            "pick": 111,
+            "pos": "TE"
+          },
+          {
+            "round": 11,
+            "pick": 130,
+            "pos": "QB"
+          },
+          {
+            "round": 12,
+            "pick": 135,
+            "pos": "RB"
+          },
+          {
+            "round": 13,
+            "pick": 154,
+            "pos": "WR"
+          },
+          {
+            "round": 14,
+            "pick": 159,
+            "pos": "DEF"
+          },
+          {
+            "round": 15,
+            "pick": 178,
+            "pos": "RB"
+          }
+        ]
+      },
+      "confidence": {},
+      "archetypes": []
+    },
+    "Tilleydmt": {
+      "seasons": [
+        "2025"
+      ],
+      "lastSeen": "2025",
+      "picks": {
+        "2025": [
+          {
+            "round": 1,
+            "pick": 11,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 14,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 35,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 38,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 59,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 62,
+            "pos": "RB"
+          },
+          {
+            "round": 7,
+            "pick": 83,
+            "pos": "TE"
+          },
+          {
+            "round": 8,
+            "pick": 86,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 107,
+            "pos": "QB"
+          },
+          {
+            "round": 10,
+            "pick": 110,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 131,
+            "pos": "RB"
+          },
+          {
+            "round": 12,
+            "pick": 134,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 155,
+            "pos": "RB"
+          },
+          {
+            "round": 14,
+            "pick": 158,
+            "pos": "RB"
+          },
+          {
+            "round": 15,
+            "pick": 179,
+            "pos": "DEF"
+          }
+        ]
+      },
+      "confidence": {},
+      "archetypes": []
+    },
+    "jaetill": {
+      "seasons": [
+        "2025"
+      ],
+      "lastSeen": "2025",
+      "picks": {
+        "2025": [
+          {
+            "round": 1,
+            "pick": 12,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 13,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 36,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 37,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 60,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 61,
+            "pos": "RB"
+          },
+          {
+            "round": 7,
+            "pick": 84,
+            "pos": "TE"
+          },
+          {
+            "round": 8,
+            "pick": 85,
+            "pos": "RB"
+          },
+          {
+            "round": 9,
+            "pick": 108,
+            "pos": "WR"
+          },
+          {
+            "round": 10,
+            "pick": 109,
+            "pos": "RB"
+          },
+          {
+            "round": 11,
+            "pick": 132,
+            "pos": "WR"
+          },
+          {
+            "round": 12,
+            "pick": 133,
+            "pos": "QB"
+          },
+          {
+            "round": 13,
+            "pick": 156,
+            "pos": "QB"
+          },
+          {
+            "round": 14,
+            "pick": 157,
+            "pos": "WR"
+          },
+          {
+            "round": 15,
+            "pick": 180,
+            "pos": "DEF"
+          }
+        ]
+      },
+      "confidence": {},
+      "archetypes": []
+    }
+  }
+}

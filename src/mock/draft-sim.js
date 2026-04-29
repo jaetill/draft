@@ -1,13 +1,15 @@
-// Mock draft simulator. Other teams pick by ADP-ish heuristic (search_rank +
-// roster-need filtering). Lets the engine and UI be exercised end-to-end without
-// a live Sleeper draft.
+// Mock draft simulator. Other teams pick by:
+//   1. ADP heuristic (top by search_rank, capped per position)
+//   2. Owner archetype bias (Anchor TE / Early QB / Hero RB / Zero RB / Robust RB),
+//      pulled from owner-profiles.json — NuttySequel reaches for an elite TE in R2
+//      because that's what NuttySequel did in 2025.
+//
+// Without history, every opponent reduces to "Default" which is just step 1.
+
+import { opponentBias, profileForSlot } from '../owners.js';
 
 const POS_LIMITS = { QB: 2, RB: 8, WR: 8, TE: 2, DEF: 1 };
 
-/**
- * Compute a team's roster (by slot 1..N) from current picks.
- * Returns { 1: {QB:[],RB:[]...}, 2: {...}, ... }
- */
 function rostersBySlot(state) {
   const out = {};
   for (let s = 1; s <= state.teams; s++) {
@@ -23,53 +25,60 @@ function rostersBySlot(state) {
 }
 
 /**
- * Pick a player for the team that's currently on the clock. Heuristic:
- *   1. Top 15 available by search_rank.
- *   2. Filter out positions that would exceed POS_LIMITS for this team.
- *   3. Among remaining, weight toward higher search_rank with mild randomness
- *      so two simulations don't produce identical drafts.
+ * Pick a player for the team currently on the clock.
+ * @param {DraftState} state
+ * @param {object|null} ownerProfiles - from owner-profiles.json
+ * @param {() => number} rng
  */
-export function pickForOpponent(state, rng = Math.random) {
+export function pickForOpponent(state, ownerProfiles = null, rng = Math.random) {
   const available = state.available();
   const slot = state.currentSlot;
+  const round = Math.ceil(state.currentPick / state.teams);
   const rosters = rostersBySlot(state);
   const myCount = rosters[slot];
 
-  const candidates = [];
+  const profile = profileForSlot(ownerProfiles, slot);
+  const archetype = profile?.primary;
+
+  // Pull a wider candidate window so archetype bias has room to reshuffle.
+  const pool = [];
   for (const p of available) {
     if ((myCount[p.position] ?? 0) >= POS_LIMITS[p.position]) continue;
-    candidates.push(p);
-    if (candidates.length >= 15) break;
+    pool.push(p);
+    if (pool.length >= 25) break;
   }
-  if (candidates.length === 0) return available[0]; // fallback
+  if (pool.length === 0) return available[0];
 
-  // Weighted pick from top 3, biased toward the top.
-  const top = candidates.slice(0, Math.min(3, candidates.length));
+  // Score = inverse search_rank * archetype bias.
+  const scored = pool.map((p) => {
+    const base = 1000 - Math.min(p.search_rank, 999);
+    const bias = opponentBias(archetype, p, round);
+    return { player: p, score: base * bias };
+  });
+  scored.sort((a, b) => b.score - a.score);
+
+  // Weighted pick from top 3 with mild randomness.
+  const top = scored.slice(0, Math.min(3, scored.length));
   const weights = [0.65, 0.25, 0.1].slice(0, top.length);
   const r = rng();
   let acc = 0;
   for (let i = 0; i < top.length; i++) {
     acc += weights[i];
-    if (r < acc) return top[i];
+    if (r < acc) return top[i].player;
   }
-  return top[top.length - 1];
+  return top[top.length - 1].player;
 }
 
-/**
- * Run picks for opponents until it's my turn or the draft is complete.
- * Returns the array of opponent picks made this call.
- */
-export function simulateUntilMyTurn(state, rng) {
+export function simulateUntilMyTurn(state, ownerProfiles = null, rng) {
   const made = [];
   while (!state.isComplete && !state.isMyTurn) {
-    const player = pickForOpponent(state, rng);
+    const player = pickForOpponent(state, ownerProfiles, rng);
     state.addPick(player.id);
     made.push({ pick: state.picks[state.picks.length - 1], player });
   }
   return made;
 }
 
-/** Optional: deterministic seed for reproducible sims. */
 export function seededRng(seed) {
   let s = seed | 0;
   return () => {

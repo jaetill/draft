@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "node scripts/build-players.mjs",
+    "prebuild": "node scripts/build-players.mjs && node scripts/build-owner-profiles.mjs",
     "build": "vite build",
     "preview": "vite preview",
     "probe": "node spike/probe.mjs",

@@ -10,19 +10,28 @@ const $ = (id) => document.getElementById(id);
 const uiState = { thesis: 'none', level: 'l2', mode: 'mock', live: null };
 let state;
 let rankings;
+let ownerProfiles = null;
 let live = null;
 
 async function loadData() {
-  const [cfg, players] = await Promise.all([
+  const [cfg, players, ownerProfiles] = await Promise.all([
     fetch('/data/league.json').then((r) => r.json()),
-    fetch('/data/players.json').then((r) => r.json())
+    fetch('/data/players.json').then((r) => r.json()),
+    fetch('/data/owner-profiles.json')
+      .then((r) => (r.ok ? r.json() : null))
+      .catch(() => null)
   ]);
-  return { cfg, players };
+  return { cfg, players, ownerProfiles };
 }
 
 function render() {
   const recs = state.isMyTurn
-    ? recommend(state, rankings, { level: uiState.level, thesis: uiState.thesis, n: 5 })
+    ? recommend(state, rankings, {
+        level: uiState.level,
+        thesis: uiState.thesis,
+        n: 5,
+        ownerProfiles
+      })
     : [];
 
   $('mode-badge').textContent = uiState.mode;
@@ -31,7 +40,7 @@ function render() {
   $('recommendations').innerHTML = ui.renderRecommendations(recs, state, uiState.mode);
   $('signals').innerHTML = ui.renderSignals(state, recs);
   $('roster').innerHTML = ui.renderRoster(state);
-  $('board').innerHTML = ui.renderBoard(state);
+  $('board').innerHTML = ui.renderBoard(state, 12, ownerProfiles);
 
   attachHandlers();
 }
@@ -90,7 +99,7 @@ function attachHandlers() {
   $('step-btn')?.addEventListener('click', () => {
     if (uiState.mode !== 'mock') return;
     if (!state.isMyTurn && !state.isComplete) {
-      simulateUntilMyTurn(state);
+      simulateUntilMyTurn(state, ownerProfiles);
       render();
     }
   });
@@ -112,7 +121,7 @@ function attachHandlers() {
       const id = el.getAttribute('data-player-id');
       if (!id || !state.isMyTurn) return;
       state.addPick(id);
-      simulateUntilMyTurn(state);
+      simulateUntilMyTurn(state, ownerProfiles);
       render();
     });
   });
@@ -120,13 +129,17 @@ function attachHandlers() {
 
 async function init() {
   try {
-    const { cfg, players } = await loadData();
+    const { cfg, players, ownerProfiles: profiles } = await loadData();
+    ownerProfiles = profiles;
     rankings = buildRankings(players);
     state = new DraftState(cfg, players, 6);
     render();
-    const liveHint = cfg.sleeper_league_id ? ` · live mode wired to ${cfg.sleeper_league_name || cfg.sleeper_league_id}` : '';
+    const liveHint = cfg.sleeper_league_id ? ` · live: ${cfg.sleeper_league_name || cfg.sleeper_league_id}` : '';
+    const profileHint = ownerProfiles
+      ? ` · ${Object.keys(ownerProfiles.owners || {}).length} owner profiles from ${(ownerProfiles.seasons || []).join(',')}`
+      : ' · no owner profiles';
     $('status').textContent =
-      `${Object.keys(players).length} players loaded · synthetic rankings (no CSV yet)${liveHint}`;
+      `${Object.keys(players).length} players · synthetic rankings${liveHint}${profileHint}`;
   } catch (err) {
     $('status').textContent = `error: ${err.message}`;
     console.error(err);

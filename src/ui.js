@@ -2,6 +2,7 @@
 
 import { THESES } from './engine/recommend.js';
 import { posLabel } from './engine/labels.js';
+import { ARCHETYPE_LABELS, profileForSlot } from './owners.js';
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
@@ -159,24 +160,57 @@ export function renderRoster(state) {
   `;
 }
 
-export function renderBoard(state, n = 12) {
+export function renderBoard(state, n = 12, ownerProfiles = null) {
   const recent = state.picks.slice(-n).reverse();
+
+  // Upcoming picks preview (next 4 slots) with archetype hints.
+  let upcomingHtml = '';
+  if (ownerProfiles && !state.isComplete) {
+    const upcoming = [];
+    for (let i = 0; i < 4 && state.currentPick + i <= state.totalPicks; i++) {
+      const pickNo = state.currentPick + i;
+      const slot = state.slotAtPick(pickNo);
+      const profile = profileForSlot(ownerProfiles, slot);
+      upcoming.push({ pickNo, slot, profile, mine: slot === state.mySlot });
+    }
+    upcomingHtml = `
+      <h2>up next</h2>
+      <ul class="board-list" style="margin-bottom:12px;">
+        ${upcoming.map((u) => {
+          const tag = u.profile?.primary
+            ? `<span class="signal" style="display:inline">⚡ ${esc(ARCHETYPE_LABELS[u.profile.primary] || u.profile.primary)}</span>`
+            : '';
+          const name = u.profile?.name || `slot ${u.slot}`;
+          return `
+            <li class="board-item ${u.mine ? 'my-pick' : ''}">
+              <span class="pick-no">#${u.pickNo}</span>
+              <span class="slot" style="grid-column:2/4;">${esc(name)} ${tag}</span>
+              <span class="slot">slot ${u.slot}</span>
+            </li>
+          `;
+        }).join('')}
+      </ul>
+    `;
+  }
+
   if (recent.length === 0) {
-    return `<h2>recent picks</h2><p class="muted">no picks yet.</p>`;
+    return `${upcomingHtml}<h2>recent picks</h2><p class="muted">no picks yet.</p>`;
   }
   const items = recent.map((pick) => {
     const p = state.players[pick.playerId];
     const mine = pick.slot === state.mySlot ? 'my-pick' : '';
+    const profile = ownerProfiles ? profileForSlot(ownerProfiles, pick.slot) : null;
+    const owner = profile?.name ? esc(profile.name) : `slot ${pick.slot}`;
     return `
       <li class="board-item ${mine}">
         <span class="pick-no">#${pick.pick}</span>
         <span class="pos ${p.position}">${posLabel(p.position)}</span>
         <span>${esc(p.name)}</span>
-        <span class="slot">slot ${pick.slot}</span>
+        <span class="slot">${owner}</span>
       </li>
     `;
   }).join('');
-  return `<h2>recent picks</h2><ul class="board-list">${items}</ul>`;
+  return `${upcomingHtml}<h2>recent picks</h2><ul class="board-list">${items}</ul>`;
 }
 
 export function renderSignals(state, recs) {
