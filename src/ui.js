@@ -34,11 +34,41 @@ export function renderControls(ui, state) {
 
   const onClock = state.isMyTurn || state.isComplete;
 
+  const isLive = ui.mode === 'live';
+  const slotLocked = isLive || state.picks.length > 0;
+
+  let liveStatusHtml = '';
+  if (isLive && ui.live) {
+    const s = ui.live;
+    const statusLabel = {
+      pre_draft: 'pre-draft (waiting for commissioner to start)',
+      drafting: 'DRAFTING — live',
+      paused: 'paused',
+      complete: 'complete'
+    }[s.draftStatus] || s.draftStatus || 'unknown';
+    const polledAgo = s.lastPollAt
+      ? `${Math.round((Date.now() - s.lastPollAt.getTime()) / 1000)}s ago`
+      : 'never';
+    liveStatusHtml = `
+      <div class="muted" style="margin-top:8px;">
+        <strong>${esc(s.leagueName || 'league')}</strong> · status: ${esc(statusLabel)} · last poll: ${polledAgo}
+        ${s.lastError ? `<br><span style="color:var(--bad)">error: ${esc(s.lastError)}</span>` : ''}
+        ${!s.orderSet && s.draftStatus === 'pre_draft' ? '<br>draft order not set yet — commissioner will assign slots before draft.' : ''}
+      </div>
+    `;
+  }
+
   return `
     <h2>controls</h2>
     <div class="controls-row">
+      <label>mode
+        <select id="mode-select">
+          <option value="mock" ${ui.mode === 'mock' ? 'selected' : ''}>mock (practice)</option>
+          <option value="live" ${ui.mode === 'live' ? 'selected' : ''}>live (Sleeper)</option>
+        </select>
+      </label>
       <label>slot
-        <select id="slot-select" ${state.picks.length > 0 ? 'disabled' : ''}>${slots.join('')}</select>
+        <select id="slot-select" ${slotLocked && !isLive ? 'disabled' : ''}>${slots.join('')}</select>
       </label>
       <label>base engine
         <select id="level-select">
@@ -51,10 +81,11 @@ export function renderControls(ui, state) {
       </label>
     </div>
     <div class="controls-row" style="margin-top:8px;">
-      <button id="step-btn" ${onClock ? 'disabled' : ''}>auto-pick to my turn</button>
-      <button id="undo-btn" class="secondary" ${state.picks.length === 0 ? 'disabled' : ''}>undo</button>
-      <button id="reset-btn" class="secondary">reset</button>
+      <button id="step-btn" ${isLive || onClock ? 'disabled' : ''}>auto-pick to my turn</button>
+      <button id="undo-btn" class="secondary" ${isLive || state.picks.length === 0 ? 'disabled' : ''}>undo</button>
+      <button id="reset-btn" class="secondary" ${isLive ? 'disabled' : ''}>reset</button>
     </div>
+    ${liveStatusHtml}
     <div class="muted" style="margin-top:8px;">
       <strong>L3 signals always on</strong> — position runs (≥5 in last 10) and ADP fallers (≥10 picks below ADP) appear inline as ⚡ on each recommendation.
       ${ui.thesis !== 'none' ? `<br><strong>L4 active:</strong> ${esc(THESES[ui.thesis].description)}` : ''}
@@ -62,16 +93,22 @@ export function renderControls(ui, state) {
   `;
 }
 
-export function renderRecommendations(recs, state) {
+export function renderRecommendations(recs, state, mode = 'mock') {
   if (state.isComplete) {
     return `<h2>recommendations</h2><p class="muted">draft complete.</p>`;
   }
   if (!state.isMyTurn) {
+    if (mode === 'live') {
+      return `<h2>recommendations</h2><p class="muted">other team on the clock — picks will sync from Sleeper.</p>`;
+    }
     return `<h2>recommendations</h2><p class="muted">other team on the clock — auto-pick to advance.</p>`;
   }
   if (recs.length === 0) {
     return `<h2>recommendations</h2><p class="muted">no recommendations available.</p>`;
   }
+  const heading = mode === 'live'
+    ? `<h2>your pick — recommendation</h2>`
+    : `<h2>your pick — tap to draft</h2>`;
   const items = recs.map((r, i) => {
     const tierClass = r.tier <= 3 ? `tier-${r.tier}` : '';
     const signals = (r.signals || [])
@@ -88,7 +125,7 @@ export function renderRecommendations(recs, state) {
       </li>
     `;
   }).join('');
-  return `<h2>your pick — tap to draft</h2><ul class="rec-list">${items}</ul>`;
+  return `${heading}<ul class="rec-list">${items}</ul>`;
 }
 
 export function renderRoster(state) {
