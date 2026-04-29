@@ -7,7 +7,7 @@ import * as ui from './ui.js';
 
 const $ = (id) => document.getElementById(id);
 
-const uiState = { thesis: 'none', level: 'l2', mode: 'mock', live: null, availablePosFilter: 'ALL' };
+const uiState = { thesis: 'none', level: 'l2', mode: 'mock', live: null, availablePosFilter: 'ALL', lookahead: false };
 let state;
 let rankings;
 let ownerProfiles = null;
@@ -30,7 +30,8 @@ function render() {
         level: uiState.level,
         thesis: uiState.thesis,
         n: 5,
-        ownerProfiles
+        ownerProfiles,
+        lookahead: uiState.lookahead
       })
     : [];
 
@@ -95,6 +96,10 @@ function attachHandlers() {
   });
   $('thesis-select')?.addEventListener('change', (e) => {
     uiState.thesis = e.target.value;
+    render();
+  });
+  $('lookahead-toggle')?.addEventListener('change', (e) => {
+    uiState.lookahead = e.target.checked;
     render();
   });
   $('step-btn')?.addEventListener('click', () => {

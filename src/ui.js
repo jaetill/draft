@@ -80,6 +80,9 @@ export function renderControls(ui, state) {
       <label>L4 thesis
         <select id="thesis-select">${thesisOpts}</select>
       </label>
+      <label>lookahead
+        <input type="checkbox" id="lookahead-toggle" ${ui.lookahead ? 'checked' : ''} />
+      </label>
     </div>
     <div class="controls-row" style="margin-top:8px;">
       <button id="step-btn" ${isLive || onClock ? 'disabled' : ''}>auto-pick to my turn</button>
@@ -114,12 +117,16 @@ export function renderRecommendations(recs, state, mode = 'mock') {
     const tierClass = r.tier <= 3 ? `tier-${r.tier}` : '';
     const signals = (r.signals || [])
       .map((s) => `<span class="signal">⚡ ${esc(s)}</span>`).join('');
+    const lookahead = r.futureBest
+      ? `<div class="meta" style="color:var(--accent); margin-top:4px;">→ next pick: ${esc(r.futureBest.name)} (${esc(r.futureBest.position)}${r.futureBest.posRank}, +${(r.futureVbd || 0).toFixed(0)} VBD) · combined ${(r.totalScore || 0).toFixed(0)}</div>`
+      : '';
     return `
       <li class="rec-item ${tierClass}" data-player-id="${esc(r.player.id)}">
         <span class="rank">${i + 1}</span>
         <div class="info">
           <div class="name">${esc(r.player.name)}${r.player.team ? ` · ${esc(r.player.team)}` : ''}</div>
           <div class="meta">${esc(r.rationale)}</div>
+          ${lookahead}
           ${signals}
         </div>
         <span class="pos ${r.player.position}">${posLabel(r.player.position)}</span>

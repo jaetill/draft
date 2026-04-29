@@ -65,6 +65,15 @@ export class DraftState {
 
   // --- Mutation ---
 
+  /** Shallow clone for hypothetical simulations (lookahead engine).
+   *  Shares cfg + players (immutable) but deep-copies picks/taken. */
+  clone() {
+    const c = new DraftState(this.cfg, this.players, this.mySlot);
+    c.picks = [...this.picks];
+    c.taken = new Set(this.taken);
+    return c;
+  }
+
   addPick(playerId) {
     if (this.taken.has(playerId)) throw new Error(`already taken: ${playerId}`);
     if (!this.players[playerId]) throw new Error(`unknown player: ${playerId}`);

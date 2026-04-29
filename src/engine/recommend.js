@@ -5,6 +5,7 @@ import { recommend as recommendL1 } from './l1.js';
 import { recommend as recommendL2 } from './l2.js';
 import { annotate } from './l3.js';
 import { applyThesis } from './l4.js';
+import { lookaheadRecommend } from './lookahead.js';
 import { anticipateUpcoming, archetypeTargets } from '../owners.js';
 
 /**
@@ -51,11 +52,22 @@ function annotateAnticipation(recs, state, profiles) {
 }
 
 export function recommend(state, rankings, opts = {}) {
-  const { level = 'l2', thesis = 'none', n = 5, ownerProfiles = null } = opts;
-  const engine = level === 'l1' ? recommendL1 : recommendL2;
-  let recs = engine(state, rankings, n * 3);
-  recs = applyThesis(recs, state, rankings, thesis);
-  recs = annotate(recs.slice(0, n), state);
+  const { level = 'l2', thesis = 'none', n = 5, ownerProfiles = null, lookahead = false } = opts;
+
+  let recs;
+  if (lookahead) {
+    // Lookahead picks its own candidate pool and re-ranks by current+future value.
+    // Thesis/L4 still applied as a re-weight on the resulting set.
+    recs = lookaheadRecommend(state, rankings, { level, n: n * 2, ownerProfiles });
+    recs = applyThesis(recs, state, rankings, thesis);
+    recs = recs.slice(0, n);
+  } else {
+    const engine = level === 'l1' ? recommendL1 : recommendL2;
+    recs = engine(state, rankings, n * 3);
+    recs = applyThesis(recs, state, rankings, thesis);
+    recs = recs.slice(0, n);
+  }
+  recs = annotate(recs, state);
   recs = annotateAnticipation(recs, state, ownerProfiles);
   return recs;
 }
