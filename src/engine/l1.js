@@ -13,7 +13,15 @@ import { posLabel } from './labels.js';
 
 function needMultiplier(player, state) {
   const needs = state.myNeeds();
-  if (needs.starterShortfall[player.position] > 0) return 1.3;
+  const pos = player.position;
+  const flexEligible = state.cfg.flex_eligible.includes(pos);
+  const tePenalty = state.cfg.te_flex_penalty ?? 0.6;
+
+  if (needs.starterShortfall[pos] > 0) return 1.3;
+  if (flexEligible && needs.flexShortfall > 0) {
+    if (pos === 'TE') return tePenalty;
+    return 1.1;
+  }
   if (needs.benchRoom > 0) return 1.0;
   return 0;
 }
@@ -41,9 +49,13 @@ export function recommend(state, rankings, n = 5) {
     replacement[pos] = rankings.replacementPoints(pos, cutoff);
   }
 
+  const currentRound = Math.ceil(state.currentPick / state.teams);
+  const defEarliestRound = state.cfg.def_earliest_round ?? state.totalRounds;
+
   const available = state.available();
   const scored = [];
   for (const p of available) {
+    if (p.position === 'DEF' && currentRound < defEarliestRound) continue;
     const mult = needMultiplier(p, state);
     if (mult === 0) continue;
     const projection = rankings.projection(p);

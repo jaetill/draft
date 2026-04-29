@@ -13,12 +13,13 @@ function needMultiplier(player, state) {
   const needs = state.myNeeds();
   const pos = player.position;
   const flexEligible = state.cfg.flex_eligible.includes(pos);
+  const tePenalty = state.cfg.te_flex_penalty ?? 0.5;
 
   if (needs.starterShortfall[pos] > 0) {
     return pos === 'DEF' ? 1.0 : 1.4;
   }
   if (flexEligible && needs.flexShortfall > 0) {
-    if (pos === 'TE') return 0.85; // TE is technically flex-eligible but humans rarely flex TE
+    if (pos === 'TE') return tePenalty; // TE-as-flex strongly disfavored
     return 1.15;
   }
   if (needs.benchRoom > 0) {
@@ -62,9 +63,13 @@ export function recommend(state, rankings, n = 5) {
     replacement[pos] = rankings.replacementPoints(pos, cutoff);
   }
 
+  const currentRound = Math.ceil(state.currentPick / state.teams);
+  const defEarliestRound = state.cfg.def_earliest_round ?? state.totalRounds;
+
   const available = state.available();
   const scored = [];
   for (const p of available) {
+    if (p.position === 'DEF' && currentRound < defEarliestRound) continue;
     const mult = needMultiplier(p, state);
     if (mult === 0) continue;
     const projection = rankings.projection(p);
