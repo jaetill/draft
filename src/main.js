@@ -7,7 +7,7 @@ import * as ui from './ui.js';
 
 const $ = (id) => document.getElementById(id);
 
-const uiState = { thesis: 'none', level: 'l2', mode: 'mock', live: null };
+const uiState = { thesis: 'none', level: 'l2', mode: 'mock', live: null, availablePosFilter: 'ALL' };
 let state;
 let rankings;
 let ownerProfiles = null;
@@ -40,6 +40,7 @@ function render() {
   $('recommendations').innerHTML = ui.renderRecommendations(recs, state, uiState.mode);
   $('signals').innerHTML = ui.renderSignals(state, recs);
   $('roster').innerHTML = ui.renderRoster(state);
+  $('available').innerHTML = ui.renderAvailable(state, rankings, uiState, uiState.mode);
   $('board').innerHTML = ui.renderBoard(state, 12, ownerProfiles);
 
   attachHandlers();
@@ -122,6 +123,12 @@ function attachHandlers() {
       if (!id || !state.isMyTurn) return;
       state.addPick(id);
       simulateUntilMyTurn(state, ownerProfiles);
+      render();
+    });
+  });
+  document.querySelectorAll('.filter-tab').forEach((el) => {
+    el.addEventListener('click', () => {
+      uiState.availablePosFilter = el.getAttribute('data-filter');
       render();
     });
   });

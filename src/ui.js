@@ -129,6 +129,74 @@ export function renderRecommendations(recs, state, mode = 'mock') {
   return `${heading}<ul class="rec-list">${items}</ul>`;
 }
 
+/**
+ * Browseable list of available players. Position filter tabs + sortable list.
+ * In mock mode + my turn, taps draft the player.
+ */
+export function renderAvailable(state, rankings, uiState, mode = 'mock') {
+  const allAvailable = state.available();
+  const filter = uiState.availablePosFilter || 'ALL';
+  const FILTERS = ['ALL', 'QB', 'RB', 'WR', 'TE', 'DEF'];
+  const POS_LIMIT = 40;
+
+  // Counts by position for the tab labels.
+  const counts = { ALL: allAvailable.length, QB: 0, RB: 0, WR: 0, TE: 0, DEF: 0 };
+  for (const p of allAvailable) {
+    if (counts[p.position] !== undefined) counts[p.position]++;
+  }
+
+  const tabs = FILTERS.map(
+    (f) => `<button class="filter-tab ${f === filter ? 'active' : ''}" data-filter="${f}">${f} <span class="muted">${counts[f]}</span></button>`
+  ).join('');
+
+  // Compute replacement levels for VBD display.
+  const replacement = {};
+  for (const [pos, cutoff] of Object.entries(state.cfg.replacement_levels || {})) {
+    if (pos.startsWith('_')) continue;
+    replacement[pos] = rankings.replacementPoints(pos, cutoff);
+  }
+
+  // Filter + score.
+  let filtered = filter === 'ALL'
+    ? allAvailable
+    : allAvailable.filter((p) => p.position === filter);
+
+  const scored = filtered.map((p) => {
+    const proj = rankings.projection(p);
+    const vbd = Math.max(0, proj - (replacement[p.position] || 0));
+    const tier = rankings.tier(p);
+    const posRank = rankings.posRank.get(p.id) ?? 999;
+    return { player: p, proj, vbd, tier, posRank };
+  });
+  scored.sort((a, b) => b.vbd - a.vbd);
+  const top = scored.slice(0, POS_LIMIT);
+
+  const canDraft = mode === 'mock' && state.isMyTurn;
+  const items = top.map((s) => {
+    const tierClass = s.tier <= 3 ? `tier-${s.tier}` : '';
+    const injury = s.player.injury_status
+      ? `<span class="signal" style="display:inline; color:var(--bad);">${esc(s.player.injury_status)}</span>`
+      : '';
+    return `
+      <li class="rec-item ${tierClass} ${canDraft ? 'draftable' : ''}" data-player-id="${esc(s.player.id)}">
+        <span class="rank">${s.player.position}${s.posRank}</span>
+        <div class="info">
+          <div class="name">${esc(s.player.name)}${s.player.team ? ` · ${esc(s.player.team)}` : ''} ${injury}</div>
+          <div class="meta">+${s.vbd.toFixed(0)} VBD · tier ${s.tier} · ADP ${s.player.search_rank}${s.player.exp === 0 ? ' · ROOKIE' : ''}</div>
+        </div>
+        <span class="pos ${s.player.position}">${posLabel(s.player.position)}</span>
+      </li>
+    `;
+  }).join('');
+
+  const showing = top.length < scored.length ? `(showing top ${top.length} of ${scored.length})` : '';
+  return `
+    <h2>available players ${showing}</h2>
+    <div class="filter-tabs">${tabs}</div>
+    <ul class="rec-list" style="max-height:480px; overflow-y:auto;">${items || '<li class="muted">none</li>'}</ul>
+  `;
+}
+
 export function renderRoster(state) {
   const roster = state.myRoster();
   const needs = state.myNeeds();
