@@ -6,7 +6,7 @@
 //
 // Without history, every opponent reduces to "Default" which is just step 1.
 
-import { opponentBias, profileForSlot } from '../owners.js';
+import { opponentBias, profileForSlot, teamAffinityBias } from '../owners.js';
 
 const POS_LIMITS = { QB: 2, RB: 8, WR: 8, TE: 2, DEF: 1 };
 
@@ -49,11 +49,12 @@ export function pickForOpponent(state, ownerProfiles = null, rng = Math.random) 
   }
   if (pool.length === 0) return available[0];
 
-  // Score = inverse search_rank * archetype bias.
+  // Score = inverse search_rank * archetype bias * team-affinity bias.
   const scored = pool.map((p) => {
     const base = 1000 - Math.min(p.search_rank, 999);
-    const bias = opponentBias(archetype, p, round);
-    return { player: p, score: base * bias };
+    const archBias = opponentBias(archetype, p, round);
+    const teamBias = teamAffinityBias(profile, p);
+    return { player: p, score: base * archBias * teamBias };
   });
   scored.sort((a, b) => b.score - a.score);
 

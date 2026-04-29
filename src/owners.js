@@ -47,6 +47,18 @@ export function primaryArchetype(profile) {
   return profile?.archetypes?.[0] || null;
 }
 
+/** Multiplier for an opponent's score on a candidate based on team affinity.
+ *  Capped so it nudges picks but doesn't override BPA value. */
+export function teamAffinityBias(profile, player) {
+  const affinities = profile?.teamAffinities || [];
+  if (!affinities.length || !player.team) return 1.0;
+  const match = affinities.find((a) => a.team === player.team);
+  if (!match) return 1.0;
+  // Strong affinity (3x+) → bigger bump but still capped at 1.35x.
+  // Modest affinity (2x) → small bump.
+  return 1.0 + Math.min(0.35, (match.ratio - 1) * 0.07);
+}
+
 /**
  * Look up an owner profile by slot. Returns { name, archetypes, primary } or null.
  * Uses the slot→owner map from the most recent completed season.
@@ -62,7 +74,8 @@ export function profileForSlot(profiles, slot) {
     archetypes: owner.archetypes || [],
     primary: primaryArchetype(owner),
     seasons: owner.seasons || [],
-    confidence: owner.confidence || {}
+    confidence: owner.confidence || {},
+    teamAffinities: owner.teamAffinities || []
   };
 }
 

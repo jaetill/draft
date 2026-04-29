@@ -84,7 +84,10 @@ async function processSleeperLeague(leagueId) {
     const name = userById[userId] || `slot${p.draft_slot}`;
     if (!byOwner[name]) byOwner[name] = [];
     const pos = p.metadata?.position || 'UNK';
-    byOwner[name].push({ round: p.round, pick: p.pick_no, pos });
+    const playerName = p.metadata
+      ? `${p.metadata.first_name ?? ''} ${p.metadata.last_name ?? ''}`.trim()
+      : '';
+    byOwner[name].push({ round: p.round, pick: p.pick_no, pos, player_name: playerName });
   }
 
   const seasonProfiles = {};
@@ -111,6 +114,50 @@ async function processSleeperLeague(leagueId) {
 
 // --- Yahoo processor ---
 
+// Resolve player NFL team for affinity detection. Three layers, in order:
+//   1. Trimmed players DB (current rosters) — accurate for active players.
+//   2. Sleeper full DB — adds players that have a team set even if not in trimmed.
+//   3. Manual overrides — retired stars (Brady, Brees, Edelman, etc.) that
+//      Sleeper marks team:null. See scripts/yahoo-history/team-overrides.json.
+async function buildPlayerTeamMap() {
+  const trimmed = JSON.parse(
+    await readFile(join(__dirname, '..', 'public', 'data', 'players.json'), 'utf8')
+  );
+  let overrides = {};
+  try {
+    overrides = JSON.parse(
+      await readFile(join(__dirname, 'yahoo-history', 'team-overrides.json'), 'utf8')
+    );
+  } catch {}
+
+  const map = new Map();
+  for (const p of Object.values(trimmed)) {
+    if (p.team) {
+      const key = p.name.toLowerCase().replace(/[^a-z]/g, '');
+      map.set(key, p.team);
+    }
+  }
+  try {
+    const fullRes = await fetch(`${BASE}/players/nfl`);
+    const full = await fullRes.json();
+    for (const p of Object.values(full)) {
+      if (!p.team) continue;
+      const name = (p.full_name || `${p.first_name ?? ''} ${p.last_name ?? ''}`.trim()).trim();
+      if (!name) continue;
+      const key = name.toLowerCase().replace(/[^a-z]/g, '');
+      if (!map.has(key)) map.set(key, p.team);
+    }
+  } catch {}
+  // Manual overrides win over any Sleeper data — they're the source of truth
+  // for retired players whose team isn't preserved in the API.
+  for (const [name, team] of Object.entries(overrides)) {
+    if (name.startsWith('_') || typeof team !== 'string') continue;
+    const key = name.toLowerCase().replace(/[^a-z]/g, '');
+    map.set(key, team);
+  }
+  return map;
+}
+
 async function processYahoo() {
   let parsed, mapping;
   try {
@@ -130,7 +177,7 @@ async function processYahoo() {
       if (handle === 'AUTODRAFT') continue; // yahoo no-show filler, not the owner's strategy
       if (typeof handle !== 'string' || handle.startsWith('_')) continue; // metadata keys
       if (!byOwner[handle]) byOwner[handle] = [];
-      byOwner[handle].push({ round: p.round, pick: p.pickNo, pos: p.position });
+      byOwner[handle].push({ round: p.round, pick: p.pickNo, pos: p.position, player_name: p.player });
     }
     const seasonProfiles = {};
     for (const [owner, ownerPicks] of Object.entries(byOwner)) {
@@ -221,6 +268,54 @@ for (const owner of Object.values(owners)) {
     .map(([arch]) => arch);
   owner.sources = [...owner.sources];
   delete owner.archetypeHits;
+}
+
+// --- Team affinity detection ---
+// For each owner, identify NFL teams they pick at meaningfully higher rate than
+// the league average. Threshold: ≥4 picks AND ≥2x the league rate.
+console.log('\nComputing team affinities...');
+const playerTeamMap = await buildPlayerTeamMap();
+
+const ownerTeamCounts = {};
+const ownerPickTotals = {};
+const leagueTeamCounts = {};
+let leaguePickTotal = 0;
+
+for (const season of allSeasons) {
+  for (const [name, prof] of Object.entries(season.seasonProfiles)) {
+    if (!ownerTeamCounts[name]) ownerTeamCounts[name] = {};
+    for (const pick of prof.picks) {
+      // Find player by name; lookup nfl team. If not found, skip.
+      // For Sleeper-source picks, we don't have the player_name in the pick — we have player_id.
+      // Skip Sleeper picks for affinity (DNS yet); affinity comes from Yahoo data only for now.
+      const playerName = pick.player_name || pick.playerName;
+      if (!playerName) continue;
+      const key = playerName.toLowerCase().replace(/[^a-z]/g, '');
+      const nfl = playerTeamMap.get(key);
+      if (!nfl) continue;
+      ownerTeamCounts[name][nfl] = (ownerTeamCounts[name][nfl] || 0) + 1;
+      ownerPickTotals[name] = (ownerPickTotals[name] || 0) + 1;
+      leagueTeamCounts[nfl] = (leagueTeamCounts[nfl] || 0) + 1;
+      leaguePickTotal++;
+    }
+  }
+}
+
+for (const [name, owner] of Object.entries(owners)) {
+  const counts = ownerTeamCounts[name] || {};
+  const total = ownerPickTotals[name] || 0;
+  const affinities = [];
+  for (const [nfl, count] of Object.entries(counts)) {
+    if (count < 4) continue;
+    const ownerRate = count / total;
+    const leagueRate = (leagueTeamCounts[nfl] || 0) / Math.max(1, leaguePickTotal);
+    const ratio = leagueRate > 0 ? ownerRate / leagueRate : 0;
+    if (ratio >= 2.0) {
+      affinities.push({ team: nfl, count, ratio: +ratio.toFixed(1) });
+    }
+  }
+  affinities.sort((a, b) => b.ratio - a.ratio);
+  owner.teamAffinities = affinities.slice(0, 4);
 }
 
 // Slot→owner map from the most recent Sleeper season (for mock-harness defaults).

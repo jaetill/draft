@@ -177,14 +177,19 @@ export function renderBoard(state, n = 12, ownerProfiles = null) {
       <h2>up next</h2>
       <ul class="board-list" style="margin-bottom:12px;">
         ${upcoming.map((u) => {
-          const tag = u.profile?.primary
-            ? `<span class="signal" style="display:inline">⚡ ${esc(ARCHETYPE_LABELS[u.profile.primary] || u.profile.primary)}</span>`
-            : '';
+          const tags = [];
+          if (u.profile?.primary) {
+            tags.push(`<span class="signal" style="display:inline">⚡ ${esc(ARCHETYPE_LABELS[u.profile.primary] || u.profile.primary)}</span>`);
+          }
+          const aff = (u.profile?.teamAffinities || []).slice(0, 2);
+          for (const a of aff) {
+            tags.push(`<span class="signal" style="display:inline">${esc(a.team)} ${a.ratio}x</span>`);
+          }
           const name = u.profile?.name || `slot ${u.slot}`;
           return `
             <li class="board-item ${u.mine ? 'my-pick' : ''}">
               <span class="pick-no">#${u.pickNo}</span>
-              <span class="slot" style="grid-column:2/4;">${esc(name)} ${tag}</span>
+              <span class="slot" style="grid-column:2/4;">${esc(name)} ${tags.join(' ')}</span>
               <span class="slot">slot ${u.slot}</span>
             </li>
           `;
