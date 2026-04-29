@@ -1,16 +1,8 @@
-// Build-time: walk the Sleeper previous_league_id chain back through every
-// completed season, then derive owner archetypes from each owner's pick
-// pattern (which positions they took in which rounds).
-//
-// Output: public/data/owner-profiles.json
-//   {
-//     <display_name>: {
-//       seasons: ["2025", ...],
-//       archetypes: ["AnchorTE", "EarlyQB"],
-//       confidence: { AnchorTE: 1.0, EarlyQB: 0.5 },  // hits / seasons
-//       lastSeen: "2025"
-//     }
-//   }
+// Build-time: walk the Sleeper previous_league_id chain through every completed
+// season AND ingest Yahoo historical data (scripts/yahoo-history/*.txt + the
+// team-mapping that resolves Yahoo team names to current Sleeper handles).
+// Detect per-season archetypes for each owner, aggregate with confidence math,
+// write public/data/owner-profiles.json.
 //
 // Run: node scripts/build-owner-profiles.mjs
 
@@ -21,6 +13,8 @@ import { fileURLToPath } from 'node:url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const CFG_PATH = join(__dirname, '..', 'public', 'data', 'league.json');
 const OUT_PATH = join(__dirname, '..', 'public', 'data', 'owner-profiles.json');
+const YAHOO_PARSED = join(__dirname, 'yahoo-history', 'parsed.json');
+const YAHOO_MAPPING = join(__dirname, 'yahoo-history', 'team-mapping.json');
 const BASE = 'https://api.sleeper.app/v1';
 
 async function get(path) {
@@ -29,18 +23,14 @@ async function get(path) {
   return res.json();
 }
 
-/** Detect archetypes from one owner's picks for a single season.
- *  Thresholds tuned for 12-team PPR — "early" means earlier than the typical
- *  league average, not just "before round 10." */
+// --- Archetype detection (shared between Sleeper + Yahoo) ---
+
 function detectSeasonArchetypes(picksByRound) {
   const tags = [];
   const r = picksByRound;
 
-  // Anchor TE: top-tier TE pick in R1-R2 (R3 is borderline, R4+ is normal timing).
   if (r[1] === 'TE' || r[2] === 'TE') tags.push('AnchorTE');
 
-  // Early QB: QB drafted in R1-R3. R4-R5 is common in modern 12-team PPR
-  // (Allen/Jackson/Mahomes price has crept up); only R1-R3 is a real archetype tell.
   for (let i = 1; i <= 3; i++) {
     if (r[i] === 'QB') {
       tags.push('EarlyQB');
@@ -48,25 +38,23 @@ function detectSeasonArchetypes(picksByRound) {
     }
   }
 
-  // Hero RB: RB in R1, then NO RB until R6+. Broaden the "no RB" window so a
-  // mid-round RB from a Hero-RB owner doesn't reclassify them as default.
   let nextRbRound = null;
   for (let i = 2; i <= 15; i++) if (r[i] === 'RB') { nextRbRound = i; break; }
   if (r[1] === 'RB' && (nextRbRound === null || nextRbRound >= 6)) tags.push('HeroRB');
 
-  // Zero RB: NO RB in rounds 1-5.
   let anyEarlyRb = false;
   for (let i = 1; i <= 5; i++) if (r[i] === 'RB') { anyEarlyRb = true; break; }
   if (!anyEarlyRb) tags.push('ZeroRB');
 
-  // Robust RB: RB in 2+ of rounds 1-3.
   const earlyRbCount = [r[1], r[2], r[3]].filter((p) => p === 'RB').length;
   if (earlyRbCount >= 2) tags.push('RobustRB');
 
   return tags;
 }
 
-async function processLeague(leagueId) {
+// --- Sleeper chain processor ---
+
+async function processSleeperLeague(leagueId) {
   const [league, users, drafts] = await Promise.all([
     get(`/league/${leagueId}`),
     get(`/league/${leagueId}/users`),
@@ -85,8 +73,11 @@ async function processLeague(leagueId) {
   const slotToUserId = Object.fromEntries(
     Object.entries(draftMeta.draft_order || {}).map(([uid, slot]) => [slot, uid])
   );
+  const slotToOwner = {};
+  for (const [slot, userId] of Object.entries(slotToUserId)) {
+    slotToOwner[slot] = userById[userId] || `slot${slot}`;
+  }
 
-  // Group picks by owner, ordered by round.
   const byOwner = {};
   for (const p of picks) {
     const userId = slotToUserId[p.draft_slot];
@@ -107,43 +98,78 @@ async function processLeague(leagueId) {
     };
   }
 
-  // slot → display_name for the season, useful for mock harness defaults.
-  const slotToOwner = {};
-  for (const [slot, userId] of Object.entries(slotToUserId)) {
-    slotToOwner[slot] = userById[userId] || `slot${slot}`;
-  }
-
   return {
     season: league.season,
     leagueId,
     leagueName: league.name,
     previousLeagueId: league.previous_league_id,
     seasonProfiles,
-    slotToOwner
+    slotToOwner,
+    source: 'sleeper'
   };
 }
+
+// --- Yahoo processor ---
+
+async function processYahoo() {
+  let parsed, mapping;
+  try {
+    parsed = JSON.parse(await readFile(YAHOO_PARSED, 'utf8'));
+    mapping = JSON.parse(await readFile(YAHOO_MAPPING, 'utf8'));
+  } catch (err) {
+    console.warn(`  Yahoo data unavailable: ${err.message}`);
+    return [];
+  }
+
+  const seasons = [];
+  for (const [season, yearData] of Object.entries(parsed.years)) {
+    const byOwner = {};
+    for (const p of yearData.picks) {
+      const handle = mapping[p.team];
+      if (!handle) continue; // null = former owner, skip
+      if (handle === 'AUTODRAFT') continue; // yahoo no-show filler, not the owner's strategy
+      if (typeof handle !== 'string' || handle.startsWith('_')) continue; // metadata keys
+      if (!byOwner[handle]) byOwner[handle] = [];
+      byOwner[handle].push({ round: p.round, pick: p.pickNo, pos: p.position });
+    }
+    const seasonProfiles = {};
+    for (const [owner, ownerPicks] of Object.entries(byOwner)) {
+      const positionsByRound = [];
+      for (const p of ownerPicks) positionsByRound[p.round] = p.pos;
+      seasonProfiles[owner] = {
+        season,
+        archetypes: detectSeasonArchetypes(positionsByRound),
+        picks: ownerPicks
+      };
+    }
+    seasons.push({
+      season,
+      leagueName: 'Plowden\'s Peeps (Yahoo)',
+      seasonProfiles,
+      teamCount: yearData.teamCount,
+      source: 'yahoo'
+    });
+    console.log(`  ${season} (Yahoo) — ${Object.keys(seasonProfiles).length} owners`);
+  }
+  return seasons;
+}
+
+// --- Main ---
 
 console.log('Walking Sleeper league chain...');
 const cfg = JSON.parse(await readFile(CFG_PATH, 'utf8'));
 let leagueId = cfg.sleeper_league_id;
-if (!leagueId) {
-  console.error('No sleeper_league_id in league.json — nothing to do.');
-  process.exit(0);
-}
-
-// Walk backward; we only want completed seasons.
 const completed = [];
 const seen = new Set();
 while (leagueId && !seen.has(leagueId)) {
   seen.add(leagueId);
   try {
-    const result = await processLeague(leagueId);
+    const result = await processSleeperLeague(leagueId);
     if (result) {
-      console.log(`  ${result.season} (${result.leagueName}) — ${Object.keys(result.seasonProfiles).length} owners`);
+      console.log(`  ${result.season} (Sleeper) — ${Object.keys(result.seasonProfiles).length} owners`);
       completed.push(result);
       leagueId = result.previousLeagueId;
     } else {
-      // current/in-progress league — get its prev to keep walking
       const lg = await get(`/league/${leagueId}`);
       leagueId = lg.previous_league_id;
     }
@@ -153,18 +179,23 @@ while (leagueId && !seen.has(leagueId)) {
   }
 }
 
-if (completed.length === 0) {
-  console.log('No completed seasons in chain — writing empty profile file.');
+console.log('\nProcessing Yahoo history...');
+const yahooSeasons = await processYahoo();
+const allSeasons = [...completed, ...yahooSeasons];
+
+if (allSeasons.length === 0) {
+  console.log('No data — writing empty profile file.');
   await writeFile(OUT_PATH, JSON.stringify({ owners: {}, seasons: [] }, null, 2));
   process.exit(0);
 }
 
-// Aggregate across seasons by owner display_name.
+// Aggregate per owner across all seasons.
 const owners = {};
-for (const season of completed) {
+for (const season of allSeasons) {
   for (const [name, prof] of Object.entries(season.seasonProfiles)) {
-    if (!owners[name]) owners[name] = { seasons: [], archetypeHits: {}, lastSeen: null, picks: {} };
+    if (!owners[name]) owners[name] = { seasons: [], archetypeHits: {}, lastSeen: null, picks: {}, sources: new Set() };
     owners[name].seasons.push(season.season);
+    owners[name].sources.add(season.source);
     for (const arch of prof.archetypes) {
       owners[name].archetypeHits[arch] = (owners[name].archetypeHits[arch] || 0) + 1;
     }
@@ -175,33 +206,35 @@ for (const season of completed) {
   }
 }
 
-// Compute confidence (hits / seasons played) and pick top archetypes.
+// Compute confidence and pick top archetypes.
 for (const owner of Object.values(owners)) {
   const n = owner.seasons.length;
   owner.confidence = {};
   for (const [arch, hits] of Object.entries(owner.archetypeHits)) {
-    owner.confidence[arch] = hits / n;
+    owner.confidence[arch] = +(hits / n).toFixed(3);
   }
-  // "Strong" archetype: hits in ≥50% of seasons (or ≥1 season if only 1 played).
-  const threshold = n === 1 ? 1 : 0.5;
+  // Strong archetype: hits in ≥40% of seasons (lower threshold OK with N>3).
+  const threshold = n >= 3 ? 0.4 : 1.0;
   owner.archetypes = Object.entries(owner.confidence)
     .filter(([, c]) => c >= threshold)
     .sort((a, b) => b[1] - a[1])
     .map(([arch]) => arch);
-  delete owner.archetypeHits; // keep file small
+  owner.sources = [...owner.sources];
+  delete owner.archetypeHits;
 }
 
-// Slot → owner from the most recent season (for mock-harness default seating).
-const latestSeason = completed.sort((a, b) => b.season.localeCompare(a.season))[0];
-const slotToOwner = latestSeason?.slotToOwner || {};
+// Slot→owner map from the most recent Sleeper season (for mock-harness defaults).
+const latestSleeperSeason = completed.sort((a, b) => b.season.localeCompare(a.season))[0];
+const slotToOwner = latestSleeperSeason?.slotToOwner || {};
 
 const out = {
   generated_at: new Date().toISOString(),
-  seasons: completed.map((s) => s.season).sort(),
-  latestSeason: latestSeason?.season,
+  seasons: allSeasons.map((s) => s.season).sort(),
+  latestSeason: latestSleeperSeason?.season,
   slotToOwner,
   owners
 };
 
 await writeFile(OUT_PATH, JSON.stringify(out, null, 2));
-console.log(`\nWrote ${OUT_PATH} — ${Object.keys(owners).length} owners across ${out.seasons.length} season(s).`);
+console.log(`\nWrote ${OUT_PATH}`);
+console.log(`Owners: ${Object.keys(owners).length} · Seasons: ${out.seasons.length}`);

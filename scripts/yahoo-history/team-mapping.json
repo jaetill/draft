@@ -1,0 +1,63 @@
+{
+  "_comment": "Maps Yahoo team names → current Sleeper display_name. Locked after user confirmation. 'AUTODRAFT' = Yahoo filler (NuttySequel no-showed in 2018, picks excluded from archetypes since they're not real choices). null = former owner no longer in league.",
+  "_sleeper_handles_for_reference": [
+    "wfadden", "Bruno2328", "CarstonT", "ForSkins25",
+    "till1025", "PaTilley", "SethYo", "RockNRollDr",
+    "NuttySequel", "cfadden", "Tilleydmt", "jaetill"
+  ],
+
+  "_owner_chains_summary": {
+    "wfadden": "joined 2022 — Dak that tha... (2022-2024)",
+    "Bruno2328": "Bruno613 → Under the in... → O NOdell Bec... → Hot Chubb Ti... → Oh Saquon Yo... → What can BRO... → RUN-CMC (serial renamer)",
+    "CarstonT": "joined 2022 — Baby Chark (2022) → Two many Cooks (2023) → Carston's Team (2024)",
+    "ForSkins25": "Kirt's Krusa... (2018) → ReallyOld Ma... (2019) → away 2020-2023 → ForSkins (2024)",
+    "till1025": "Copper's Cro... 2018-2024 (continuous)",
+    "PaTilley": "Bill's Team 2018-2024 (continuous)",
+    "SethYo": "Seth's Team 2018-2024 (continuous)",
+    "RockNRollDr": "Disposal Che... (2018-2021) → Cobra Kyler (2022-2024)",
+    "NuttySequel": "Autodraft no-show in 2018 → Pentagon Fiv... 2019-2024",
+    "cfadden": "Beak's BOSS 2018-2024 (continuous)",
+    "Tilleydmt": "The Cheese S... 2018-2024 (continuous)",
+    "jaetill": "Blind Falafel 2018-2024 (continuous)"
+  },
+
+  "_former_owners_left_league": [
+    "Poppin' Bortles (2018 only)",
+    "Gonna Git Yo... (2018-2019)",
+    "Saved By Le... (2019-2023, replaced by ForSkins25 returning in 2024)"
+  ],
+
+  "Beak's BOSS": "cfadden",
+  "Bill's Team": "PaTilley",
+  "Blind Falafel": "jaetill",
+  "Bruno613": "Bruno2328",
+  "Carston's Team": "CarstonT",
+  "Cobra Kyler": "RockNRollDr",
+  "Copper's Cro...": "till1025",
+  "ForSkins": "ForSkins25",
+  "Pentagon Fiv...": "NuttySequel",
+  "Seth's Team": "SethYo",
+  "The Cheese S...": "Tilleydmt",
+
+  "Autodraft": "AUTODRAFT",
+
+  "Dak that tha...": "wfadden",
+  "RUN-CMC": "Bruno2328",
+
+  "Disposal Che...": "RockNRollDr",
+  "Kirt's Krusa...": "ForSkins25",
+  "ReallyOld Ma...": "ForSkins25",
+
+  "Under the in...": "Bruno2328",
+  "O NOdell Bec...": "Bruno2328",
+  "Hot Chubb Ti...": "Bruno2328",
+  "Oh Saquon Yo...": "Bruno2328",
+  "What can BRO...": "Bruno2328",
+
+  "Baby Chark": "CarstonT",
+  "Two many Cooks": "CarstonT",
+
+  "Poppin' Bortles": null,
+  "Gonna Git Yo...": null,
+  "Saved By Le...": null
+}

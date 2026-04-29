@@ -1,0 +1,209 @@
+Round 1
+1.	Christian McCaffrey 	RUN-CMC
+2.	CeeDee Lamb	Pentagon Fiv...
+3.	Tyreek Hill 	Bill's Team
+4.	Breece Hall 	ForSkins
+5.	Ja'Marr Chase 	Copper's Cro...
+6.	Bijan Robinson 	Blind Falafel
+7.	Amon-Ra St. Brown 	Carston's Team
+8.	Justin Jefferson 	The Cheese S...
+9.	Garrett Wilson 	Cobra Kyler
+10.	A.J. Brown 	Beak's BOSS
+11.	Jonathan Taylor 	Dak that tha...
+12.	Saquon Barkley 	Seth's Team
+
+Round 2
+1.	Marvin Harrison Jr. 	Seth's Team
+2.	Puka Nacua 	Dak that tha...
+3.	Derrick Henry 	Beak's BOSS
+4.	Kyren Williams 	Cobra Kyler
+5.	Chris Olave	The Cheese S...
+6.	Drake London 	Carston's Team
+7.	Jahmyr Gibbs 	Blind Falafel
+8.	Isiah Pacheco 	Copper's Cro...
+9.	Nico Collins 	ForSkins
+10.	Josh Allen 	Bill's Team
+11.	Travis Etienne Jr. 	Pentagon Fiv...
+12.	Davante Adams 	RUN-CMC
+
+Round 3
+1.	Mike Evans 	RUN-CMC
+2.	Travis Kelce 	Pentagon Fiv...
+3.	Cooper Kupp 	Bill's Team
+4.	De'Von Achane 	ForSkins
+5.	Deebo Samuel 	Copper's Cro...
+6.	Josh Jacobs 	Blind Falafel
+7.	Sam LaPorta 	Carston's Team
+8.	James Cook III 	The Cheese S...
+9.	Brandon Aiyuk 	Cobra Kyler
+10.	DJ Moore 	Beak's BOSS
+11.	Jaylen Waddle 	Dak that tha...
+12.	Michael Pittman Jr. 	Seth's Team
+
+Round 4
+1.	Rachaad White 	Seth's Team
+2.	Joe Mixon 	Dak that tha...
+3.	DK Metcalf 	Beak's BOSS
+4.	Kenneth Walker III 	Cobra Kyler
+5.	DeVonta Smith 	The Cheese S...
+6.	Lamar Jackson 	Carston's Team
+7.	Trey McBride 	Blind Falafel
+8.	Malik Nabers 	Copper's Cro...
+9.	Rashee Rice	ForSkins
+10.	Raheem Mostert 	Bill's Team
+11.	Alvin Kamara	Pentagon Fiv...
+12.	Jalen Hurts	RUN-CMC
+
+Round 5
+1.	Amari Cooper 	RUN-CMC
+2.	Patrick Mahomes	Pentagon Fiv...
+3.	Rhamondre Stevenson 	Bill's Team
+4.	D'Andre Swift 	ForSkins
+5.	C.J. Stroud 	Copper's Cro...
+6.	Zay Flowers 	Blind Falafel
+7.	Stefon Diggs	Carston's Team
+8.	Mark Andrews 	The Cheese S...
+9.	Terry McLaurin 	Cobra Kyler
+10.	Anthony Richardson Sr. 	Beak's BOSS
+11.	Tee Higgins 	Dak that tha...
+12.	Kyler Murray 	Seth's Team
+
+Round 6
+1.	Chris Godwin Jr.	Seth's Team
+2.	James Conner 	Dak that tha...
+3.	Tank Dell 	Beak's BOSS
+4.	Joe Burrow 	Cobra Kyler
+5.	Calvin Ridley 	The Cheese S...
+6.	Aaron Jones Sr. 	Carston's Team
+7.	Christian Kirk	Blind Falafel
+8.	Dalton Kincaid 	Copper's Cro...
+9.	Zamir White	ForSkins
+10.	George Kittle 	Bill's Team
+11.	George Pickens	Pentagon Fiv...
+12.	David Montgomery 	RUN-CMC
+
+Round 7
+1.	Diontae Johnson 	RUN-CMC
+2.	Javonte Williams 	Pentagon Fiv...
+3.	Jaxon Smith-Njigba 	Bill's Team
+4.	Keenan Allen 	ForSkins
+5.	Tony Pollard	Copper's Cro...
+6.	Najee Harris 	Blind Falafel
+7.	Rome Odunze 	Carston's Team
+8.	Brian Thomas Jr. 	The Cheese S...
+9.	Jayden Reed 	Cobra Kyler
+10.	Kyle Pitts Sr. 	Beak's BOSS
+11.	Dak Prescott	Dak that tha...
+12.	Evan Engram	Seth's Team
+
+Round 8
+1.	Jaylen Warren 	Seth's Team
+2.	Brian Robinson Jr. 	Dak that tha...
+3.	Tyjae Spears 	Beak's BOSS
+4.	Jake Ferguson 	Cobra Kyler
+5.	Jayden Daniels 	The Cheese S...
+6.	Devin Singletary 	Carston's Team
+7.	Xavier Worthy 	Blind Falafel
+8.	Zack Moss	Copper's Cro...
+9.	Brock Purdy 	ForSkins
+10.	Jordan Addison 	Bill's Team
+11.	DeAndre Hopkins 	Pentagon Fiv...
+12.	David Njoku 	RUN-CMC
+
+Round 9
+1.	49ers	RUN-CMC
+2.	Austin Ekeler	Pentagon Fiv...
+3.	Ezekiel Elliott	Bill's Team
+4.	Brock Bowers 	ForSkins
+5.	Courtland Sutton 	Copper's Cro...
+6.	Khalil Shakir 	Blind Falafel
+7.	Gus Edwards 	Carston's Team
+8.	Jonathon Brooks	The Cheese S...
+9.	Jameson Williams 	Cobra Kyler
+10.	Ravens 	Beak's BOSS
+11.	Dallas Goedert 	Dak that tha...
+12.	Chase Brown 	Seth's Team
+
+Round 10
+1.	Jahan Dotson	Seth's Team
+2.	Christian Watson	Dak that tha...
+3.	Jordan Love 	Beak's BOSS
+4.	Trey Benson	Cobra Kyler
+5.	Nick Chubb	The Cheese S...
+6.	Jerome Ford 	Carston's Team
+7.	Ladd McConkey 	Blind Falafel
+8.	Romeo Doubs 	Copper's Cro...
+9.	Rico Dowdle 	ForSkins
+10.	Nelson Agholor	Bill's Team
+11.	Tyler Lockett	Pentagon Fiv...
+12.	Caleb Williams 	RUN-CMC
+
+Round 11
+1.	Hollywood Brown	RUN-CMC
+2.	Joshua Palmer	Pentagon Fiv...
+3.	Blake Corum	Bill's Team
+4.	Keon Coleman	ForSkins
+5.	Chuba Hubbard	Copper's Cro...
+6.	Tua Tagovailoa 	Blind Falafel
+7.	Curtis Samuel	Carston's Team
+8.	J.K. Dobbins 	The Cheese S...
+9.	Cowboys 	Cobra Kyler
+10.	Rashid Shaheed	Beak's BOSS
+11.	Ja'Lynn Polk	Dak that tha...
+12.	DeMario Douglas	Seth's Team
+
+Round 12
+1.	Pat Freiermuth 	Seth's Team
+2.	Bucky Irving 	Dak that tha...
+3.	Jakobi Meyers 	Beak's BOSS
+4.	Taysom Hill	Cobra Kyler
+5.	Brandin Cooks	The Cheese S...
+6.	Jared Goff 	Carston's Team
+7.	Jerry Jeudy 	Blind Falafel
+8.	Dalton Schultz 	Copper's Cro...
+9.	Mike Williams	ForSkins
+10.	Bills 	Bill's Team
+11.	Darnell Mooney 	Pentagon Fiv...
+12.	Zach Charbonnet 	RUN-CMC
+
+Round 13
+1.	Adonai Mitchell	RUN-CMC
+2.	T.J. Hockenson 	Pentagon Fiv...
+3.	Adam Thielen 	Bill's Team
+4.	Jaleel McLaughlin	ForSkins
+5.	Browns	Copper's Cro...
+6.	Aaron Rodgers 	Blind Falafel
+7.	Jets	Carston's Team
+8.	Jordan Mason	The Cheese S...
+9.	Matthew Stafford 	Cobra Kyler
+10.	Luke Musgrave	Beak's BOSS
+11.	Trevor Lawrence	Dak that tha...
+12.	Ray Davis 	Seth's Team
+
+Round 14
+1.	Bengals 	Seth's Team
+2.	Gabe Davis	Dak that tha...
+3.	Khalil Herbert	Beak's BOSS
+4.	Josh Downs 	Cobra Kyler
+5.	Justin Herbert 	The Cheese S...
+6.	Cole Kmet 	Carston's Team
+7.	Saints	Blind Falafel
+8.	Geno Smith 	Copper's Cro...
+9.	Chiefs 	ForSkins
+10.	Drake Maye 	Bill's Team
+11.	Deshaun Watson	Pentagon Fiv...
+12.	Noah Fant	RUN-CMC
+
+Round 15
+1.	Steelers 	RUN-CMC
+2.	Dolphins 	Pentagon Fiv...
+3.	Raiders	Bill's Team
+4.	Tyler Conklin	ForSkins
+5.	Ty Chandler	Copper's Cro...
+6.	Tyler Allgeier	Blind Falafel
+7.	Michael Wilson 	Carston's Team
+8.	Seahawks	The Cheese S...
+9.	Wan'Dale Robinson 	Cobra Kyler
+10.	Vikings 	Beak's BOSS
+11.	Bears 	Dak that tha...
+12.	Baker Mayfield 	Seth's Team

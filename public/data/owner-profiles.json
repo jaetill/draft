@@ -1,6 +1,13 @@
 {
-  "generated_at": "2026-04-29T00:17:57.694Z",
+  "generated_at": "2026-04-29T01:06:41.086Z",
   "seasons": [
+    "2018",
+    "2019",
+    "2020",
+    "2021",
+    "2022",
+    "2023",
+    "2024",
     "2025"
   ],
   "latestSeason": "2025",
@@ -21,10 +28,244 @@
   "owners": {
     "wfadden": {
       "seasons": [
-        "2025"
+        "2025",
+        "2022",
+        "2023",
+        "2024"
       ],
       "lastSeen": "2025",
       "picks": {
+        "2022": [
+          {
+            "round": 1,
+            "pick": 7,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 18,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 31,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 42,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 55,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 66,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 79,
+            "pos": "TE"
+          },
+          {
+            "round": 8,
+            "pick": 90,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 103,
+            "pos": "QB"
+          },
+          {
+            "round": 10,
+            "pick": 114,
+            "pos": "DEF"
+          },
+          {
+            "round": 11,
+            "pick": 127,
+            "pos": "RB"
+          },
+          {
+            "round": 12,
+            "pick": 138,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 151,
+            "pos": "WR"
+          },
+          {
+            "round": 14,
+            "pick": 162,
+            "pos": "TE"
+          },
+          {
+            "round": 15,
+            "pick": 175,
+            "pos": "QB"
+          }
+        ],
+        "2023": [
+          {
+            "round": 1,
+            "pick": 11,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 14,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 35,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 38,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 59,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 62,
+            "pos": "QB"
+          },
+          {
+            "round": 7,
+            "pick": 83,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 86,
+            "pos": "TE"
+          },
+          {
+            "round": 9,
+            "pick": 107,
+            "pos": "DEF"
+          },
+          {
+            "round": 10,
+            "pick": 110,
+            "pos": "RB"
+          },
+          {
+            "round": 11,
+            "pick": 131,
+            "pos": "RB"
+          },
+          {
+            "round": 12,
+            "pick": 134,
+            "pos": "TE"
+          },
+          {
+            "round": 13,
+            "pick": 155,
+            "pos": "WR"
+          },
+          {
+            "round": 14,
+            "pick": 158,
+            "pos": "QB"
+          },
+          {
+            "round": 15,
+            "pick": 179,
+            "pos": "DEF"
+          }
+        ],
+        "2024": [
+          {
+            "round": 1,
+            "pick": 11,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 14,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 35,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 38,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 59,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 62,
+            "pos": "RB"
+          },
+          {
+            "round": 7,
+            "pick": 83,
+            "pos": "QB"
+          },
+          {
+            "round": 8,
+            "pick": 86,
+            "pos": "RB"
+          },
+          {
+            "round": 9,
+            "pick": 107,
+            "pos": "TE"
+          },
+          {
+            "round": 10,
+            "pick": 110,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 131,
+            "pos": "WR"
+          },
+          {
+            "round": 12,
+            "pick": 134,
+            "pos": "RB"
+          },
+          {
+            "round": 13,
+            "pick": 155,
+            "pos": "QB"
+          },
+          {
+            "round": 14,
+            "pick": 158,
+            "pos": "WR"
+          },
+          {
+            "round": 15,
+            "pick": 179,
+            "pos": "DEF"
+          }
+        ],
         "2025": [
           {
             "round": 1,
@@ -103,15 +344,564 @@
           }
         ]
       },
-      "confidence": {},
-      "archetypes": []
+      "sources": [
+        "sleeper",
+        "yahoo"
+      ],
+      "confidence": {
+        "RobustRB": 0.5
+      },
+      "archetypes": [
+        "RobustRB"
+      ]
     },
     "Bruno2328": {
       "seasons": [
-        "2025"
+        "2025",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
       ],
       "lastSeen": "2025",
       "picks": {
+        "2018": [
+          {
+            "round": 1,
+            "pick": 11,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 14,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 35,
+            "pos": "TE"
+          },
+          {
+            "round": 4,
+            "pick": 38,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 59,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 62,
+            "pos": "QB"
+          },
+          {
+            "round": 7,
+            "pick": 83,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 86,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 107,
+            "pos": "DEF"
+          },
+          {
+            "round": 10,
+            "pick": 110,
+            "pos": "QB"
+          },
+          {
+            "round": 11,
+            "pick": 131,
+            "pos": "DEF"
+          },
+          {
+            "round": 12,
+            "pick": 134,
+            "pos": "TE"
+          },
+          {
+            "round": 13,
+            "pick": 155,
+            "pos": "RB"
+          },
+          {
+            "round": 14,
+            "pick": 158,
+            "pos": "TE"
+          },
+          {
+            "round": 15,
+            "pick": 179,
+            "pos": "WR"
+          }
+        ],
+        "2019": [
+          {
+            "round": 1,
+            "pick": 8,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 17,
+            "pos": "TE"
+          },
+          {
+            "round": 3,
+            "pick": 32,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 41,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 56,
+            "pos": "TE"
+          },
+          {
+            "round": 6,
+            "pick": 65,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 80,
+            "pos": "QB"
+          },
+          {
+            "round": 8,
+            "pick": 89,
+            "pos": "RB"
+          },
+          {
+            "round": 9,
+            "pick": 104,
+            "pos": "DEF"
+          },
+          {
+            "round": 10,
+            "pick": 113,
+            "pos": "QB"
+          },
+          {
+            "round": 11,
+            "pick": 128,
+            "pos": "WR"
+          },
+          {
+            "round": 12,
+            "pick": 137,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 152,
+            "pos": "RB"
+          },
+          {
+            "round": 14,
+            "pick": 161,
+            "pos": "TE"
+          },
+          {
+            "round": 15,
+            "pick": 176,
+            "pos": "DEF"
+          }
+        ],
+        "2020": [
+          {
+            "round": 1,
+            "pick": 7,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 14,
+            "pos": "TE"
+          },
+          {
+            "round": 3,
+            "pick": 27,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 34,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 47,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 54,
+            "pos": "RB"
+          },
+          {
+            "round": 7,
+            "pick": 67,
+            "pos": "QB"
+          },
+          {
+            "round": 8,
+            "pick": 74,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 87,
+            "pos": "DEF"
+          },
+          {
+            "round": 10,
+            "pick": 94,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 107,
+            "pos": "QB"
+          },
+          {
+            "round": 12,
+            "pick": 114,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 127,
+            "pos": "TE"
+          },
+          {
+            "round": 14,
+            "pick": 134,
+            "pos": "RB"
+          },
+          {
+            "round": 15,
+            "pick": 147,
+            "pos": "DEF"
+          }
+        ],
+        "2021": [
+          {
+            "round": 1,
+            "pick": 6,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 15,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 26,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 35,
+            "pos": "QB"
+          },
+          {
+            "round": 5,
+            "pick": 46,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 55,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 66,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 75,
+            "pos": "TE"
+          },
+          {
+            "round": 9,
+            "pick": 86,
+            "pos": "DEF"
+          },
+          {
+            "round": 10,
+            "pick": 95,
+            "pos": "RB"
+          },
+          {
+            "round": 11,
+            "pick": 106,
+            "pos": "QB"
+          },
+          {
+            "round": 12,
+            "pick": 115,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 126,
+            "pos": "RB"
+          },
+          {
+            "round": 14,
+            "pick": 135,
+            "pos": "TE"
+          },
+          {
+            "round": 15,
+            "pick": 146,
+            "pos": "DEF"
+          }
+        ],
+        "2022": [
+          {
+            "round": 1,
+            "pick": 9,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 16,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 33,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 40,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 57,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 64,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 81,
+            "pos": "QB"
+          },
+          {
+            "round": 8,
+            "pick": 88,
+            "pos": "TE"
+          },
+          {
+            "round": 9,
+            "pick": 105,
+            "pos": "DEF"
+          },
+          {
+            "round": 10,
+            "pick": 112,
+            "pos": "RB"
+          },
+          {
+            "round": 11,
+            "pick": 129,
+            "pos": "QB"
+          },
+          {
+            "round": 12,
+            "pick": 136,
+            "pos": "RB"
+          },
+          {
+            "round": 13,
+            "pick": 153,
+            "pos": "TE"
+          },
+          {
+            "round": 15,
+            "pick": 177,
+            "pos": "DEF"
+          }
+        ],
+        "2023": [
+          {
+            "round": 1,
+            "pick": 10,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 15,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 34,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 39,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 58,
+            "pos": "TE"
+          },
+          {
+            "round": 6,
+            "pick": 63,
+            "pos": "RB"
+          },
+          {
+            "round": 7,
+            "pick": 82,
+            "pos": "QB"
+          },
+          {
+            "round": 8,
+            "pick": 87,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 106,
+            "pos": "WR"
+          },
+          {
+            "round": 10,
+            "pick": 111,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 130,
+            "pos": "QB"
+          },
+          {
+            "round": 12,
+            "pick": 135,
+            "pos": "DEF"
+          },
+          {
+            "round": 13,
+            "pick": 154,
+            "pos": "RB"
+          },
+          {
+            "round": 14,
+            "pick": 159,
+            "pos": "TE"
+          },
+          {
+            "round": 15,
+            "pick": 178,
+            "pos": "WR"
+          }
+        ],
+        "2024": [
+          {
+            "round": 1,
+            "pick": 1,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 24,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 25,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 48,
+            "pos": "QB"
+          },
+          {
+            "round": 5,
+            "pick": 49,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 72,
+            "pos": "RB"
+          },
+          {
+            "round": 7,
+            "pick": 73,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 96,
+            "pos": "TE"
+          },
+          {
+            "round": 9,
+            "pick": 97,
+            "pos": null
+          },
+          {
+            "round": 10,
+            "pick": 120,
+            "pos": "QB"
+          },
+          {
+            "round": 11,
+            "pick": 121,
+            "pos": null
+          },
+          {
+            "round": 12,
+            "pick": 144,
+            "pos": "RB"
+          },
+          {
+            "round": 13,
+            "pick": 145,
+            "pos": "WR"
+          },
+          {
+            "round": 14,
+            "pick": 168,
+            "pos": "TE"
+          },
+          {
+            "round": 15,
+            "pick": 169,
+            "pos": "DEF"
+          }
+        ],
         "2025": [
           {
             "round": 1,
@@ -190,21 +980,258 @@
           }
         ]
       },
+      "sources": [
+        "sleeper",
+        "yahoo"
+      ],
       "confidence": {
-        "EarlyQB": 1,
-        "RobustRB": 1
+        "EarlyQB": 0.125,
+        "RobustRB": 0.375,
+        "AnchorTE": 0.25,
+        "HeroRB": 0.125
       },
-      "archetypes": [
-        "EarlyQB",
-        "RobustRB"
-      ]
+      "archetypes": []
     },
     "CarstonT": {
       "seasons": [
-        "2025"
+        "2025",
+        "2022",
+        "2023",
+        "2024"
       ],
       "lastSeen": "2025",
       "picks": {
+        "2022": [
+          {
+            "round": 1,
+            "pick": 5,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 20,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 29,
+            "pos": "TE"
+          },
+          {
+            "round": 4,
+            "pick": 44,
+            "pos": "TE"
+          },
+          {
+            "round": 5,
+            "pick": 53,
+            "pos": "QB"
+          },
+          {
+            "round": 6,
+            "pick": 68,
+            "pos": "RB"
+          },
+          {
+            "round": 7,
+            "pick": 77,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 92,
+            "pos": "DEF"
+          },
+          {
+            "round": 9,
+            "pick": 101,
+            "pos": "WR"
+          },
+          {
+            "round": 10,
+            "pick": 116,
+            "pos": "TE"
+          },
+          {
+            "round": 11,
+            "pick": 125,
+            "pos": "RB"
+          },
+          {
+            "round": 12,
+            "pick": 140,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 149,
+            "pos": "QB"
+          },
+          {
+            "round": 14,
+            "pick": 164,
+            "pos": "WR"
+          },
+          {
+            "round": 15,
+            "pick": 173,
+            "pos": "RB"
+          }
+        ],
+        "2023": [
+          {
+            "round": 1,
+            "pick": 3,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 22,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 27,
+            "pos": "QB"
+          },
+          {
+            "round": 4,
+            "pick": 46,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 51,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 70,
+            "pos": "TE"
+          },
+          {
+            "round": 7,
+            "pick": 75,
+            "pos": "RB"
+          },
+          {
+            "round": 8,
+            "pick": 94,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 99,
+            "pos": "DEF"
+          },
+          {
+            "round": 10,
+            "pick": 118,
+            "pos": "QB"
+          },
+          {
+            "round": 11,
+            "pick": 123,
+            "pos": "WR"
+          },
+          {
+            "round": 12,
+            "pick": 142,
+            "pos": "TE"
+          },
+          {
+            "round": 13,
+            "pick": 147,
+            "pos": "RB"
+          },
+          {
+            "round": 14,
+            "pick": 166,
+            "pos": "WR"
+          },
+          {
+            "round": 15,
+            "pick": 171,
+            "pos": "RB"
+          }
+        ],
+        "2024": [
+          {
+            "round": 1,
+            "pick": 7,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 18,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 31,
+            "pos": "TE"
+          },
+          {
+            "round": 4,
+            "pick": 42,
+            "pos": "QB"
+          },
+          {
+            "round": 5,
+            "pick": 55,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 66,
+            "pos": "RB"
+          },
+          {
+            "round": 7,
+            "pick": 79,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 90,
+            "pos": "RB"
+          },
+          {
+            "round": 9,
+            "pick": 103,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 114,
+            "pos": "RB"
+          },
+          {
+            "round": 11,
+            "pick": 127,
+            "pos": "WR"
+          },
+          {
+            "round": 12,
+            "pick": 138,
+            "pos": "QB"
+          },
+          {
+            "round": 13,
+            "pick": 151,
+            "pos": "DEF"
+          },
+          {
+            "round": 14,
+            "pick": 162,
+            "pos": "TE"
+          },
+          {
+            "round": 15,
+            "pick": 175,
+            "pos": "WR"
+          }
+        ],
         "2025": [
           {
             "round": 1,
@@ -283,15 +1310,257 @@
           }
         ]
       },
-      "confidence": {},
+      "sources": [
+        "sleeper",
+        "yahoo"
+      ],
+      "confidence": {
+        "HeroRB": 0.25,
+        "EarlyQB": 0.25,
+        "ZeroRB": 0.25
+      },
       "archetypes": []
     },
     "ForSkins25": {
       "seasons": [
-        "2025"
+        "2025",
+        "2018",
+        "2019",
+        "2024"
       ],
       "lastSeen": "2025",
       "picks": {
+        "2018": [
+          {
+            "round": 1,
+            "pick": 12,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 13,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 36,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 37,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 60,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 61,
+            "pos": "RB"
+          },
+          {
+            "round": 7,
+            "pick": 84,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 85,
+            "pos": "QB"
+          },
+          {
+            "round": 9,
+            "pick": 108,
+            "pos": "TE"
+          },
+          {
+            "round": 10,
+            "pick": 109,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 132,
+            "pos": "RB"
+          },
+          {
+            "round": 12,
+            "pick": 133,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 156,
+            "pos": "TE"
+          },
+          {
+            "round": 14,
+            "pick": 157,
+            "pos": "DEF"
+          },
+          {
+            "round": 15,
+            "pick": 180,
+            "pos": "WR"
+          }
+        ],
+        "2019": [
+          {
+            "round": 1,
+            "pick": 6,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 19,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 30,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 43,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 54,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 67,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 78,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 91,
+            "pos": "TE"
+          },
+          {
+            "round": 9,
+            "pick": 102,
+            "pos": "WR"
+          },
+          {
+            "round": 10,
+            "pick": 115,
+            "pos": "QB"
+          },
+          {
+            "round": 11,
+            "pick": 126,
+            "pos": "RB"
+          },
+          {
+            "round": 12,
+            "pick": 139,
+            "pos": "RB"
+          },
+          {
+            "round": 13,
+            "pick": 150,
+            "pos": "RB"
+          },
+          {
+            "round": 14,
+            "pick": 163,
+            "pos": "DEF"
+          },
+          {
+            "round": 15,
+            "pick": 174,
+            "pos": "QB"
+          }
+        ],
+        "2024": [
+          {
+            "round": 1,
+            "pick": 4,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 21,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 28,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 45,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 52,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 69,
+            "pos": "RB"
+          },
+          {
+            "round": 7,
+            "pick": 76,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 93,
+            "pos": "QB"
+          },
+          {
+            "round": 9,
+            "pick": 100,
+            "pos": "TE"
+          },
+          {
+            "round": 10,
+            "pick": 117,
+            "pos": "RB"
+          },
+          {
+            "round": 11,
+            "pick": 124,
+            "pos": "WR"
+          },
+          {
+            "round": 12,
+            "pick": 141,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 148,
+            "pos": "RB"
+          },
+          {
+            "round": 14,
+            "pick": 165,
+            "pos": "DEF"
+          },
+          {
+            "round": 15,
+            "pick": 172,
+            "pos": "TE"
+          }
+        ],
         "2025": [
           {
             "round": 1,
@@ -370,21 +1639,569 @@
           }
         ]
       },
+      "sources": [
+        "sleeper",
+        "yahoo"
+      ],
       "confidence": {
-        "AnchorTE": 1,
-        "EarlyQB": 1
+        "AnchorTE": 0.25,
+        "EarlyQB": 0.25,
+        "RobustRB": 0.25
       },
-      "archetypes": [
-        "AnchorTE",
-        "EarlyQB"
-      ]
+      "archetypes": []
     },
     "till1025": {
       "seasons": [
-        "2025"
+        "2025",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
       ],
       "lastSeen": "2025",
       "picks": {
+        "2018": [
+          {
+            "round": 1,
+            "pick": 5,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 20,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 29,
+            "pos": "TE"
+          },
+          {
+            "round": 4,
+            "pick": 44,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 53,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 68,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 77,
+            "pos": "RB"
+          },
+          {
+            "round": 8,
+            "pick": 92,
+            "pos": "RB"
+          },
+          {
+            "round": 9,
+            "pick": 101,
+            "pos": "WR"
+          },
+          {
+            "round": 10,
+            "pick": 116,
+            "pos": null
+          },
+          {
+            "round": 11,
+            "pick": 125,
+            "pos": "QB"
+          },
+          {
+            "round": 12,
+            "pick": 140,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 149,
+            "pos": "QB"
+          },
+          {
+            "round": 14,
+            "pick": 164,
+            "pos": "RB"
+          },
+          {
+            "round": 15,
+            "pick": 173,
+            "pos": "DEF"
+          }
+        ],
+        "2019": [
+          {
+            "round": 1,
+            "pick": 12,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 13,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 36,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 37,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 60,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 61,
+            "pos": "RB"
+          },
+          {
+            "round": 7,
+            "pick": 84,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 85,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 108,
+            "pos": "TE"
+          },
+          {
+            "round": 10,
+            "pick": 109,
+            "pos": "RB"
+          },
+          {
+            "round": 11,
+            "pick": 132,
+            "pos": "QB"
+          },
+          {
+            "round": 12,
+            "pick": 133,
+            "pos": "QB"
+          },
+          {
+            "round": 13,
+            "pick": 156,
+            "pos": "WR"
+          },
+          {
+            "round": 14,
+            "pick": 157,
+            "pos": "WR"
+          },
+          {
+            "round": 15,
+            "pick": 180,
+            "pos": "DEF"
+          }
+        ],
+        "2020": [
+          {
+            "round": 1,
+            "pick": 5,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 16,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 25,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 36,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 45,
+            "pos": "QB"
+          },
+          {
+            "round": 6,
+            "pick": 56,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 65,
+            "pos": "RB"
+          },
+          {
+            "round": 8,
+            "pick": 76,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 85,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 96,
+            "pos": "TE"
+          },
+          {
+            "round": 11,
+            "pick": 105,
+            "pos": "WR"
+          },
+          {
+            "round": 12,
+            "pick": 116,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 125,
+            "pos": "QB"
+          },
+          {
+            "round": 14,
+            "pick": 136,
+            "pos": "DEF"
+          },
+          {
+            "round": 15,
+            "pick": 145,
+            "pos": "TE"
+          }
+        ],
+        "2021": [
+          {
+            "round": 1,
+            "pick": 5,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 16,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 25,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 36,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 45,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 56,
+            "pos": "TE"
+          },
+          {
+            "round": 7,
+            "pick": 65,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 76,
+            "pos": "RB"
+          },
+          {
+            "round": 9,
+            "pick": 85,
+            "pos": "QB"
+          },
+          {
+            "round": 10,
+            "pick": 96,
+            "pos": "RB"
+          },
+          {
+            "round": 11,
+            "pick": 105,
+            "pos": "QB"
+          },
+          {
+            "round": 12,
+            "pick": 116,
+            "pos": "TE"
+          },
+          {
+            "round": 13,
+            "pick": 125,
+            "pos": "WR"
+          },
+          {
+            "round": 14,
+            "pick": 136,
+            "pos": "WR"
+          },
+          {
+            "round": 15,
+            "pick": 145,
+            "pos": "DEF"
+          }
+        ],
+        "2022": [
+          {
+            "round": 1,
+            "pick": 2,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 23,
+            "pos": "TE"
+          },
+          {
+            "round": 3,
+            "pick": 26,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 47,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 50,
+            "pos": "QB"
+          },
+          {
+            "round": 6,
+            "pick": 71,
+            "pos": "RB"
+          },
+          {
+            "round": 7,
+            "pick": 74,
+            "pos": "RB"
+          },
+          {
+            "round": 8,
+            "pick": 95,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 98,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 119,
+            "pos": "RB"
+          },
+          {
+            "round": 11,
+            "pick": 122,
+            "pos": "QB"
+          },
+          {
+            "round": 12,
+            "pick": 143,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 146,
+            "pos": "TE"
+          },
+          {
+            "round": 14,
+            "pick": 167,
+            "pos": "DEF"
+          },
+          {
+            "round": 15,
+            "pick": 170,
+            "pos": "WR"
+          }
+        ],
+        "2023": [
+          {
+            "round": 1,
+            "pick": 1,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 24,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 25,
+            "pos": "QB"
+          },
+          {
+            "round": 4,
+            "pick": 48,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 49,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 72,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 73,
+            "pos": "TE"
+          },
+          {
+            "round": 8,
+            "pick": 96,
+            "pos": "RB"
+          },
+          {
+            "round": 9,
+            "pick": 97,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 120,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 121,
+            "pos": "QB"
+          },
+          {
+            "round": 12,
+            "pick": 144,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 145,
+            "pos": "DEF"
+          },
+          {
+            "round": 14,
+            "pick": 168,
+            "pos": "WR"
+          },
+          {
+            "round": 15,
+            "pick": 169,
+            "pos": "RB"
+          }
+        ],
+        "2024": [
+          {
+            "round": 1,
+            "pick": 5,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 20,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 29,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 44,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 53,
+            "pos": "QB"
+          },
+          {
+            "round": 6,
+            "pick": 68,
+            "pos": "TE"
+          },
+          {
+            "round": 7,
+            "pick": 77,
+            "pos": "RB"
+          },
+          {
+            "round": 8,
+            "pick": 92,
+            "pos": "RB"
+          },
+          {
+            "round": 9,
+            "pick": 101,
+            "pos": "WR"
+          },
+          {
+            "round": 10,
+            "pick": 116,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 125,
+            "pos": "RB"
+          },
+          {
+            "round": 12,
+            "pick": 140,
+            "pos": "TE"
+          },
+          {
+            "round": 13,
+            "pick": 149,
+            "pos": "DEF"
+          },
+          {
+            "round": 14,
+            "pick": 164,
+            "pos": "QB"
+          },
+          {
+            "round": 15,
+            "pick": 173,
+            "pos": "RB"
+          }
+        ],
         "2025": [
           {
             "round": 1,
@@ -463,19 +2280,560 @@
           }
         ]
       },
+      "sources": [
+        "sleeper",
+        "yahoo"
+      ],
       "confidence": {
-        "RobustRB": 1
+        "RobustRB": 0.375,
+        "AnchorTE": 0.125,
+        "HeroRB": 0.125,
+        "EarlyQB": 0.125
       },
-      "archetypes": [
-        "RobustRB"
-      ]
+      "archetypes": []
     },
     "PaTilley": {
       "seasons": [
-        "2025"
+        "2025",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
       ],
       "lastSeen": "2025",
       "picks": {
+        "2018": [
+          {
+            "round": 1,
+            "pick": 6,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 19,
+            "pos": "TE"
+          },
+          {
+            "round": 3,
+            "pick": 30,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 43,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 54,
+            "pos": "QB"
+          },
+          {
+            "round": 6,
+            "pick": 67,
+            "pos": "RB"
+          },
+          {
+            "round": 7,
+            "pick": 78,
+            "pos": "RB"
+          },
+          {
+            "round": 8,
+            "pick": 91,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 102,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 115,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 126,
+            "pos": "TE"
+          },
+          {
+            "round": 12,
+            "pick": 139,
+            "pos": "DEF"
+          },
+          {
+            "round": 13,
+            "pick": 150,
+            "pos": "QB"
+          },
+          {
+            "round": 14,
+            "pick": 163,
+            "pos": "WR"
+          },
+          {
+            "round": 15,
+            "pick": 174,
+            "pos": "WR"
+          }
+        ],
+        "2019": [
+          {
+            "round": 1,
+            "pick": 3,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 22,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 27,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 46,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 51,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 70,
+            "pos": "TE"
+          },
+          {
+            "round": 7,
+            "pick": 75,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 94,
+            "pos": "QB"
+          },
+          {
+            "round": 9,
+            "pick": 99,
+            "pos": "TE"
+          },
+          {
+            "round": 10,
+            "pick": 118,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 123,
+            "pos": "DEF"
+          },
+          {
+            "round": 12,
+            "pick": 142,
+            "pos": null
+          },
+          {
+            "round": 13,
+            "pick": 147,
+            "pos": "TE"
+          },
+          {
+            "round": 14,
+            "pick": 166,
+            "pos": "WR"
+          },
+          {
+            "round": 15,
+            "pick": 171,
+            "pos": "WR"
+          }
+        ],
+        "2020": [
+          {
+            "round": 1,
+            "pick": 1,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 20,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 21,
+            "pos": "QB"
+          },
+          {
+            "round": 4,
+            "pick": 40,
+            "pos": "TE"
+          },
+          {
+            "round": 5,
+            "pick": 41,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 60,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 61,
+            "pos": "RB"
+          },
+          {
+            "round": 9,
+            "pick": 81,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 100,
+            "pos": "TE"
+          },
+          {
+            "round": 11,
+            "pick": 101,
+            "pos": "WR"
+          },
+          {
+            "round": 12,
+            "pick": 120,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 121,
+            "pos": "DEF"
+          },
+          {
+            "round": 14,
+            "pick": 140,
+            "pos": "DEF"
+          },
+          {
+            "round": 15,
+            "pick": 141,
+            "pos": "WR"
+          }
+        ],
+        "2021": [
+          {
+            "round": 1,
+            "pick": 1,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 20,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 21,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 40,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 41,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 60,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 61,
+            "pos": "TE"
+          },
+          {
+            "round": 8,
+            "pick": 80,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 81,
+            "pos": "QB"
+          },
+          {
+            "round": 10,
+            "pick": 100,
+            "pos": "RB"
+          },
+          {
+            "round": 11,
+            "pick": 101,
+            "pos": "RB"
+          },
+          {
+            "round": 12,
+            "pick": 120,
+            "pos": "DEF"
+          },
+          {
+            "round": 13,
+            "pick": 121,
+            "pos": "RB"
+          },
+          {
+            "round": 14,
+            "pick": 140,
+            "pos": "WR"
+          },
+          {
+            "round": 15,
+            "pick": 141,
+            "pos": "QB"
+          }
+        ],
+        "2022": [
+          {
+            "round": 1,
+            "pick": 3,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 22,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 27,
+            "pos": "QB"
+          },
+          {
+            "round": 4,
+            "pick": 46,
+            "pos": "TE"
+          },
+          {
+            "round": 5,
+            "pick": 51,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 70,
+            "pos": "RB"
+          },
+          {
+            "round": 7,
+            "pick": 75,
+            "pos": "RB"
+          },
+          {
+            "round": 8,
+            "pick": 94,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 99,
+            "pos": "DEF"
+          },
+          {
+            "round": 10,
+            "pick": 118,
+            "pos": "QB"
+          },
+          {
+            "round": 11,
+            "pick": 123,
+            "pos": "WR"
+          },
+          {
+            "round": 12,
+            "pick": 142,
+            "pos": "TE"
+          },
+          {
+            "round": 13,
+            "pick": 147,
+            "pos": "WR"
+          },
+          {
+            "round": 15,
+            "pick": 171,
+            "pos": "WR"
+          }
+        ],
+        "2023": [
+          {
+            "round": 1,
+            "pick": 12,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 13,
+            "pos": "QB"
+          },
+          {
+            "round": 3,
+            "pick": 36,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 37,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 60,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 61,
+            "pos": "TE"
+          },
+          {
+            "round": 7,
+            "pick": 84,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 85,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 108,
+            "pos": "WR"
+          },
+          {
+            "round": 10,
+            "pick": 109,
+            "pos": "DEF"
+          },
+          {
+            "round": 11,
+            "pick": 132,
+            "pos": "RB"
+          },
+          {
+            "round": 12,
+            "pick": 133,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 156,
+            "pos": "TE"
+          },
+          {
+            "round": 14,
+            "pick": 157,
+            "pos": "WR"
+          },
+          {
+            "round": 15,
+            "pick": 180,
+            "pos": "WR"
+          }
+        ],
+        "2024": [
+          {
+            "round": 1,
+            "pick": 3,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 22,
+            "pos": "QB"
+          },
+          {
+            "round": 3,
+            "pick": 27,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 46,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 51,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 70,
+            "pos": "TE"
+          },
+          {
+            "round": 7,
+            "pick": 75,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 94,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 99,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 118,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 123,
+            "pos": "RB"
+          },
+          {
+            "round": 12,
+            "pick": 142,
+            "pos": "DEF"
+          },
+          {
+            "round": 13,
+            "pick": 147,
+            "pos": "WR"
+          },
+          {
+            "round": 14,
+            "pick": 166,
+            "pos": "QB"
+          },
+          {
+            "round": 15,
+            "pick": 171,
+            "pos": "DEF"
+          }
+        ],
         "2025": [
           {
             "round": 1,
@@ -554,8 +2912,15 @@
           }
         ]
       },
+      "sources": [
+        "sleeper",
+        "yahoo"
+      ],
       "confidence": {
-        "EarlyQB": 1
+        "EarlyQB": 0.625,
+        "AnchorTE": 0.125,
+        "HeroRB": 0.25,
+        "RobustRB": 0.125
       },
       "archetypes": [
         "EarlyQB"
@@ -563,10 +2928,556 @@
     },
     "SethYo": {
       "seasons": [
-        "2025"
+        "2025",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
       ],
       "lastSeen": "2025",
       "picks": {
+        "2018": [
+          {
+            "round": 1,
+            "pick": 8,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 17,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 32,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 41,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 56,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 65,
+            "pos": "QB"
+          },
+          {
+            "round": 7,
+            "pick": 80,
+            "pos": "TE"
+          },
+          {
+            "round": 8,
+            "pick": 89,
+            "pos": "RB"
+          },
+          {
+            "round": 9,
+            "pick": 104,
+            "pos": "WR"
+          },
+          {
+            "round": 10,
+            "pick": 113,
+            "pos": "RB"
+          },
+          {
+            "round": 11,
+            "pick": 128,
+            "pos": "TE"
+          },
+          {
+            "round": 12,
+            "pick": 137,
+            "pos": "QB"
+          },
+          {
+            "round": 13,
+            "pick": 152,
+            "pos": "RB"
+          },
+          {
+            "round": 14,
+            "pick": 161,
+            "pos": "DEF"
+          },
+          {
+            "round": 15,
+            "pick": 176,
+            "pos": "DEF"
+          }
+        ],
+        "2019": [
+          {
+            "round": 1,
+            "pick": 1,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 24,
+            "pos": "TE"
+          },
+          {
+            "round": 3,
+            "pick": 25,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 48,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 49,
+            "pos": "QB"
+          },
+          {
+            "round": 6,
+            "pick": 72,
+            "pos": "RB"
+          },
+          {
+            "round": 7,
+            "pick": 73,
+            "pos": "RB"
+          },
+          {
+            "round": 8,
+            "pick": 96,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 97,
+            "pos": "DEF"
+          },
+          {
+            "round": 10,
+            "pick": 120,
+            "pos": "TE"
+          },
+          {
+            "round": 11,
+            "pick": 121,
+            "pos": "QB"
+          },
+          {
+            "round": 12,
+            "pick": 144,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 145,
+            "pos": "WR"
+          },
+          {
+            "round": 14,
+            "pick": 168,
+            "pos": "RB"
+          },
+          {
+            "round": 15,
+            "pick": 169,
+            "pos": "DEF"
+          }
+        ],
+        "2020": [
+          {
+            "round": 1,
+            "pick": 4,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 17,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 24,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 37,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 44,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 57,
+            "pos": "QB"
+          },
+          {
+            "round": 7,
+            "pick": 64,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 77,
+            "pos": "TE"
+          },
+          {
+            "round": 9,
+            "pick": 84,
+            "pos": null
+          },
+          {
+            "round": 10,
+            "pick": 97,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 104,
+            "pos": "QB"
+          },
+          {
+            "round": 12,
+            "pick": 117,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 124,
+            "pos": "RB"
+          },
+          {
+            "round": 14,
+            "pick": 137,
+            "pos": "TE"
+          },
+          {
+            "round": 15,
+            "pick": 144,
+            "pos": "DEF"
+          }
+        ],
+        "2021": [
+          {
+            "round": 1,
+            "pick": 4,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 17,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 24,
+            "pos": "QB"
+          },
+          {
+            "round": 4,
+            "pick": 37,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 44,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 57,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 64,
+            "pos": "RB"
+          },
+          {
+            "round": 8,
+            "pick": 77,
+            "pos": "TE"
+          },
+          {
+            "round": 9,
+            "pick": 84,
+            "pos": "DEF"
+          },
+          {
+            "round": 10,
+            "pick": 97,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 104,
+            "pos": "RB"
+          },
+          {
+            "round": 12,
+            "pick": 117,
+            "pos": "QB"
+          },
+          {
+            "round": 13,
+            "pick": 124,
+            "pos": "RB"
+          },
+          {
+            "round": 14,
+            "pick": 137,
+            "pos": "TE"
+          },
+          {
+            "round": 15,
+            "pick": 144,
+            "pos": "DEF"
+          }
+        ],
+        "2022": [
+          {
+            "round": 1,
+            "pick": 4,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 21,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 28,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 45,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 52,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 69,
+            "pos": "RB"
+          },
+          {
+            "round": 7,
+            "pick": 76,
+            "pos": "QB"
+          },
+          {
+            "round": 8,
+            "pick": 93,
+            "pos": "QB"
+          },
+          {
+            "round": 9,
+            "pick": 100,
+            "pos": "WR"
+          },
+          {
+            "round": 10,
+            "pick": 117,
+            "pos": "TE"
+          },
+          {
+            "round": 11,
+            "pick": 124,
+            "pos": "DEF"
+          },
+          {
+            "round": 12,
+            "pick": 141,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 148,
+            "pos": "TE"
+          },
+          {
+            "round": 14,
+            "pick": 165,
+            "pos": "RB"
+          },
+          {
+            "round": 15,
+            "pick": 172,
+            "pos": "RB"
+          }
+        ],
+        "2023": [
+          {
+            "round": 1,
+            "pick": 2,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 23,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 26,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 47,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 50,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 71,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 74,
+            "pos": "QB"
+          },
+          {
+            "round": 8,
+            "pick": 95,
+            "pos": "TE"
+          },
+          {
+            "round": 9,
+            "pick": 98,
+            "pos": null
+          },
+          {
+            "round": 10,
+            "pick": 119,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 122,
+            "pos": "WR"
+          },
+          {
+            "round": 12,
+            "pick": 143,
+            "pos": "RB"
+          },
+          {
+            "round": 13,
+            "pick": 146,
+            "pos": "TE"
+          },
+          {
+            "round": 14,
+            "pick": 167,
+            "pos": "QB"
+          },
+          {
+            "round": 15,
+            "pick": 170,
+            "pos": "DEF"
+          }
+        ],
+        "2024": [
+          {
+            "round": 1,
+            "pick": 12,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 13,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 36,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 37,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 60,
+            "pos": "QB"
+          },
+          {
+            "round": 6,
+            "pick": 61,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 84,
+            "pos": "TE"
+          },
+          {
+            "round": 8,
+            "pick": 85,
+            "pos": "RB"
+          },
+          {
+            "round": 9,
+            "pick": 108,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 109,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 132,
+            "pos": "WR"
+          },
+          {
+            "round": 12,
+            "pick": 133,
+            "pos": "TE"
+          },
+          {
+            "round": 13,
+            "pick": 156,
+            "pos": "RB"
+          },
+          {
+            "round": 14,
+            "pick": 157,
+            "pos": "DEF"
+          },
+          {
+            "round": 15,
+            "pick": 180,
+            "pos": "QB"
+          }
+        ],
         "2025": [
           {
             "round": 1,
@@ -645,15 +3556,571 @@
           }
         ]
       },
-      "confidence": {},
-      "archetypes": []
+      "sources": [
+        "sleeper",
+        "yahoo"
+      ],
+      "confidence": {
+        "RobustRB": 0.5,
+        "AnchorTE": 0.125,
+        "EarlyQB": 0.125
+      },
+      "archetypes": [
+        "RobustRB"
+      ]
     },
     "RockNRollDr": {
       "seasons": [
-        "2025"
+        "2025",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
       ],
       "lastSeen": "2025",
       "picks": {
+        "2018": [
+          {
+            "round": 1,
+            "pick": 3,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 22,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 27,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 46,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 51,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 70,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 75,
+            "pos": "TE"
+          },
+          {
+            "round": 8,
+            "pick": 94,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 99,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 118,
+            "pos": "TE"
+          },
+          {
+            "round": 11,
+            "pick": 123,
+            "pos": "QB"
+          },
+          {
+            "round": 12,
+            "pick": 142,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 147,
+            "pos": "QB"
+          },
+          {
+            "round": 14,
+            "pick": 166,
+            "pos": "WR"
+          },
+          {
+            "round": 15,
+            "pick": 171,
+            "pos": "DEF"
+          }
+        ],
+        "2019": [
+          {
+            "round": 1,
+            "pick": 5,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 20,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 29,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 44,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 53,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 68,
+            "pos": null
+          },
+          {
+            "round": 7,
+            "pick": 77,
+            "pos": "RB"
+          },
+          {
+            "round": 8,
+            "pick": 92,
+            "pos": "RB"
+          },
+          {
+            "round": 9,
+            "pick": 101,
+            "pos": "TE"
+          },
+          {
+            "round": 10,
+            "pick": 116,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 125,
+            "pos": "QB"
+          },
+          {
+            "round": 12,
+            "pick": 140,
+            "pos": "TE"
+          },
+          {
+            "round": 13,
+            "pick": 149,
+            "pos": "QB"
+          },
+          {
+            "round": 14,
+            "pick": 164,
+            "pos": "DEF"
+          },
+          {
+            "round": 15,
+            "pick": 173,
+            "pos": "WR"
+          }
+        ],
+        "2020": [
+          {
+            "round": 1,
+            "pick": 2,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 19,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 22,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 39,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 42,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 59,
+            "pos": "QB"
+          },
+          {
+            "round": 7,
+            "pick": 62,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 79,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 82,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 99,
+            "pos": "TE"
+          },
+          {
+            "round": 11,
+            "pick": 102,
+            "pos": "WR"
+          },
+          {
+            "round": 12,
+            "pick": 119,
+            "pos": "RB"
+          },
+          {
+            "round": 13,
+            "pick": 122,
+            "pos": "DEF"
+          },
+          {
+            "round": 14,
+            "pick": 139,
+            "pos": "TE"
+          },
+          {
+            "round": 15,
+            "pick": 142,
+            "pos": "QB"
+          }
+        ],
+        "2021": [
+          {
+            "round": 1,
+            "pick": 2,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 19,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 22,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 39,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 42,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 59,
+            "pos": "TE"
+          },
+          {
+            "round": 7,
+            "pick": 62,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 79,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 82,
+            "pos": "QB"
+          },
+          {
+            "round": 10,
+            "pick": 99,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 102,
+            "pos": "RB"
+          },
+          {
+            "round": 12,
+            "pick": 119,
+            "pos": "DEF"
+          },
+          {
+            "round": 13,
+            "pick": 122,
+            "pos": "WR"
+          },
+          {
+            "round": 14,
+            "pick": 139,
+            "pos": "TE"
+          },
+          {
+            "round": 15,
+            "pick": 142,
+            "pos": "QB"
+          }
+        ],
+        "2022": [
+          {
+            "round": 1,
+            "pick": 11,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 14,
+            "pos": "TE"
+          },
+          {
+            "round": 3,
+            "pick": 35,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 38,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 59,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 62,
+            "pos": "QB"
+          },
+          {
+            "round": 7,
+            "pick": 83,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 86,
+            "pos": "RB"
+          },
+          {
+            "round": 9,
+            "pick": 107,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 110,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 131,
+            "pos": "WR"
+          },
+          {
+            "round": 12,
+            "pick": 134,
+            "pos": "QB"
+          },
+          {
+            "round": 13,
+            "pick": 155,
+            "pos": "TE"
+          },
+          {
+            "round": 14,
+            "pick": 158,
+            "pos": "DEF"
+          },
+          {
+            "round": 15,
+            "pick": 179,
+            "pos": "RB"
+          }
+        ],
+        "2023": [
+          {
+            "round": 1,
+            "pick": 9,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 16,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 33,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 40,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 57,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 64,
+            "pos": "RB"
+          },
+          {
+            "round": 7,
+            "pick": 81,
+            "pos": "QB"
+          },
+          {
+            "round": 8,
+            "pick": 88,
+            "pos": null
+          },
+          {
+            "round": 9,
+            "pick": 105,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 112,
+            "pos": "TE"
+          },
+          {
+            "round": 11,
+            "pick": 129,
+            "pos": "WR"
+          },
+          {
+            "round": 12,
+            "pick": 136,
+            "pos": "TE"
+          },
+          {
+            "round": 13,
+            "pick": 153,
+            "pos": "QB"
+          },
+          {
+            "round": 14,
+            "pick": 160,
+            "pos": "DEF"
+          },
+          {
+            "round": 15,
+            "pick": 177,
+            "pos": "RB"
+          }
+        ],
+        "2024": [
+          {
+            "round": 1,
+            "pick": 9,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 16,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 33,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 40,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 57,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 64,
+            "pos": "QB"
+          },
+          {
+            "round": 7,
+            "pick": 81,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 88,
+            "pos": "TE"
+          },
+          {
+            "round": 9,
+            "pick": 105,
+            "pos": "WR"
+          },
+          {
+            "round": 10,
+            "pick": 112,
+            "pos": "RB"
+          },
+          {
+            "round": 11,
+            "pick": 129,
+            "pos": "DEF"
+          },
+          {
+            "round": 12,
+            "pick": 136,
+            "pos": "TE"
+          },
+          {
+            "round": 13,
+            "pick": 153,
+            "pos": "QB"
+          },
+          {
+            "round": 14,
+            "pick": 160,
+            "pos": "WR"
+          },
+          {
+            "round": 15,
+            "pick": 177,
+            "pos": "WR"
+          }
+        ],
         "2025": [
           {
             "round": 1,
@@ -732,19 +4199,486 @@
           }
         ]
       },
+      "sources": [
+        "sleeper",
+        "yahoo"
+      ],
       "confidence": {
-        "EarlyQB": 1
+        "EarlyQB": 0.125,
+        "RobustRB": 0.375,
+        "AnchorTE": 0.125
       },
-      "archetypes": [
-        "EarlyQB"
-      ]
+      "archetypes": []
     },
     "NuttySequel": {
       "seasons": [
-        "2025"
+        "2025",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
       ],
       "lastSeen": "2025",
       "picks": {
+        "2019": [
+          {
+            "round": 1,
+            "pick": 2,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 23,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 26,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 47,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 50,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 71,
+            "pos": "RB"
+          },
+          {
+            "round": 7,
+            "pick": 74,
+            "pos": "QB"
+          },
+          {
+            "round": 8,
+            "pick": 95,
+            "pos": "TE"
+          },
+          {
+            "round": 9,
+            "pick": 98,
+            "pos": "WR"
+          },
+          {
+            "round": 10,
+            "pick": 119,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 122,
+            "pos": "RB"
+          },
+          {
+            "round": 12,
+            "pick": 143,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 146,
+            "pos": "RB"
+          },
+          {
+            "round": 14,
+            "pick": 167,
+            "pos": "TE"
+          },
+          {
+            "round": 15,
+            "pick": 170,
+            "pos": "DEF"
+          }
+        ],
+        "2020": [
+          {
+            "round": 1,
+            "pick": 6,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 15,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 26,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 35,
+            "pos": "TE"
+          },
+          {
+            "round": 5,
+            "pick": 46,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 55,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 66,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 86,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 95,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 106,
+            "pos": "TE"
+          },
+          {
+            "round": 12,
+            "pick": 115,
+            "pos": "QB"
+          },
+          {
+            "round": 13,
+            "pick": 126,
+            "pos": "RB"
+          },
+          {
+            "round": 14,
+            "pick": 135,
+            "pos": "WR"
+          },
+          {
+            "round": 15,
+            "pick": 146,
+            "pos": "DEF"
+          }
+        ],
+        "2021": [
+          {
+            "round": 1,
+            "pick": 8,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 13,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 28,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 33,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 48,
+            "pos": "QB"
+          },
+          {
+            "round": 6,
+            "pick": 53,
+            "pos": "TE"
+          },
+          {
+            "round": 7,
+            "pick": 68,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 73,
+            "pos": "RB"
+          },
+          {
+            "round": 9,
+            "pick": 88,
+            "pos": "WR"
+          },
+          {
+            "round": 10,
+            "pick": 93,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 108,
+            "pos": "WR"
+          },
+          {
+            "round": 12,
+            "pick": 113,
+            "pos": "RB"
+          },
+          {
+            "round": 13,
+            "pick": 128,
+            "pos": "TE"
+          },
+          {
+            "round": 14,
+            "pick": 133,
+            "pos": "RB"
+          },
+          {
+            "round": 15,
+            "pick": 148,
+            "pos": "DEF"
+          }
+        ],
+        "2022": [
+          {
+            "round": 1,
+            "pick": 12,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 13,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 36,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 37,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 60,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 61,
+            "pos": "TE"
+          },
+          {
+            "round": 7,
+            "pick": 84,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 85,
+            "pos": "QB"
+          },
+          {
+            "round": 9,
+            "pick": 108,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 109,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 132,
+            "pos": "WR"
+          },
+          {
+            "round": 12,
+            "pick": 133,
+            "pos": "RB"
+          },
+          {
+            "round": 13,
+            "pick": 156,
+            "pos": "WR"
+          },
+          {
+            "round": 14,
+            "pick": 157,
+            "pos": "DEF"
+          },
+          {
+            "round": 15,
+            "pick": 180,
+            "pos": "QB"
+          }
+        ],
+        "2023": [
+          {
+            "round": 1,
+            "pick": 5,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 20,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 29,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 44,
+            "pos": "TE"
+          },
+          {
+            "round": 5,
+            "pick": 53,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 68,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 77,
+            "pos": "RB"
+          },
+          {
+            "round": 8,
+            "pick": 92,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 101,
+            "pos": "WR"
+          },
+          {
+            "round": 10,
+            "pick": 116,
+            "pos": "QB"
+          },
+          {
+            "round": 11,
+            "pick": 125,
+            "pos": "QB"
+          },
+          {
+            "round": 12,
+            "pick": 140,
+            "pos": "TE"
+          },
+          {
+            "round": 13,
+            "pick": 149,
+            "pos": "DEF"
+          },
+          {
+            "round": 14,
+            "pick": 164,
+            "pos": "WR"
+          },
+          {
+            "round": 15,
+            "pick": 173,
+            "pos": "WR"
+          }
+        ],
+        "2024": [
+          {
+            "round": 1,
+            "pick": 2,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 23,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 26,
+            "pos": "TE"
+          },
+          {
+            "round": 4,
+            "pick": 47,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 50,
+            "pos": "QB"
+          },
+          {
+            "round": 6,
+            "pick": 71,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 74,
+            "pos": "RB"
+          },
+          {
+            "round": 8,
+            "pick": 95,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 98,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 119,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 122,
+            "pos": "WR"
+          },
+          {
+            "round": 12,
+            "pick": 143,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 146,
+            "pos": "TE"
+          },
+          {
+            "round": 14,
+            "pick": 167,
+            "pos": "QB"
+          },
+          {
+            "round": 15,
+            "pick": 170,
+            "pos": "DEF"
+          }
+        ],
         "2025": [
           {
             "round": 1,
@@ -823,21 +4757,571 @@
           }
         ]
       },
+      "sources": [
+        "sleeper",
+        "yahoo"
+      ],
       "confidence": {
-        "AnchorTE": 1,
-        "HeroRB": 1
+        "AnchorTE": 0.143,
+        "HeroRB": 0.143,
+        "RobustRB": 0.429
       },
       "archetypes": [
-        "AnchorTE",
-        "HeroRB"
+        "RobustRB"
       ]
     },
     "cfadden": {
       "seasons": [
-        "2025"
+        "2025",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
       ],
       "lastSeen": "2025",
       "picks": {
+        "2018": [
+          {
+            "round": 1,
+            "pick": 1,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 24,
+            "pos": "QB"
+          },
+          {
+            "round": 3,
+            "pick": 25,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 48,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 49,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 72,
+            "pos": "RB"
+          },
+          {
+            "round": 7,
+            "pick": 73,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 96,
+            "pos": "TE"
+          },
+          {
+            "round": 9,
+            "pick": 97,
+            "pos": "DEF"
+          },
+          {
+            "round": 10,
+            "pick": 120,
+            "pos": "QB"
+          },
+          {
+            "round": 11,
+            "pick": 121,
+            "pos": "TE"
+          },
+          {
+            "round": 12,
+            "pick": 144,
+            "pos": "DEF"
+          },
+          {
+            "round": 13,
+            "pick": 145,
+            "pos": "TE"
+          },
+          {
+            "round": 14,
+            "pick": 168,
+            "pos": "WR"
+          },
+          {
+            "round": 15,
+            "pick": 169,
+            "pos": "RB"
+          }
+        ],
+        "2019": [
+          {
+            "round": 1,
+            "pick": 10,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 15,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 34,
+            "pos": "TE"
+          },
+          {
+            "round": 4,
+            "pick": 39,
+            "pos": "QB"
+          },
+          {
+            "round": 5,
+            "pick": 58,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 63,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 82,
+            "pos": "RB"
+          },
+          {
+            "round": 8,
+            "pick": 87,
+            "pos": null
+          },
+          {
+            "round": 9,
+            "pick": 106,
+            "pos": "QB"
+          },
+          {
+            "round": 10,
+            "pick": 111,
+            "pos": "RB"
+          },
+          {
+            "round": 11,
+            "pick": 130,
+            "pos": "WR"
+          },
+          {
+            "round": 12,
+            "pick": 135,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 154,
+            "pos": "DEF"
+          },
+          {
+            "round": 14,
+            "pick": 159,
+            "pos": "WR"
+          },
+          {
+            "round": 15,
+            "pick": 178,
+            "pos": "RB"
+          }
+        ],
+        "2020": [
+          {
+            "round": 1,
+            "pick": 10,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 11,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 30,
+            "pos": "QB"
+          },
+          {
+            "round": 4,
+            "pick": 31,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 50,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 51,
+            "pos": "TE"
+          },
+          {
+            "round": 7,
+            "pick": 70,
+            "pos": "RB"
+          },
+          {
+            "round": 8,
+            "pick": 71,
+            "pos": null
+          },
+          {
+            "round": 9,
+            "pick": 90,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 91,
+            "pos": "QB"
+          },
+          {
+            "round": 11,
+            "pick": 110,
+            "pos": "DEF"
+          },
+          {
+            "round": 12,
+            "pick": 111,
+            "pos": "TE"
+          },
+          {
+            "round": 13,
+            "pick": 130,
+            "pos": "RB"
+          },
+          {
+            "round": 14,
+            "pick": 131,
+            "pos": "QB"
+          },
+          {
+            "round": 15,
+            "pick": 150,
+            "pos": "WR"
+          }
+        ],
+        "2021": [
+          {
+            "round": 1,
+            "pick": 9,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 12,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 29,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 32,
+            "pos": "TE"
+          },
+          {
+            "round": 5,
+            "pick": 49,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 52,
+            "pos": "QB"
+          },
+          {
+            "round": 7,
+            "pick": 69,
+            "pos": "RB"
+          },
+          {
+            "round": 8,
+            "pick": 72,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 89,
+            "pos": "WR"
+          },
+          {
+            "round": 10,
+            "pick": 92,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 109,
+            "pos": "WR"
+          },
+          {
+            "round": 12,
+            "pick": 112,
+            "pos": "RB"
+          },
+          {
+            "round": 13,
+            "pick": 129,
+            "pos": "DEF"
+          },
+          {
+            "round": 14,
+            "pick": 132,
+            "pos": "QB"
+          },
+          {
+            "round": 15,
+            "pick": 149,
+            "pos": "TE"
+          }
+        ],
+        "2022": [
+          {
+            "round": 1,
+            "pick": 8,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 17,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 32,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 41,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 56,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 65,
+            "pos": "QB"
+          },
+          {
+            "round": 7,
+            "pick": 80,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 89,
+            "pos": "TE"
+          },
+          {
+            "round": 9,
+            "pick": 104,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 113,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 128,
+            "pos": "RB"
+          },
+          {
+            "round": 12,
+            "pick": 137,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 152,
+            "pos": "RB"
+          },
+          {
+            "round": 14,
+            "pick": 161,
+            "pos": "RB"
+          },
+          {
+            "round": 15,
+            "pick": 176,
+            "pos": "DEF"
+          }
+        ],
+        "2023": [
+          {
+            "round": 1,
+            "pick": 7,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 18,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 31,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 42,
+            "pos": "TE"
+          },
+          {
+            "round": 5,
+            "pick": 55,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 66,
+            "pos": "QB"
+          },
+          {
+            "round": 7,
+            "pick": 79,
+            "pos": "RB"
+          },
+          {
+            "round": 8,
+            "pick": 90,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 103,
+            "pos": "DEF"
+          },
+          {
+            "round": 10,
+            "pick": 114,
+            "pos": "RB"
+          },
+          {
+            "round": 11,
+            "pick": 127,
+            "pos": "QB"
+          },
+          {
+            "round": 12,
+            "pick": 138,
+            "pos": "RB"
+          },
+          {
+            "round": 13,
+            "pick": 151,
+            "pos": "WR"
+          },
+          {
+            "round": 14,
+            "pick": 162,
+            "pos": "TE"
+          },
+          {
+            "round": 15,
+            "pick": 175,
+            "pos": "DEF"
+          }
+        ],
+        "2024": [
+          {
+            "round": 1,
+            "pick": 10,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 15,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 34,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 39,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 58,
+            "pos": "QB"
+          },
+          {
+            "round": 6,
+            "pick": 63,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 82,
+            "pos": "TE"
+          },
+          {
+            "round": 8,
+            "pick": 87,
+            "pos": "RB"
+          },
+          {
+            "round": 9,
+            "pick": 106,
+            "pos": "DEF"
+          },
+          {
+            "round": 10,
+            "pick": 111,
+            "pos": "QB"
+          },
+          {
+            "round": 11,
+            "pick": 130,
+            "pos": "WR"
+          },
+          {
+            "round": 12,
+            "pick": 135,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 154,
+            "pos": "TE"
+          },
+          {
+            "round": 14,
+            "pick": 159,
+            "pos": "RB"
+          },
+          {
+            "round": 15,
+            "pick": 178,
+            "pos": "DEF"
+          }
+        ],
         "2025": [
           {
             "round": 1,
@@ -916,15 +5400,568 @@
           }
         ]
       },
-      "confidence": {},
+      "sources": [
+        "sleeper",
+        "yahoo"
+      ],
+      "confidence": {
+        "EarlyQB": 0.25,
+        "RobustRB": 0.125
+      },
       "archetypes": []
     },
     "Tilleydmt": {
       "seasons": [
-        "2025"
+        "2025",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
       ],
       "lastSeen": "2025",
       "picks": {
+        "2018": [
+          {
+            "round": 1,
+            "pick": 4,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 21,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 28,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 45,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 52,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 69,
+            "pos": "QB"
+          },
+          {
+            "round": 7,
+            "pick": 76,
+            "pos": "TE"
+          },
+          {
+            "round": 8,
+            "pick": 93,
+            "pos": "RB"
+          },
+          {
+            "round": 9,
+            "pick": 100,
+            "pos": null
+          },
+          {
+            "round": 10,
+            "pick": 117,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 124,
+            "pos": "QB"
+          },
+          {
+            "round": 12,
+            "pick": 141,
+            "pos": "RB"
+          },
+          {
+            "round": 13,
+            "pick": 148,
+            "pos": "WR"
+          },
+          {
+            "round": 14,
+            "pick": 165,
+            "pos": "DEF"
+          },
+          {
+            "round": 15,
+            "pick": 172,
+            "pos": "RB"
+          }
+        ],
+        "2019": [
+          {
+            "round": 1,
+            "pick": 4,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 21,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 28,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 45,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 52,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 69,
+            "pos": "TE"
+          },
+          {
+            "round": 7,
+            "pick": 76,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 93,
+            "pos": "RB"
+          },
+          {
+            "round": 9,
+            "pick": 100,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 117,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 124,
+            "pos": "RB"
+          },
+          {
+            "round": 12,
+            "pick": 141,
+            "pos": "QB"
+          },
+          {
+            "round": 13,
+            "pick": 148,
+            "pos": "QB"
+          },
+          {
+            "round": 14,
+            "pick": 165,
+            "pos": "RB"
+          },
+          {
+            "round": 15,
+            "pick": 172,
+            "pos": "DEF"
+          }
+        ],
+        "2020": [
+          {
+            "round": 1,
+            "pick": 3,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 18,
+            "pos": "TE"
+          },
+          {
+            "round": 3,
+            "pick": 23,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 38,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 43,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 58,
+            "pos": "RB"
+          },
+          {
+            "round": 7,
+            "pick": 63,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 78,
+            "pos": "RB"
+          },
+          {
+            "round": 9,
+            "pick": 83,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 98,
+            "pos": "RB"
+          },
+          {
+            "round": 11,
+            "pick": 103,
+            "pos": "RB"
+          },
+          {
+            "round": 12,
+            "pick": 118,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 123,
+            "pos": "QB"
+          },
+          {
+            "round": 14,
+            "pick": 138,
+            "pos": "DEF"
+          },
+          {
+            "round": 15,
+            "pick": 143,
+            "pos": "WR"
+          }
+        ],
+        "2021": [
+          {
+            "round": 1,
+            "pick": 3,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 18,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 23,
+            "pos": "TE"
+          },
+          {
+            "round": 4,
+            "pick": 38,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 43,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 58,
+            "pos": "QB"
+          },
+          {
+            "round": 7,
+            "pick": 63,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 78,
+            "pos": "RB"
+          },
+          {
+            "round": 9,
+            "pick": 83,
+            "pos": "WR"
+          },
+          {
+            "round": 10,
+            "pick": 98,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 103,
+            "pos": null
+          },
+          {
+            "round": 12,
+            "pick": 118,
+            "pos": "RB"
+          },
+          {
+            "round": 13,
+            "pick": 123,
+            "pos": "WR"
+          },
+          {
+            "round": 14,
+            "pick": 138,
+            "pos": "RB"
+          },
+          {
+            "round": 15,
+            "pick": 143,
+            "pos": "DEF"
+          }
+        ],
+        "2022": [
+          {
+            "round": 1,
+            "pick": 10,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 15,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 34,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 39,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 58,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 63,
+            "pos": "QB"
+          },
+          {
+            "round": 7,
+            "pick": 82,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 87,
+            "pos": "TE"
+          },
+          {
+            "round": 9,
+            "pick": 106,
+            "pos": "WR"
+          },
+          {
+            "round": 10,
+            "pick": 111,
+            "pos": "RB"
+          },
+          {
+            "round": 11,
+            "pick": 130,
+            "pos": "WR"
+          },
+          {
+            "round": 12,
+            "pick": 135,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 154,
+            "pos": "TE"
+          },
+          {
+            "round": 14,
+            "pick": 159,
+            "pos": "RB"
+          },
+          {
+            "round": 15,
+            "pick": 178,
+            "pos": "DEF"
+          }
+        ],
+        "2023": [
+          {
+            "round": 1,
+            "pick": 6,
+            "pos": "TE"
+          },
+          {
+            "round": 2,
+            "pick": 19,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 30,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 43,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 54,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 67,
+            "pos": "QB"
+          },
+          {
+            "round": 7,
+            "pick": 78,
+            "pos": "RB"
+          },
+          {
+            "round": 8,
+            "pick": 91,
+            "pos": "RB"
+          },
+          {
+            "round": 9,
+            "pick": 102,
+            "pos": "WR"
+          },
+          {
+            "round": 10,
+            "pick": 115,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 126,
+            "pos": "RB"
+          },
+          {
+            "round": 12,
+            "pick": 139,
+            "pos": "RB"
+          },
+          {
+            "round": 13,
+            "pick": 150,
+            "pos": "WR"
+          },
+          {
+            "round": 14,
+            "pick": 163,
+            "pos": "RB"
+          },
+          {
+            "round": 15,
+            "pick": 174,
+            "pos": "DEF"
+          }
+        ],
+        "2024": [
+          {
+            "round": 1,
+            "pick": 8,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 17,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 32,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 41,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 56,
+            "pos": "TE"
+          },
+          {
+            "round": 6,
+            "pick": 65,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 80,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 89,
+            "pos": "QB"
+          },
+          {
+            "round": 9,
+            "pick": 104,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 113,
+            "pos": "RB"
+          },
+          {
+            "round": 11,
+            "pick": 128,
+            "pos": "RB"
+          },
+          {
+            "round": 12,
+            "pick": 137,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 152,
+            "pos": "RB"
+          },
+          {
+            "round": 14,
+            "pick": 161,
+            "pos": "QB"
+          },
+          {
+            "round": 15,
+            "pick": 176,
+            "pos": "DEF"
+          }
+        ],
         "2025": [
           {
             "round": 1,
@@ -1003,15 +6040,568 @@
           }
         ]
       },
-      "confidence": {},
+      "sources": [
+        "sleeper",
+        "yahoo"
+      ],
+      "confidence": {
+        "AnchorTE": 0.25,
+        "HeroRB": 0.125
+      },
       "archetypes": []
     },
     "jaetill": {
       "seasons": [
-        "2025"
+        "2025",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
       ],
       "lastSeen": "2025",
       "picks": {
+        "2018": [
+          {
+            "round": 1,
+            "pick": 10,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 15,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 34,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 39,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 58,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 63,
+            "pos": "QB"
+          },
+          {
+            "round": 7,
+            "pick": 82,
+            "pos": "RB"
+          },
+          {
+            "round": 8,
+            "pick": 87,
+            "pos": "TE"
+          },
+          {
+            "round": 9,
+            "pick": 106,
+            "pos": "DEF"
+          },
+          {
+            "round": 10,
+            "pick": 111,
+            "pos": "QB"
+          },
+          {
+            "round": 11,
+            "pick": 130,
+            "pos": "DEF"
+          },
+          {
+            "round": 12,
+            "pick": 135,
+            "pos": "TE"
+          },
+          {
+            "round": 13,
+            "pick": 154,
+            "pos": "TE"
+          },
+          {
+            "round": 14,
+            "pick": 159,
+            "pos": "RB"
+          },
+          {
+            "round": 15,
+            "pick": 178,
+            "pos": "WR"
+          }
+        ],
+        "2019": [
+          {
+            "round": 1,
+            "pick": 9,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 16,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 33,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 40,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 57,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 64,
+            "pos": "QB"
+          },
+          {
+            "round": 7,
+            "pick": 81,
+            "pos": "TE"
+          },
+          {
+            "round": 8,
+            "pick": 88,
+            "pos": "RB"
+          },
+          {
+            "round": 9,
+            "pick": 105,
+            "pos": "DEF"
+          },
+          {
+            "round": 10,
+            "pick": 112,
+            "pos": "QB"
+          },
+          {
+            "round": 11,
+            "pick": 129,
+            "pos": "WR"
+          },
+          {
+            "round": 12,
+            "pick": 136,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 153,
+            "pos": "TE"
+          },
+          {
+            "round": 14,
+            "pick": 160,
+            "pos": "RB"
+          },
+          {
+            "round": 15,
+            "pick": 177,
+            "pos": "DEF"
+          }
+        ],
+        "2020": [
+          {
+            "round": 1,
+            "pick": 9,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 12,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 29,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 32,
+            "pos": "RB"
+          },
+          {
+            "round": 5,
+            "pick": 49,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 52,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 69,
+            "pos": "QB"
+          },
+          {
+            "round": 8,
+            "pick": 72,
+            "pos": "TE"
+          },
+          {
+            "round": 9,
+            "pick": 89,
+            "pos": "DEF"
+          },
+          {
+            "round": 10,
+            "pick": 92,
+            "pos": null
+          },
+          {
+            "round": 11,
+            "pick": 109,
+            "pos": "QB"
+          },
+          {
+            "round": 12,
+            "pick": 112,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 129,
+            "pos": "TE"
+          },
+          {
+            "round": 14,
+            "pick": 132,
+            "pos": "RB"
+          },
+          {
+            "round": 15,
+            "pick": 149,
+            "pos": "DEF"
+          }
+        ],
+        "2021": [
+          {
+            "round": 1,
+            "pick": 10,
+            "pos": "WR"
+          },
+          {
+            "round": 2,
+            "pick": 11,
+            "pos": "TE"
+          },
+          {
+            "round": 3,
+            "pick": 30,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 31,
+            "pos": "WR"
+          },
+          {
+            "round": 5,
+            "pick": 50,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 51,
+            "pos": "QB"
+          },
+          {
+            "round": 7,
+            "pick": 70,
+            "pos": "RB"
+          },
+          {
+            "round": 8,
+            "pick": 71,
+            "pos": "RB"
+          },
+          {
+            "round": 9,
+            "pick": 90,
+            "pos": "WR"
+          },
+          {
+            "round": 10,
+            "pick": 91,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 110,
+            "pos": "WR"
+          },
+          {
+            "round": 12,
+            "pick": 111,
+            "pos": "QB"
+          },
+          {
+            "round": 13,
+            "pick": 130,
+            "pos": "WR"
+          },
+          {
+            "round": 14,
+            "pick": 131,
+            "pos": null
+          },
+          {
+            "round": 15,
+            "pick": 150,
+            "pos": "WR"
+          }
+        ],
+        "2022": [
+          {
+            "round": 1,
+            "pick": 6,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 19,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 30,
+            "pos": "WR"
+          },
+          {
+            "round": 4,
+            "pick": 43,
+            "pos": "TE"
+          },
+          {
+            "round": 5,
+            "pick": 54,
+            "pos": "RB"
+          },
+          {
+            "round": 6,
+            "pick": 67,
+            "pos": "RB"
+          },
+          {
+            "round": 7,
+            "pick": 78,
+            "pos": null
+          },
+          {
+            "round": 8,
+            "pick": 91,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 102,
+            "pos": "QB"
+          },
+          {
+            "round": 10,
+            "pick": 115,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 126,
+            "pos": "WR"
+          },
+          {
+            "round": 12,
+            "pick": 139,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 150,
+            "pos": "RB"
+          },
+          {
+            "round": 14,
+            "pick": 163,
+            "pos": "DEF"
+          },
+          {
+            "round": 15,
+            "pick": 174,
+            "pos": "QB"
+          }
+        ],
+        "2023": [
+          {
+            "round": 1,
+            "pick": 8,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 17,
+            "pos": "WR"
+          },
+          {
+            "round": 3,
+            "pick": 32,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 41,
+            "pos": "QB"
+          },
+          {
+            "round": 5,
+            "pick": 56,
+            "pos": "TE"
+          },
+          {
+            "round": 6,
+            "pick": 65,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 80,
+            "pos": "WR"
+          },
+          {
+            "round": 8,
+            "pick": 89,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 104,
+            "pos": "RB"
+          },
+          {
+            "round": 10,
+            "pick": 113,
+            "pos": "RB"
+          },
+          {
+            "round": 11,
+            "pick": 128,
+            "pos": "WR"
+          },
+          {
+            "round": 12,
+            "pick": 137,
+            "pos": "RB"
+          },
+          {
+            "round": 13,
+            "pick": 152,
+            "pos": "TE"
+          },
+          {
+            "round": 14,
+            "pick": 161,
+            "pos": "QB"
+          },
+          {
+            "round": 15,
+            "pick": 176,
+            "pos": "DEF"
+          }
+        ],
+        "2024": [
+          {
+            "round": 1,
+            "pick": 6,
+            "pos": "RB"
+          },
+          {
+            "round": 2,
+            "pick": 19,
+            "pos": "RB"
+          },
+          {
+            "round": 3,
+            "pick": 30,
+            "pos": "RB"
+          },
+          {
+            "round": 4,
+            "pick": 43,
+            "pos": "TE"
+          },
+          {
+            "round": 5,
+            "pick": 54,
+            "pos": "WR"
+          },
+          {
+            "round": 6,
+            "pick": 67,
+            "pos": "WR"
+          },
+          {
+            "round": 7,
+            "pick": 78,
+            "pos": "RB"
+          },
+          {
+            "round": 8,
+            "pick": 91,
+            "pos": "WR"
+          },
+          {
+            "round": 9,
+            "pick": 102,
+            "pos": "WR"
+          },
+          {
+            "round": 10,
+            "pick": 115,
+            "pos": "WR"
+          },
+          {
+            "round": 11,
+            "pick": 126,
+            "pos": "QB"
+          },
+          {
+            "round": 12,
+            "pick": 139,
+            "pos": "WR"
+          },
+          {
+            "round": 13,
+            "pick": 150,
+            "pos": "QB"
+          },
+          {
+            "round": 14,
+            "pick": 163,
+            "pos": "DEF"
+          },
+          {
+            "round": 15,
+            "pick": 174,
+            "pos": "RB"
+          }
+        ],
         "2025": [
           {
             "round": 1,
@@ -1090,8 +6680,17 @@
           }
         ]
       },
-      "confidence": {},
-      "archetypes": []
+      "sources": [
+        "sleeper",
+        "yahoo"
+      ],
+      "confidence": {
+        "RobustRB": 0.625,
+        "AnchorTE": 0.125
+      },
+      "archetypes": [
+        "RobustRB"
+      ]
     }
   }
 }
