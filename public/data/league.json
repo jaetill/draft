@@ -21,5 +21,7 @@
     "TE": 15,
     "DEF": 12
   },
-  "sleeper_league_id": null
+  "sleeper_league_id": "1347230924131041280",
+  "sleeper_league_name": "Plowden's Peeps",
+  "sleeper_league_notes": "Settings need commissioner fix before draft day: draft_rounds is 3 (should be 15), max_keepers is 1 (should be 0). League uses Sleeper's auto_continue chain — previous_league_id 1261484943775629312 was 2025 inaugural season."
 }
