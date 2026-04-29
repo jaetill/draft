@@ -114,12 +114,15 @@ async function processSleeperLeague(leagueId) {
 
 // --- Yahoo processor ---
 
-// Resolve player NFL team for affinity detection. Three layers, in order:
+// Owners known to occasionally miss drafts and get autodrafted. Their archetype
+// data is partially noise — the engine should know to de-emphasize confidence.
+const OCCASIONAL_AUTODRAFT_OWNERS = new Set(['Bruno2328', 'SethYo', 'cfadden']);
+
+// Resolve player metadata: NFL team + rookie_year. Three layers:
 //   1. Trimmed players DB (current rosters) — accurate for active players.
-//   2. Sleeper full DB — adds players that have a team set even if not in trimmed.
-//   3. Manual overrides — retired stars (Brady, Brees, Edelman, etc.) that
-//      Sleeper marks team:null. See scripts/yahoo-history/team-overrides.json.
-async function buildPlayerTeamMap() {
+//   2. Sleeper full DB — adds rookie_year + retired-with-team players.
+//   3. Manual team overrides — retired stars Sleeper marks team:null.
+async function buildPlayerInfoMap() {
   const trimmed = JSON.parse(
     await readFile(join(__dirname, '..', 'public', 'data', 'players.json'), 'utf8')
   );
@@ -130,30 +133,35 @@ async function buildPlayerTeamMap() {
     );
   } catch {}
 
+  // Map name → { team, rookieYear }
   const map = new Map();
+  function set(key, fields) {
+    const cur = map.get(key) || {};
+    map.set(key, { ...cur, ...fields });
+  }
+
   for (const p of Object.values(trimmed)) {
-    if (p.team) {
-      const key = p.name.toLowerCase().replace(/[^a-z]/g, '');
-      map.set(key, p.team);
-    }
+    const key = p.name.toLowerCase().replace(/[^a-z]/g, '');
+    if (p.team) set(key, { team: p.team });
   }
   try {
     const fullRes = await fetch(`${BASE}/players/nfl`);
     const full = await fullRes.json();
     for (const p of Object.values(full)) {
-      if (!p.team) continue;
       const name = (p.full_name || `${p.first_name ?? ''} ${p.last_name ?? ''}`.trim()).trim();
       if (!name) continue;
       const key = name.toLowerCase().replace(/[^a-z]/g, '');
-      if (!map.has(key)) map.set(key, p.team);
+      const rookieYear = p.metadata?.rookie_year ? parseInt(p.metadata.rookie_year, 10) : null;
+      const fields = {};
+      if (p.team && !map.get(key)?.team) fields.team = p.team;
+      if (rookieYear) fields.rookieYear = rookieYear;
+      if (Object.keys(fields).length) set(key, fields);
     }
   } catch {}
-  // Manual overrides win over any Sleeper data — they're the source of truth
-  // for retired players whose team isn't preserved in the API.
   for (const [name, team] of Object.entries(overrides)) {
     if (name.startsWith('_') || typeof team !== 'string') continue;
     const key = name.toLowerCase().replace(/[^a-z]/g, '');
-    map.set(key, team);
+    set(key, { team });
   }
   return map;
 }
@@ -270,52 +278,98 @@ for (const owner of Object.values(owners)) {
   delete owner.archetypeHits;
 }
 
-// --- Team affinity detection ---
-// For each owner, identify NFL teams they pick at meaningfully higher rate than
-// the league average. Threshold: ≥4 picks AND ≥2x the league rate.
-console.log('\nComputing team affinities...');
-const playerTeamMap = await buildPlayerTeamMap();
+// --- Team / rookie / loyalty affinity detection ---
+console.log('\nComputing team + rookie + loyalty affinities...');
+const playerInfo = await buildPlayerInfoMap();
 
-const ownerTeamCounts = {};
-const ownerPickTotals = {};
+const ownerStats = {};
 const leagueTeamCounts = {};
 let leaguePickTotal = 0;
+let leagueRookieCount = 0;
 
 for (const season of allSeasons) {
+  const draftYear = parseInt(season.season, 10);
   for (const [name, prof] of Object.entries(season.seasonProfiles)) {
-    if (!ownerTeamCounts[name]) ownerTeamCounts[name] = {};
+    if (!ownerStats[name]) {
+      ownerStats[name] = {
+        teamCounts: {},
+        playerCounts: {}, // for loyalty
+        total: 0,
+        rookieCount: 0
+      };
+    }
+    const stats = ownerStats[name];
     for (const pick of prof.picks) {
-      // Find player by name; lookup nfl team. If not found, skip.
-      // For Sleeper-source picks, we don't have the player_name in the pick — we have player_id.
-      // Skip Sleeper picks for affinity (DNS yet); affinity comes from Yahoo data only for now.
       const playerName = pick.player_name || pick.playerName;
       if (!playerName) continue;
       const key = playerName.toLowerCase().replace(/[^a-z]/g, '');
-      const nfl = playerTeamMap.get(key);
-      if (!nfl) continue;
-      ownerTeamCounts[name][nfl] = (ownerTeamCounts[name][nfl] || 0) + 1;
-      ownerPickTotals[name] = (ownerPickTotals[name] || 0) + 1;
-      leagueTeamCounts[nfl] = (leagueTeamCounts[nfl] || 0) + 1;
+      const info = playerInfo.get(key);
+
+      // Track player frequency for loyalty regardless of team resolution.
+      if (!stats.playerCounts[playerName]) {
+        stats.playerCounts[playerName] = { count: 0, seasons: [] };
+      }
+      stats.playerCounts[playerName].count++;
+      stats.playerCounts[playerName].seasons.push(season.season);
+
+      stats.total++;
       leaguePickTotal++;
+
+      if (info?.team) {
+        stats.teamCounts[info.team] = (stats.teamCounts[info.team] || 0) + 1;
+        leagueTeamCounts[info.team] = (leagueTeamCounts[info.team] || 0) + 1;
+      }
+      // Rookie pick: pick made in the player's debut year.
+      if (info?.rookieYear === draftYear) {
+        stats.rookieCount++;
+        leagueRookieCount++;
+      }
     }
   }
 }
 
+const leagueRookieRate = leagueRookieCount / Math.max(1, leaguePickTotal);
+
 for (const [name, owner] of Object.entries(owners)) {
-  const counts = ownerTeamCounts[name] || {};
-  const total = ownerPickTotals[name] || 0;
+  const stats = ownerStats[name] || { teamCounts: {}, playerCounts: {}, total: 0, rookieCount: 0 };
+
+  // Team affinity (≥4 picks, ≥2x league rate)
   const affinities = [];
-  for (const [nfl, count] of Object.entries(counts)) {
+  for (const [team, count] of Object.entries(stats.teamCounts)) {
     if (count < 4) continue;
-    const ownerRate = count / total;
-    const leagueRate = (leagueTeamCounts[nfl] || 0) / Math.max(1, leaguePickTotal);
+    const ownerRate = count / stats.total;
+    const leagueRate = (leagueTeamCounts[team] || 0) / Math.max(1, leaguePickTotal);
     const ratio = leagueRate > 0 ? ownerRate / leagueRate : 0;
-    if (ratio >= 2.0) {
-      affinities.push({ team: nfl, count, ratio: +ratio.toFixed(1) });
-    }
+    if (ratio >= 2.0) affinities.push({ team, count, ratio: +ratio.toFixed(1) });
   }
   affinities.sort((a, b) => b.ratio - a.ratio);
   owner.teamAffinities = affinities.slice(0, 4);
+
+  // Rookie affinity
+  const ownerRookieRate = stats.total > 0 ? stats.rookieCount / stats.total : 0;
+  owner.rookieAffinity = {
+    rookiePicks: stats.rookieCount,
+    totalPicks: stats.total,
+    rate: +ownerRookieRate.toFixed(3),
+    leagueRate: +leagueRookieRate.toFixed(3),
+    ratio: leagueRookieRate > 0 ? +(ownerRookieRate / leagueRookieRate).toFixed(2) : 0
+  };
+
+  // Loyalty: players the owner drafted in 2+ different seasons.
+  const favorites = [];
+  for (const [player, data] of Object.entries(stats.playerCounts)) {
+    const uniqueSeasons = [...new Set(data.seasons)];
+    if (uniqueSeasons.length >= 2) {
+      favorites.push({ player, seasons: uniqueSeasons.sort() });
+    }
+  }
+  favorites.sort((a, b) => b.seasons.length - a.seasons.length);
+  owner.loyaltyPicks = favorites.slice(0, 8);
+
+  // Autodraft caveat
+  if (OCCASIONAL_AUTODRAFT_OWNERS.has(name)) {
+    owner.occasionallyAutodrafts = true;
+  }
 }
 
 // Slot→owner map from the most recent Sleeper season (for mock-harness defaults).

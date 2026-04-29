@@ -19,6 +19,9 @@ function annotateAnticipation(recs, state, profiles) {
   const upcoming = anticipateUpcoming(state, profiles, 12);
   return recs.map((rec) => {
     const tags = new Set();
+    const isRookie = rec.player.exp === 0;
+    const playerNameLower = (rec.player.name || '').toLowerCase();
+
     for (const u of upcoming) {
       const profile = u.profile;
       if (!profile) continue;
@@ -27,7 +30,18 @@ function annotateAnticipation(recs, state, profiles) {
       }
       const teamMatch = (profile.teamAffinities || []).find((a) => a.team === rec.player.team);
       if (teamMatch) {
-        tags.add(`${profile.name} (${rec.player.team} ${teamMatch.ratio}x bias)`);
+        tags.add(`${profile.name} (${rec.player.team} ${teamMatch.ratio}x)`);
+      }
+      // Rookie pickers
+      if (isRookie && (profile.rookieAffinity?.ratio || 0) >= 1.5) {
+        tags.add(`${profile.name} (rookie bias ${profile.rookieAffinity.ratio.toFixed(1)}x)`);
+      }
+      // Loyalty match
+      const loyaltyMatch = (profile.loyaltyPicks || []).find(
+        (l) => l.player.toLowerCase() === playerNameLower
+      );
+      if (loyaltyMatch && loyaltyMatch.seasons.length >= 3) {
+        tags.add(`${profile.name} (drafted ${loyaltyMatch.seasons.length}x)`);
       }
     }
     if (tags.size === 0) return rec;

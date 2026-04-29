@@ -185,6 +185,13 @@ export function renderBoard(state, n = 12, ownerProfiles = null) {
           for (const a of aff) {
             tags.push(`<span class="signal" style="display:inline">${esc(a.team)} ${a.ratio}x</span>`);
           }
+          const rk = u.profile?.rookieAffinity?.ratio || 0;
+          if (rk >= 1.4) {
+            tags.push(`<span class="signal" style="display:inline">rookies ${rk.toFixed(1)}x</span>`);
+          }
+          if (u.profile?.occasionallyAutodrafts) {
+            tags.push(`<span class="signal muted" style="display:inline; opacity:0.7;">may autodraft</span>`);
+          }
           const name = u.profile?.name || `slot ${u.slot}`;
           return `
             <li class="board-item ${u.mine ? 'my-pick' : ''}">

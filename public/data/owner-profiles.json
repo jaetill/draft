@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-29T01:17:27.680Z",
+  "generated_at": "2026-04-29T01:22:01.626Z",
   "seasons": [
     "2018",
     "2019",
@@ -418,12 +418,63 @@
         {
           "team": "LAC",
           "count": 5,
-          "ratio": 2.8
+          "ratio": 2.9
         },
         {
           "team": "CIN",
           "count": 5,
-          "ratio": 2.7
+          "ratio": 2.8
+        }
+      ],
+      "rookieAffinity": {
+        "rookiePicks": 4,
+        "totalPicks": 60,
+        "rate": 0.067,
+        "leagueRate": 0.082,
+        "ratio": 0.81
+      },
+      "loyaltyPicks": [
+        {
+          "player": "Jonathan Taylor",
+          "seasons": [
+            "2024",
+            "2025"
+          ]
+        },
+        {
+          "player": "James Conner",
+          "seasons": [
+            "2024",
+            "2025"
+          ]
+        },
+        {
+          "player": "Trevor Lawrence",
+          "seasons": [
+            "2024",
+            "2025"
+          ]
+        },
+        {
+          "player": "Dallas Goedert",
+          "seasons": [
+            "2022",
+            "2024"
+          ]
+        },
+        {
+          "player": "Dak Prescott",
+          "seasons": [
+            "2022",
+            "2024"
+          ]
+        },
+        {
+          "player": "Tyler Boyd",
+          "seasons": [
+            "2022",
+            "2023"
+          ]
         }
       ]
     },
@@ -1182,7 +1233,74 @@
         "HeroRB": 0.125
       },
       "archetypes": [],
-      "teamAffinities": []
+      "teamAffinities": [],
+      "rookieAffinity": {
+        "rookiePicks": 6,
+        "totalPicks": 119,
+        "rate": 0.05,
+        "leagueRate": 0.082,
+        "ratio": 0.61
+      },
+      "loyaltyPicks": [
+        {
+          "player": "Robbie Chosen",
+          "seasons": [
+            "2018",
+            "2019",
+            "2021"
+          ]
+        },
+        {
+          "player": "Lamar Jackson",
+          "seasons": [
+            "2019",
+            "2025"
+          ]
+        },
+        {
+          "player": "Julio Jones",
+          "seasons": [
+            "2018",
+            "2021"
+          ]
+        },
+        {
+          "player": "LeSean McCoy",
+          "seasons": [
+            "2018",
+            "2019"
+          ]
+        },
+        {
+          "player": "Latavius Murray",
+          "seasons": [
+            "2018",
+            "2019"
+          ]
+        },
+        {
+          "player": "Davante Adams",
+          "seasons": [
+            "2019",
+            "2024"
+          ]
+        },
+        {
+          "player": "James Conner",
+          "seasons": [
+            "2020",
+            "2023"
+          ]
+        },
+        {
+          "player": "A.J. Brown",
+          "seasons": [
+            "2020",
+            "2023"
+          ]
+        }
+      ],
+      "occasionallyAutodrafts": true
     },
     "CarstonT": {
       "seasons": [
@@ -1576,7 +1694,58 @@
         {
           "team": "PHI",
           "count": 4,
-          "ratio": 2.1
+          "ratio": 2.2
+        }
+      ],
+      "rookieAffinity": {
+        "rookiePicks": 8,
+        "totalPicks": 60,
+        "rate": 0.133,
+        "leagueRate": 0.082,
+        "ratio": 1.62
+      },
+      "loyaltyPicks": [
+        {
+          "player": "Sam LaPorta",
+          "seasons": [
+            "2024",
+            "2025"
+          ]
+        },
+        {
+          "player": "Jared Goff",
+          "seasons": [
+            "2024",
+            "2025"
+          ]
+        },
+        {
+          "player": "Dalvin Cook",
+          "seasons": [
+            "2022",
+            "2023"
+          ]
+        },
+        {
+          "player": "Lamar Jackson",
+          "seasons": [
+            "2022",
+            "2024"
+          ]
+        },
+        {
+          "player": "Devin Singletary",
+          "seasons": [
+            "2023",
+            "2024"
+          ]
+        },
+        {
+          "player": "Gus Edwards",
+          "seasons": [
+            "2023",
+            "2024"
+          ]
         }
       ]
     },
@@ -1978,6 +2147,36 @@
           "team": "PIT",
           "count": 4,
           "ratio": 2.1
+        }
+      ],
+      "rookieAffinity": {
+        "rookiePicks": 5,
+        "totalPicks": 60,
+        "rate": 0.083,
+        "leagueRate": 0.082,
+        "ratio": 1.01
+      },
+      "loyaltyPicks": [
+        {
+          "player": "Keon Coleman",
+          "seasons": [
+            "2024",
+            "2025"
+          ]
+        },
+        {
+          "player": "Leonard Fournette",
+          "seasons": [
+            "2018",
+            "2019"
+          ]
+        },
+        {
+          "player": "Mike Williams",
+          "seasons": [
+            "2019",
+            "2024"
+          ]
         }
       ]
     },
@@ -2746,12 +2945,79 @@
         {
           "team": "SF",
           "count": 11,
-          "ratio": 2.5
+          "ratio": 2.6
         },
         {
           "team": "TEN",
           "count": 6,
           "ratio": 2.4
+        }
+      ],
+      "rookieAffinity": {
+        "rookiePicks": 7,
+        "totalPicks": 120,
+        "rate": 0.058,
+        "leagueRate": 0.082,
+        "ratio": 0.71
+      },
+      "loyaltyPicks": [
+        {
+          "player": "Deebo Samuel",
+          "seasons": [
+            "2020",
+            "2022",
+            "2024",
+            "2025"
+          ]
+        },
+        {
+          "player": "Zach Charbonnet",
+          "seasons": [
+            "2023",
+            "2025"
+          ]
+        },
+        {
+          "player": "Dalton Kincaid",
+          "seasons": [
+            "2024",
+            "2025"
+          ]
+        },
+        {
+          "player": "Christian McCaffrey",
+          "seasons": [
+            "2018",
+            "2022"
+          ]
+        },
+        {
+          "player": "Dak Prescott",
+          "seasons": [
+            "2018",
+            "2020"
+          ]
+        },
+        {
+          "player": "Derrick Henry",
+          "seasons": [
+            "2019",
+            "2020"
+          ]
+        },
+        {
+          "player": "Jarvis Landry",
+          "seasons": [
+            "2020",
+            "2021"
+          ]
+        },
+        {
+          "player": "Mark Andrews",
+          "seasons": [
+            "2021",
+            "2022"
+          ]
         }
       ]
     },
@@ -3510,7 +3776,75 @@
         {
           "team": "NE",
           "count": 15,
-          "ratio": 4.3
+          "ratio": 4.2
+        }
+      ],
+      "rookieAffinity": {
+        "rookiePicks": 10,
+        "totalPicks": 118,
+        "rate": 0.085,
+        "leagueRate": 0.082,
+        "ratio": 1.03
+      },
+      "loyaltyPicks": [
+        {
+          "player": "Hunter Henry",
+          "seasons": [
+            "2019",
+            "2022",
+            "2025"
+          ]
+        },
+        {
+          "player": "Patriots",
+          "seasons": [
+            "2019",
+            "2021",
+            "2023"
+          ]
+        },
+        {
+          "player": "Josh Allen",
+          "seasons": [
+            "2022",
+            "2023",
+            "2024"
+          ]
+        },
+        {
+          "player": "Jakobi Meyers",
+          "seasons": [
+            "2023",
+            "2025"
+          ]
+        },
+        {
+          "player": "J.K. Dobbins",
+          "seasons": [
+            "2020",
+            "2025"
+          ]
+        },
+        {
+          "player": "Drake Maye",
+          "seasons": [
+            "2024",
+            "2025"
+          ]
+        },
+        {
+          "player": "Adam Thielen",
+          "seasons": [
+            "2018",
+            "2024"
+          ]
+        },
+        {
+          "player": "James White",
+          "seasons": [
+            "2018",
+            "2020"
+          ]
         }
       ]
     },
@@ -4282,7 +4616,74 @@
           "count": 8,
           "ratio": 2.1
         }
-      ]
+      ],
+      "rookieAffinity": {
+        "rookiePicks": 11,
+        "totalPicks": 120,
+        "rate": 0.092,
+        "leagueRate": 0.082,
+        "ratio": 1.12
+      },
+      "loyaltyPicks": [
+        {
+          "player": "Miles Sanders",
+          "seasons": [
+            "2019",
+            "2020",
+            "2023"
+          ]
+        },
+        {
+          "player": "Justin Jefferson",
+          "seasons": [
+            "2022",
+            "2025"
+          ]
+        },
+        {
+          "player": "Josh Jacobs",
+          "seasons": [
+            "2021",
+            "2025"
+          ]
+        },
+        {
+          "player": "Patrick Mahomes",
+          "seasons": [
+            "2021",
+            "2025"
+          ]
+        },
+        {
+          "player": "Evan Engram",
+          "seasons": [
+            "2024",
+            "2025"
+          ]
+        },
+        {
+          "player": "Tevin Coleman",
+          "seasons": [
+            "2018",
+            "2019"
+          ]
+        },
+        {
+          "player": "Steelers",
+          "seasons": [
+            "2018",
+            "2023"
+          ]
+        },
+        {
+          "player": "Saquon Barkley",
+          "seasons": [
+            "2019",
+            "2024"
+          ]
+        }
+      ],
+      "occasionallyAutodrafts": true
     },
     "RockNRollDr": {
       "seasons": [
@@ -5048,17 +5449,85 @@
         {
           "team": "DET",
           "count": 9,
-          "ratio": 2.3
+          "ratio": 2.4
         },
         {
           "team": "LAR",
           "count": 8,
-          "ratio": 2.2
+          "ratio": 2.3
         },
         {
           "team": "CIN",
           "count": 8,
-          "ratio": 2.1
+          "ratio": 2.2
+        }
+      ],
+      "rookieAffinity": {
+        "rookiePicks": 4,
+        "totalPicks": 120,
+        "rate": 0.033,
+        "leagueRate": 0.082,
+        "ratio": 0.41
+      },
+      "loyaltyPicks": [
+        {
+          "player": "Cooper Kupp",
+          "seasons": [
+            "2020",
+            "2023",
+            "2025"
+          ]
+        },
+        {
+          "player": "Matthew Stafford",
+          "seasons": [
+            "2023",
+            "2024",
+            "2025"
+          ]
+        },
+        {
+          "player": "Adam Thielen",
+          "seasons": [
+            "2021",
+            "2022",
+            "2023"
+          ]
+        },
+        {
+          "player": "Tee Higgins",
+          "seasons": [
+            "2021",
+            "2025"
+          ]
+        },
+        {
+          "player": "Breece Hall",
+          "seasons": [
+            "2023",
+            "2025"
+          ]
+        },
+        {
+          "player": "Joe Mixon",
+          "seasons": [
+            "2019",
+            "2025"
+          ]
+        },
+        {
+          "player": "Jayden Reed",
+          "seasons": [
+            "2024",
+            "2025"
+          ]
+        },
+        {
+          "player": "Najee Harris",
+          "seasons": [
+            "2021",
+            "2025"
+          ]
         }
       ]
     },
@@ -5729,7 +6198,77 @@
         {
           "team": "LAC",
           "count": 7,
-          "ratio": 2.2
+          "ratio": 2.3
+        }
+      ],
+      "rookieAffinity": {
+        "rookiePicks": 6,
+        "totalPicks": 104,
+        "rate": 0.058,
+        "leagueRate": 0.082,
+        "ratio": 0.7
+      },
+      "loyaltyPicks": [
+        {
+          "player": "T.J. Hockenson",
+          "seasons": [
+            "2020",
+            "2021",
+            "2023",
+            "2024"
+          ]
+        },
+        {
+          "player": "Austin Ekeler",
+          "seasons": [
+            "2019",
+            "2021",
+            "2024"
+          ]
+        },
+        {
+          "player": "Michael Thomas",
+          "seasons": [
+            "2020",
+            "2021",
+            "2022"
+          ]
+        },
+        {
+          "player": "DeAndre Hopkins",
+          "seasons": [
+            "2022",
+            "2023",
+            "2024"
+          ]
+        },
+        {
+          "player": "Christian McCaffrey",
+          "seasons": [
+            "2019",
+            "2025"
+          ]
+        },
+        {
+          "player": "Davante Adams",
+          "seasons": [
+            "2021",
+            "2025"
+          ]
+        },
+        {
+          "player": "Rachaad White",
+          "seasons": [
+            "2023",
+            "2025"
+          ]
+        },
+        {
+          "player": "Tyler Lockett",
+          "seasons": [
+            "2019",
+            "2024"
+          ]
         }
       ]
     },
@@ -6496,14 +7035,85 @@
         {
           "team": "CIN",
           "count": 8,
-          "ratio": 2.3
+          "ratio": 2.2
         },
         {
           "team": "CAR",
           "count": 6,
           "ratio": 2.1
         }
-      ]
+      ],
+      "rookieAffinity": {
+        "rookiePicks": 8,
+        "totalPicks": 120,
+        "rate": 0.067,
+        "leagueRate": 0.082,
+        "ratio": 0.81
+      },
+      "loyaltyPicks": [
+        {
+          "player": "DJ Moore",
+          "seasons": [
+            "2018",
+            "2020",
+            "2024",
+            "2025"
+          ]
+        },
+        {
+          "player": "Aaron Rodgers",
+          "seasons": [
+            "2018",
+            "2019",
+            "2023"
+          ]
+        },
+        {
+          "player": "Joe Burrow",
+          "seasons": [
+            "2020",
+            "2022",
+            "2023"
+          ]
+        },
+        {
+          "player": "Jakobi Meyers",
+          "seasons": [
+            "2021",
+            "2022",
+            "2024"
+          ]
+        },
+        {
+          "player": "Mark Andrews",
+          "seasons": [
+            "2023",
+            "2025"
+          ]
+        },
+        {
+          "player": "Tyjae Spears",
+          "seasons": [
+            "2024",
+            "2025"
+          ]
+        },
+        {
+          "player": "George Kittle",
+          "seasons": [
+            "2018",
+            "2021"
+          ]
+        },
+        {
+          "player": "Odell Beckham Jr.",
+          "seasons": [
+            "2019",
+            "2021"
+          ]
+        }
+      ],
+      "occasionallyAutodrafts": true
     },
     "Tilleydmt": {
       "seasons": [
@@ -7268,7 +7878,76 @@
         {
           "team": "NO",
           "count": 11,
-          "ratio": 2.7
+          "ratio": 2.8
+        }
+      ],
+      "rookieAffinity": {
+        "rookiePicks": 14,
+        "totalPicks": 120,
+        "rate": 0.117,
+        "leagueRate": 0.082,
+        "ratio": 1.42
+      },
+      "loyaltyPicks": [
+        {
+          "player": "Ezekiel Elliott",
+          "seasons": [
+            "2019",
+            "2020",
+            "2023"
+          ]
+        },
+        {
+          "player": "Alvin Kamara",
+          "seasons": [
+            "2021",
+            "2022",
+            "2023"
+          ]
+        },
+        {
+          "player": "Brandin Cooks",
+          "seasons": [
+            "2022",
+            "2023",
+            "2024"
+          ]
+        },
+        {
+          "player": "Chris Olave",
+          "seasons": [
+            "2022",
+            "2023",
+            "2024"
+          ]
+        },
+        {
+          "player": "Mike Evans",
+          "seasons": [
+            "2019",
+            "2025"
+          ]
+        },
+        {
+          "player": "Tony Pollard",
+          "seasons": [
+            "2019",
+            "2025"
+          ]
+        },
+        {
+          "player": "Dak Prescott",
+          "seasons": [
+            "2021",
+            "2025"
+          ]
+        },
+        {
+          "player": "Keenan Allen",
+          "seasons": [
+            "2023",
+            "2025"
+          ]
         }
       ]
     },
@@ -8037,12 +8716,82 @@
         {
           "team": "ARI",
           "count": 6,
-          "ratio": 2.8
+          "ratio": 2.7
         },
         {
           "team": "ATL",
           "count": 9,
-          "ratio": 2.5
+          "ratio": 2.4
+        }
+      ],
+      "rookieAffinity": {
+        "rookiePicks": 19,
+        "totalPicks": 120,
+        "rate": 0.158,
+        "leagueRate": 0.082,
+        "ratio": 1.93
+      },
+      "loyaltyPicks": [
+        {
+          "player": "Zay Flowers",
+          "seasons": [
+            "2023",
+            "2024",
+            "2025"
+          ]
+        },
+        {
+          "player": "Christian Kirk",
+          "seasons": [
+            "2023",
+            "2024",
+            "2025"
+          ]
+        },
+        {
+          "player": "Jared Cook",
+          "seasons": [
+            "2018",
+            "2019",
+            "2020"
+          ]
+        },
+        {
+          "player": "Chris Godwin Jr.",
+          "seasons": [
+            "2019",
+            "2021",
+            "2023"
+          ]
+        },
+        {
+          "player": "Kyler Murray",
+          "seasons": [
+            "2019",
+            "2021",
+            "2023"
+          ]
+        },
+        {
+          "player": "Garrett Wilson",
+          "seasons": [
+            "2023",
+            "2025"
+          ]
+        },
+        {
+          "player": "David Njoku",
+          "seasons": [
+            "2018",
+            "2025"
+          ]
+        },
+        {
+          "player": "Nick Chubb",
+          "seasons": [
+            "2022",
+            "2025"
+          ]
         }
       ]
     }

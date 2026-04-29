@@ -54,9 +54,32 @@ export function teamAffinityBias(profile, player) {
   if (!affinities.length || !player.team) return 1.0;
   const match = affinities.find((a) => a.team === player.team);
   if (!match) return 1.0;
-  // Strong affinity (3x+) → bigger bump but still capped at 1.35x.
-  // Modest affinity (2x) → small bump.
   return 1.0 + Math.min(0.35, (match.ratio - 1) * 0.07);
+}
+
+/** Multiplier for rookie picks based on owner's rookie-pick rate vs league avg.
+ *  Player must have exp === 0 in current player DB to count as a rookie. */
+export function rookieBias(profile, player) {
+  if (player.exp !== 0) return 1.0;
+  const ratio = profile?.rookieAffinity?.ratio ?? 1.0;
+  if (ratio < 1.4) return 1.0; // not a rookie type
+  return 1.0 + Math.min(0.25, (ratio - 1) * 0.15);
+}
+
+/** Multiplier for loyalty picks — if the candidate has been drafted by this
+ *  owner in 2+ past seasons, give a bump. */
+export function loyaltyBias(profile, player) {
+  const loyalty = profile?.loyaltyPicks || [];
+  if (!loyalty.length) return 1.0;
+  // Match by exact name; case-insensitive for safety.
+  const name = (player.name || '').toLowerCase();
+  const match = loyalty.find((l) => l.player.toLowerCase() === name);
+  if (!match) return 1.0;
+  // 2-season repeat = 1.15x, 3+ = 1.3x, 4+ = 1.4x.
+  const n = match.seasons.length;
+  if (n >= 4) return 1.4;
+  if (n >= 3) return 1.3;
+  return 1.15;
 }
 
 /**
