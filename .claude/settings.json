@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "_comment": "Project subscribes to the ai-team plugin (per workspace ADR-0015). The plugin ships subagents, slash commands, hooks, and skills. This file only carries: (1) the marketplace subscription, (2) the permissions block (plugin manifests cannot ship permissions per the Claude Code spec).",
+
+  "extraKnownMarketplaces": {
+    "agentic-dev-environment": {
+      "source": {
+        "source": "github",
+        "repo": "jaetill/agentic-dev-environment"
+      }
+    }
+  },
+
+  "enabledPlugins": {
+    "ai-team@agentic-dev-environment": true
+  },
+
+  "permissions": {
+    "allow": [],
+    "deny": [
+      "Bash(rm -rf /*)",
+      "Bash(sudo rm*)",
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(*DROP TABLE*)",
+      "Bash(*TRUNCATE*)",
+      "Edit(*.tfstate*)",
+      "Edit(.env)",
+      "Write(*.tfstate*)",
+      "Write(.env)"
+    ]
+  }
+}

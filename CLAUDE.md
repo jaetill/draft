@@ -119,3 +119,18 @@ Manual CSV refresh on draft morning. No scraping infrastructure. The `data/` fil
 ## Workspace impact
 - Workspace `CLAUDE.md` "Adding a New App" checklist is missing the bootstrap-perms step. The `jaetill-dev` user needed `s3:CreateBucket`, ACM, and CloudFront-Create perms to provision a new app from CLI. Added managed policy `jaetill-dev-app-bootstrap` to fix; the next app will have it automatically. Worth folding back into the workspace checklist.
 - `jaetill-dev-s3` managed policy updated to v3 to include `jaetill-draft` bucket (per checklist item 7).
+
+
+---
+
+## Platform inheritance
+
+This project adopts the [Agentic Dev Environment](https://github.com/jaetill/agentic-dev-environment) platform per [ADR-0001](docs/adr/0001-platform-adoption.md). Project-specific deviations are documented in ADR-0001.
+
+### AI configuration
+
+The platform's subagents, slash commands, and hooks are delivered via the `ai-team` plugin subscription (per workspace ADR-0015). `.claude/settings.json` retains only the plugin subscription, the permissions block, and the marketplace pointer.
+
+### Finding lifecycle (per workspace ADR-0016)
+
+Reviewer agents calibrate severity, low/nit findings get `deferred-until-adjacent`, Sentry/critical issues auto-trigger the implementer.
