@@ -103,7 +103,7 @@ The bundle is internally consistent because {the coupling that makes the choices
 
 (MADR extension — pointers to operational artifacts that make this decision real.)
 
-- Standards doc: [`docs/standards/NN-name.md`](../standards/NN-name.md)
+- Standards doc: `docs/standards/NN-name.md`
 - Affected workflows: ...
 - Affected templates: ...
 
