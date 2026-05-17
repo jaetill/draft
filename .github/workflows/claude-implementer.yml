@@ -35,16 +35,16 @@ on:
         type: string
 
 permissions:
-  contents: write # branch creation + push
-  pull-requests: write # PR creation
-  issues: write # commenting on the issue
-  id-token: write # claude-code-action OIDC
+  contents: write       # branch creation + push
+  pull-requests: write  # PR creation
+  issues: write         # commenting on the issue
+  id-token: write       # claude-code-action OIDC
 
 # Cancel previous runs for the same issue; if a new label triggers a re-run,
 # the older one's work is stale.
 concurrency:
   group: implementer-${{ github.event.issue.number || github.event.pull_request.number || github.run_id }}
-  cancel-in-progress: false # don't kill mid-implementation
+  cancel-in-progress: false   # don't kill mid-implementation
 
 jobs:
   # ── Mode A: initial implementation ──────────────────────────────────────
@@ -209,6 +209,15 @@ jobs:
     #
     # The 3-attempt cap (enforced in the agent prompt + workflow step
     # below) bounds the fix loop.
+    # NB: removed the `startsWith(issue.title, 'fix(') == false` filter that
+    # was here. The intent had been to prevent fix-iteration from re-entering
+    # on already-in-flight fix PRs, but the effect was to exclude EVERY
+    # Conventional-Commits-named PR (all of our PRs start with `fix(` or
+    # `feat(`). Observed concretely on PR #58 on 2026-05-13: VERDICT: BLOCK
+    # landed, fix-iteration didn't fire, the head agent had to do the fix
+    # manually. The re-entry concern is already handled by the Resolve PR
+    # head ref step below — only PRs whose head branch starts with `impl/`
+    # qualify, and the 3-attempt cap downstream bounds the loop.
     if: |
       github.event_name == 'issue_comment'
       && github.event.action == 'created'
@@ -218,15 +227,6 @@ jobs:
       && (
         startsWith(github.event.issue.pull_request.html_url, 'https://github.com/jaetill/draft/pull/')
       )
-      # NB: removed the `startsWith(issue.title, 'fix(') == false` filter that
-      # was here. The intent had been to prevent fix-iteration from re-entering
-      # on already-in-flight fix PRs, but the effect was to exclude EVERY
-      # Conventional-Commits-named PR (all of our PRs start with `fix(` or
-      # `feat(`). Observed concretely on PR #58 on 2026-05-13: VERDICT: BLOCK
-      # landed, fix-iteration didn't fire, the head agent had to do the fix
-      # manually. The re-entry concern is already handled by the Resolve PR
-      # head ref step below — only PRs whose head branch starts with `impl/`
-      # qualify, and the 3-attempt cap downstream bounds the loop.
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
