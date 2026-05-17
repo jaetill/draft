@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "node scripts/build-players.js",
+    "prebuild": "node scripts/build-players.mjs",
     "build": "vite build",
     "preview": "vite preview",
     "probe": "node scripts/probe.js",
-    "build-players": "node scripts/build-players.js",
+    "build-players": "node scripts/build-players.mjs",
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
