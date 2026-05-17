@@ -1,0 +1,812 @@
+name: claude-pr-review
+# Per ADR-0011 §9 — invokes the code-reviewer + security-reviewer +
+# destructive-change-detector subagents in parallel against the PR diff.
+# Each posts findings as a PR comment.
+#
+# Inlined from the platform's reusable workflow (jaetill/agentic-dev-environment
+# is local-only). When the platform repo is published, this can be replaced
+# with `uses: jaetill/agentic-dev-environment/.github/workflows/claude-pr-review.yml@v1`.
+
+on:
+  pull_request:
+    branches: [master]
+
+# Cancel any in-flight runs for the same PR when a new event arrives — most
+# common case is a rapid synchronize sequence (test-writer pushes after the
+# first run starts). Stops parallel jobs from piling up.
+concurrency:
+  group: claude-pr-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+  id-token: write # required by anthropics/claude-code-action for OIDC
+
+jobs:
+  code-review:
+    # Skip on bot-initiated runs (e.g. test-writer pushed new tests, triggering
+    # synchronize with github.actor=claude[bot]). The action itself rejects bot
+    # runs with "Workflow initiated by non-human actor" — short-circuit at the
+    # workflow level instead so PR status checks stay green.
+    # Bot-skip guard intentionally removed per the autonomous-team
+    # architecture (ADR-0013). Implementer-authored PRs (actor: claude[bot])
+    # MUST be reviewed; otherwise branch protection's required checks
+    # report SKIPPED, which GitHub treats as satisfied, which would let
+    # bot-authored PRs bypass review entirely. The 3-attempt cap on the
+    # implementer's fix-iteration job is the real loop guard, not this.
+    runs-on: ubuntu-latest
+    timeout-minutes: 15 # generous; reviews typically run 2–5 min
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # need full history to compute PR diff
+      - name: Run code-reviewer agent
+        uses: anthropics/claude-code-action@v1
+        with:
+          # Prefer the OAuth token (counts against the Claude Max subscription)
+          # when present; fall back to a pay-per-token API key. Either works;
+          # only one needs to be set.
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          # The action's sticky-comment / buffered-inline-comment flow is
+          # designed for @claude-mention triggers; on bare pull_request events
+          # the post step reports "No buffered inline comments" and nothing
+          # gets posted. Bypass that by having the agent shell out to `gh pr
+          # comment` directly, which is reliable on every event type.
+          show_full_output: true
+          # Allow runs initiated by claude[bot] (i.e. implementer-authored
+          # PRs and synchronize events from agent commits). Loop prevention
+          # is done by the implementer's 3-attempt cap, not by skipping
+          # bot-initiated runs here.
+          allowed_bots: 'claude[bot]'
+          prompt: |
+            Act as the code-reviewer subagent defined in .claude/agents/code-reviewer.md.
+
+            Review the diff between origin/${{ github.base_ref }} and HEAD.
+            Run `git diff origin/${{ github.base_ref }}...HEAD` to get the diff,
+            then read whatever surrounding files you need for context.
+
+            ## Your outputs (TWO things to post)
+
+            ### 1. A PR comment with the human-readable summary
+
+            Post a SINGLE PR comment via:
+              gh pr comment ${{ github.event.pull_request.number }} --body-file -
+            (read the body from stdin via a heredoc).
+
+            The comment must:
+              - Lead with `## Code Review (claude-sonnet-4-6)`
+              - Group findings by severity: Critical / High / Medium / Low / Nit
+              - Cite file paths and line numbers
+              - End with a line of the EXACT form (parsed by the gate step):
+                  `VERDICT: BLOCK` if any Critical or High findings exist
+                  `VERDICT: APPROVE-WITH-COMMENTS` if only Medium/Low/Nit
+                  `VERDICT: APPROVE` if no findings at all
+              - Say "No issues found." in the body if there are no findings
+
+            ### 2. A GitHub issue per HIGH or MEDIUM finding (with dedup)
+
+            For each Critical, High, or Medium finding, file a defect issue
+            so it survives this PR's lifecycle and can be picked up by the
+            implementer agent (per ADR-0013).
+
+            Dedup: before filing, check existing open issues for one that
+            already covers this exact file:line + finding category. Run:
+              gh issue list \
+                --label "origin:internal-review,defect" \
+                --state open \
+                --json title,number --limit 100 | \
+                jq -r '.[].title'
+            If you see an existing title containing the same file:line
+            reference, SKIP filing — the issue is already tracked.
+
+            For each new finding, file via:
+              gh issue create \
+                --title "[code-review] <file>:<line> — <one-line description>" \
+                --label "defect,severity:critical|high|medium,origin:internal-review" \
+                --body "$(cat <<EOF
+                **From PR:** #${{ github.event.pull_request.number }}
+                **File:** <file>:<line>
+                **Severity:** <critical|high|medium>
+
+                ## What's wrong
+
+                <2–4 sentences describing the issue>
+
+                ## Suggested fix
+
+                <minimal change — should fit the implementer's scope cap
+                (50 LOC / 3 files / 1 component)>
+
+                ## Test that would catch it
+
+                <one-line test description, if applicable>
+
+                ---
+
+                *Auto-filed by code-reviewer per ADR-0013. Awaiting human
+                dispatch — add label `ready-for-implementer` to dispatch
+                to the implementer agent.*
+                EOF
+                )"
+
+            Do NOT file issues for Low or Nit findings. Those stay in the
+            PR comment only — too noisy as standalone defects.
+
+            Do NOT apply `ready-for-implementer` yourself — that's the
+            human's dispatch gate per the three-tier model.
+
+            After both outputs, exit the agent session normally.
+          claude_args: |
+            --model claude-sonnet-4-6
+            --permission-mode bypassPermissions
+            --allowed-tools Bash,Read,Glob,Grep
+            --append-system-prompt "Follow the platform standards in docs/standards/."
+      - name: 'Enforce gate (hybrid VERDICT verification)'
+        # Defense in depth per ADR-0013 §4 decision:
+        #   1. Parse the agent's self-declared VERDICT line
+        #   2. INDEPENDENTLY scan the comment for ### Critical or ### High
+        #      severity headers
+        # Fail the job if EITHER signals BLOCK. This catches a subverted
+        # prompt that "forgets" the VERDICT line, AND it catches an
+        # honest VERDICT: APPROVE that's inconsistent with the body.
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          body=$(gh api "repos/${{ github.repository }}/issues/${PR_NUMBER}/comments" \
+            --jq '[.[] | select(.body | startswith("## Code Review"))] | last | .body // ""')
+          if [[ -z "$body" ]]; then
+            echo "::warning::No code-review comment found; agent may have failed to post."
+            echo "Treating as APPROVE (don't punish a tooling failure)."
+            exit 0
+          fi
+          # Signal 1: explicit VERDICT line
+          verdict_block=0
+          if echo "$body" | grep -q '^VERDICT: BLOCK$'; then
+            verdict_block=1
+            echo "::notice::VERDICT line says BLOCK."
+          fi
+          # Signal 2: independent scan for Critical/High severity headers
+          # that contain at least one finding bullet
+          severity_block=0
+          if echo "$body" | awk '
+            /^### Critical/ || /^### High/ { in_section=1; next }
+            /^### / || /^---/ { in_section=0; next }
+            in_section && /^- / { print; exit 0 }
+            END { exit 1 }
+          ' >/dev/null 2>&1; then
+            severity_block=1
+            echo "::notice::Independent scan found Critical or High severity findings."
+          fi
+          if [[ $verdict_block -eq 1 || $severity_block -eq 1 ]]; then
+            echo "::error::Code review BLOCKED merge."
+            echo "(verdict_block=$verdict_block, severity_block=$severity_block)"
+            echo "See the PR comment for details."
+            exit 1
+          fi
+          echo "Code review: no blocking findings. Job passing."
+
+  functional-test:
+    # Bot-skip guard intentionally removed per the autonomous-team
+    # architecture (ADR-0013). Implementer-authored PRs (actor: claude[bot])
+    # MUST be reviewed; otherwise branch protection's required checks
+    # report SKIPPED, which GitHub treats as satisfied, which would let
+    # bot-authored PRs bypass review entirely. The 3-attempt cap on the
+    # implementer's fix-iteration job is the real loop guard, not this.
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: |
+          npm ci
+          npm ci --prefix lambda
+      - name: Run functional-tester agent
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          show_full_output: true
+          # Allow runs initiated by claude[bot] (i.e. implementer-authored
+          # PRs and synchronize events from agent commits). Loop prevention
+          # is done by the implementer's 3-attempt cap, not by skipping
+          # bot-initiated runs here.
+          allowed_bots: 'claude[bot]'
+          prompt: |
+            Act as the functional-tester subagent defined in .claude/agents/functional-tester.md.
+
+            Steps:
+            1. Run the project's test suite: `npm test 2>&1 | tee /tmp/test-output.txt`
+            2. Inspect /tmp/test-output.txt for pass/fail counts and failure classification.
+            3. If failures exist, classify each per the agent spec:
+               REAL BUG / TEST BUG / ENVIRONMENT / FLAKE.
+               For REAL BUG: read the failing test + the code it tests
+               (use `git diff origin/${{ github.base_ref }}...HEAD` for diff context).
+            4. Post a SINGLE PR comment via:
+                 gh pr comment ${{ github.event.pull_request.number }} --body-file -
+               (read body from stdin via heredoc).
+
+            The comment must:
+              - Lead with `## Functional Test Run (claude-sonnet-4-6)`
+              - State pass/fail counts and total runtime
+              - For each failure: classification, file:line, suspected cause, reproduction command
+              - End with a one-line verdict: PASS, FAIL (blocking), or FAIL (non-blocking due to environment)
+              - Say "All tests pass." if there are no failures
+          claude_args: |
+            --model claude-sonnet-4-6
+            --permission-mode bypassPermissions
+            --allowed-tools Bash,Read,Glob,Grep
+            --append-system-prompt "Follow the platform standards in docs/standards/."
+
+  test-writer:
+    # Bot-skip guard intentionally removed per the autonomous-team
+    # architecture (ADR-0013). Implementer-authored PRs (actor: claude[bot])
+    # MUST be reviewed; otherwise branch protection's required checks
+    # report SKIPPED, which GitHub treats as satisfied, which would let
+    # bot-authored PRs bypass review entirely. The 3-attempt cap on the
+    # implementer's fix-iteration job is the real loop guard, not this.
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          # Check out the PR head branch so commits push back to it.
+          ref: ${{ github.event.pull_request.head.ref }}
+          # Use a token that can push to the PR branch. GITHUB_TOKEN
+          # has write to contents per the workflow-level permissions block.
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: |
+          npm ci
+          npm ci --prefix lambda
+      - name: Run test-writer agent
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          show_full_output: true
+          # Allow runs initiated by claude[bot] (i.e. implementer-authored
+          # PRs and synchronize events from agent commits). Loop prevention
+          # is done by the implementer's 3-attempt cap, not by skipping
+          # bot-initiated runs here.
+          allowed_bots: 'claude[bot]'
+          prompt: |
+            Act as the test-writer subagent defined in .claude/agents/test-writer.md
+            in **reviewer mode** (per issue #25 / ADR-0013 follow-up).
+
+            ## Role at PR time
+
+            You are a coverage REVIEWER, not a test author at this stage.
+            Test authoring belongs in the implementer's Mode A pipeline
+            (per issue #25 redesign). Your job here is to verify that
+            the PR includes adequate tests for its changes, and post
+            findings if it doesn't. **You do NOT push commits to this PR.**
+
+            ## Steps
+
+            1. List the changed source files in this PR:
+                 git diff --name-only origin/${{ github.base_ref }}...HEAD \
+                   | grep -E '^(lambda/.*\.(js|mjs)|src/js/.*\.js)$' \
+                   | grep -v -E '\.test\.|\.spec\.' || true
+            2. For each changed source file, check whether a corresponding
+               tests/*.test.js covers the diff's added/changed behavior.
+               Read the test file's content. Don't trust file existence
+               alone; verify the assertions actually exercise the new code.
+            3. Identify each coverage gap (changed function/code path with
+               no corresponding assertion).
+            4. For HIGH-priority coverage gaps (security-sensitive paths,
+               new public functions, modified API contracts), file each
+               as a defect issue with labels
+               `defect,severity:medium,origin:internal-review` using the
+               same dedup pattern as code-reviewer.
+            5. Post a SINGLE PR comment via:
+                 gh pr comment ${{ github.event.pull_request.number }} --body-file -
+
+            The comment must:
+              - Lead with `## Test Coverage (claude-sonnet-4-6)`
+              - List each changed source file + its coverage status
+                (covered / partial / uncovered)
+              - For uncovered files: cite the function/path that lacks a test
+              - End with `Coverage adequate.` OR
+                `Coverage gaps found — see filed defects.` OR
+                `Manual integration test recommended:` for paths the
+                test framework can't easily exercise
+
+            ## Hard rules
+
+            - Do NOT commit or push anything. Test-writing happens in the
+              implementer's Mode A pipeline now, not at PR time.
+            - Do NOT modify production code.
+            - Do NOT file Low/Nit findings (PR comment only).
+            - Skip terraform/, docs/, .github/, .claude/ — not code that
+              benefits from unit tests.
+          claude_args: |
+            --model claude-sonnet-4-6
+            --permission-mode bypassPermissions
+            --allowed-tools Bash,Read,Glob,Grep
+            --append-system-prompt "Follow the platform standards in docs/standards/. You are in REVIEWER mode per issue #25 — do not push commits."
+
+  e2e-test:
+    # Bot-skip guard intentionally removed per the autonomous-team
+    # architecture (ADR-0013). Implementer-authored PRs (actor: claude[bot])
+    # MUST be reviewed; otherwise branch protection's required checks
+    # report SKIPPED, which GitHub treats as satisfied, which would let
+    # bot-authored PRs bypass review entirely. The 3-attempt cap on the
+    # implementer's fix-iteration job is the real loop guard, not this.
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright browser + system deps
+        run: npx playwright install --with-deps chromium
+      - name: Run e2e suite (captures output for agent)
+        id: e2e
+        run: |
+          set +e
+          npx playwright test --reporter=list > /tmp/e2e-output.txt 2>&1
+          echo "exit=$?" >> "$GITHUB_OUTPUT"
+          cat /tmp/e2e-output.txt
+      - name: Run e2e-tester agent
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          show_full_output: true
+          # Allow runs initiated by claude[bot] (i.e. implementer-authored
+          # PRs and synchronize events from agent commits). Loop prevention
+          # is done by the implementer's 3-attempt cap, not by skipping
+          # bot-initiated runs here.
+          allowed_bots: 'claude[bot]'
+          prompt: |
+            Act as the e2e-tester subagent defined in .claude/agents/e2e-tester.md.
+
+            The Playwright suite has already run. Its output is at
+            /tmp/e2e-output.txt and its exit code was ${{ steps.e2e.outputs.exit }}.
+
+            Steps:
+            1. Read /tmp/e2e-output.txt — count pass/fail, identify each failure.
+            2. For each failing spec, classify per the agent spec:
+               REAL BUG / TEST BUG / ENVIRONMENT / FLAKE.
+               - REAL BUG: read the failing spec + the application code it
+                 exercises (use `git diff origin/${{ github.base_ref }}...HEAD`
+                 for what changed in this PR).
+               - TEST BUG: the spec's assertion is wrong (e.g. asserts on a
+                 URL format that legitimately changed).
+               - ENVIRONMENT: dev server didn't start, browser couldn't reach
+                 localhost, etc.
+               - FLAKE: passes on rerun. Per ADR-0004 §6, do NOT recommend
+                 quarantine — recommend fix or remove.
+            3. Post a SINGLE PR comment via:
+                 gh pr comment ${{ github.event.pull_request.number }} --body-file -
+
+            The comment must:
+              - Lead with `## End-to-End Test Run (claude-sonnet-4-6)`
+              - State pass/fail counts and total runtime
+              - For each failure: classification, file:line, suspected cause
+              - End with verdict: PASS, FAIL (blocking), or FAIL (env-only)
+              - Say "All e2e specs pass." if everything is green
+          claude_args: |
+            --model claude-sonnet-4-6
+            --permission-mode bypassPermissions
+            --allowed-tools Bash,Read,Glob,Grep
+            --append-system-prompt "Follow the platform standards in docs/standards/."
+      - name: Upload Playwright report on failure
+        if: failure() || steps.e2e.outputs.exit != '0'
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+
+  doc-keeper:
+    # Bot-skip guard intentionally removed per the autonomous-team
+    # architecture (ADR-0013). Implementer-authored PRs (actor: claude[bot])
+    # MUST be reviewed; otherwise branch protection's required checks
+    # report SKIPPED, which GitHub treats as satisfied, which would let
+    # bot-authored PRs bypass review entirely. The 3-attempt cap on the
+    # implementer's fix-iteration job is the real loop guard, not this.
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run doc-keeper agent
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          show_full_output: true
+          # Allow runs initiated by claude[bot] (i.e. implementer-authored
+          # PRs and synchronize events from agent commits). Loop prevention
+          # is done by the implementer's 3-attempt cap, not by skipping
+          # bot-initiated runs here.
+          allowed_bots: 'claude[bot]'
+          prompt: |
+            Act as the doc-keeper subagent defined in .claude/agents/doc-keeper.md.
+
+            Steps:
+            1. Inspect the diff: `git diff origin/${{ github.base_ref }}...HEAD`.
+            2. Determine whether the changes warrant doc updates:
+               - New Lambda, route, env var, or AWS resource → CLAUDE.md table
+                 (Lambda functions, env vars, API routes, etc.) needs updating
+               - New ADR-worthy decision → check docs/adr/ has a corresponding
+                 entry (don't draft one; that's the architect's job)
+               - Behavioral change to user-facing feature → README or
+                 docs/runbooks/ may need a touch
+               - Pure refactor / test additions / dependency bumps → no doc
+                 changes needed
+            3. If doc updates are needed AND the change is mechanical (table
+               row, config line, env var entry), make the edit and commit it
+               to the PR head branch:
+                 git config user.name 'claude[bot]'
+                 git config user.email '41898282+claude[bot]@users.noreply.github.com'
+                 git add CLAUDE.md docs/
+                 git commit -m 'docs: update for PR changes (doc-keeper agent)'
+                 git push
+            4. If doc updates need judgment (rewriting a section, drafting a
+               runbook), DO NOT commit — list the recommended changes in the
+               PR comment instead.
+            5. Post a SINGLE PR comment via:
+                 gh pr comment ${{ github.event.pull_request.number }} --body-file -
+
+            The comment must:
+              - Lead with `## Doc Keeper (claude-sonnet-4-6)`
+              - List doc files updated (or "No doc updates needed.")
+              - List recommended manual doc changes if any
+
+            Constraints:
+              - Do NOT modify production code under any circumstance
+              - Do NOT touch docs/adr/ — ADRs are the architect's domain
+          claude_args: |
+            --model claude-sonnet-4-6
+            --permission-mode bypassPermissions
+            --allowed-tools Bash,Read,Write,Edit,Glob,Grep
+            --append-system-prompt "Follow the platform standards in docs/standards/. Don't write ADRs."
+
+  security-review:
+    # Bot-skip guard intentionally removed per the autonomous-team
+    # architecture (ADR-0013). Implementer-authored PRs (actor: claude[bot])
+    # MUST be reviewed; otherwise branch protection's required checks
+    # report SKIPPED, which GitHub treats as satisfied, which would let
+    # bot-authored PRs bypass review entirely. The 3-attempt cap on the
+    # implementer's fix-iteration job is the real loop guard, not this.
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run security-reviewer agent
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          show_full_output: true
+          # Allow runs initiated by claude[bot] (i.e. implementer-authored
+          # PRs and synchronize events from agent commits). Loop prevention
+          # is done by the implementer's 3-attempt cap, not by skipping
+          # bot-initiated runs here.
+          allowed_bots: 'claude[bot]'
+          prompt: |
+            Act as the security-reviewer subagent defined in .claude/agents/security-reviewer.md.
+
+            Run a security review on the diff between origin/${{ github.base_ref }}
+            and HEAD. Get the diff via `git diff origin/${{ github.base_ref }}...HEAD`
+            and read whatever surrounding files you need for context.
+
+            ## Your outputs (TWO things to post)
+
+            ### 1. A PR comment with the human-readable summary
+
+            Post a SINGLE PR comment via:
+              gh pr comment ${{ github.event.pull_request.number }} --body-file -
+
+            The comment must:
+              - Lead with `## Security Review (claude-sonnet-4-6)`
+              - Group findings by severity: Critical / High / Medium / Low
+              - Focus on injection, authn/authz, secrets, IAM scope, input validation
+              - Cite file paths and line numbers
+              - End with a line of the EXACT form (parsed by gate step):
+                  `VERDICT: BLOCK` if any Critical or High findings exist
+                  `VERDICT: APPROVE-WITH-COMMENTS` if only Medium/Low
+                  `VERDICT: APPROVE` if no findings at all
+              - Say "No security issues found." in the body if there are no findings
+
+            ### 2. A GitHub issue per HIGH or MEDIUM finding (with dedup)
+
+            Same pattern as the code-reviewer:
+
+            Dedup check:
+              gh issue list \
+                --label "origin:internal-review,defect" \
+                --state open \
+                --json title,number --limit 100 | \
+                jq -r '.[].title'
+            If a title already references the same file:line, SKIP.
+
+            File new findings:
+              gh issue create \
+                --title "[security-review] <file>:<line> — <one-line description>" \
+                --label "defect,severity:critical|high|medium,origin:internal-review" \
+                --body "$(cat <<EOF
+                **From PR:** #${{ github.event.pull_request.number }}
+                **File:** <file>:<line>
+                **Severity:** <critical|high|medium>
+                **Class:** <e.g. injection / authz / secret leakage / IAM scope>
+
+                ## Threat model
+
+                <2–4 sentences: who can exploit, under what conditions, blast radius>
+
+                ## Suggested mitigation
+
+                <minimal fix description>
+
+                ---
+
+                *Auto-filed by security-reviewer per ADR-0013. Awaiting
+                human dispatch — add `ready-for-implementer` to dispatch
+                to the implementer agent.*
+                EOF
+                )"
+
+            Do NOT file issues for Low findings (kept in PR comment only).
+            Do NOT apply `ready-for-implementer` yourself.
+          claude_args: |
+            --model claude-sonnet-4-6
+            --permission-mode bypassPermissions
+            --allowed-tools Bash,Read,Glob,Grep
+            --append-system-prompt "Follow the platform standards in docs/standards/."
+      - name: 'Enforce gate (hybrid VERDICT verification)'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          body=$(gh api "repos/${{ github.repository }}/issues/${PR_NUMBER}/comments" \
+            --jq '[.[] | select(.body | startswith("## Security Review"))] | last | .body // ""')
+          if [[ -z "$body" ]]; then
+            echo "::warning::No security-review comment found; treating as APPROVE."
+            exit 0
+          fi
+          verdict_block=0
+          if echo "$body" | grep -q '^VERDICT: BLOCK$'; then
+            verdict_block=1
+          fi
+          severity_block=0
+          if echo "$body" | awk '
+            /^### Critical/ || /^### High/ { in_section=1; next }
+            /^### / || /^---/ { in_section=0; next }
+            in_section && /^- / { print; exit 0 }
+            END { exit 1 }
+          ' >/dev/null 2>&1; then
+            severity_block=1
+          fi
+          if [[ $verdict_block -eq 1 || $severity_block -eq 1 ]]; then
+            echo "::error::Security review BLOCKED merge."
+            echo "(verdict_block=$verdict_block, severity_block=$severity_block)"
+            exit 1
+          fi
+          echo "Security review: no blocking findings. Job passing."
+
+  destructive-change-check:
+    runs-on: ubuntu-latest
+    outputs:
+      requires-adr: ${{ steps.detect.outputs.requires-adr }}
+      categories: ${{ steps.detect.outputs.categories }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: detect
+        name: Detect ADR-gated changes
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          # Static detection rules per ADR-0003. Categories: destructive-migration,
+          # new-external-dep, security-relevant, api-contract, schema.
+          #
+          # All patterns operate on ADDED lines only (grep '^+' before content
+          # checks) so we don't flag a PR that merely deletes a code comment
+          # containing 'DROP TABLE' or unmaps an auth handler.
+          requires_adr=false
+          categories=""
+
+          # destructive migration (DROP TABLE / ALTER TABLE DROP COLUMN / TRUNCATE).
+          # Scope to SQL files and migration directories — without this, the
+          # grep matches its own pattern definition in this workflow file
+          # whenever the workflow itself is edited (the classic "regex matches
+          # itself" problem). Real destructive DDL lives in .sql files or in
+          # migrations/ directories under the project's convention.
+          migration_files=$(
+            git diff --name-only "origin/${BASE_REF}...HEAD" \
+              | grep -E '\.sql$|^(.*/)?migrations/' \
+              || true
+          )
+          if [[ -n "$migration_files" ]]; then
+            # shellcheck disable=SC2086  # paths from grep won't contain spaces in this repo
+            if git diff "origin/${BASE_REF}...HEAD" -- $migration_files \
+                 | grep -E '^\+' \
+                 | grep -E '\bDROP TABLE\b|\bALTER TABLE.*DROP COLUMN\b|\bTRUNCATE\b' \
+                 >/dev/null; then
+              requires_adr=true
+              categories="$categories destructive-migration"
+            fi
+          fi
+
+          # New external dep — inspect only added lines that look like a
+          # dependency entry (excludes top-level keys like "version", "name",
+          # "description", "main", which release-please bumps regularly and
+          # which previously caused false-positive new-external-dep flags).
+          #
+          # Use an array for manifest paths so paths with spaces are handled
+          # correctly under `set -e` / shell word-splitting.
+          mapfile -t changed_manifest < <(
+            git diff --name-only "origin/${BASE_REF}...HEAD" \
+              | grep -E 'package\.json|pyproject\.toml|Cargo\.toml|go\.mod' \
+              || true
+          )
+          if [[ ${#changed_manifest[@]} -gt 0 ]]; then
+            if git diff "origin/${BASE_REF}...HEAD" -- "${changed_manifest[@]}" \
+                 | grep -E '^\+\s*"[^"]+":\s*"\^?[0-9]' \
+                 | grep -Ev '^\+\s*"(version|name|description|main|module|types|license|author|homepage|repository|bugs|engines|private)":' \
+                 >/dev/null; then
+              requires_adr=true
+              categories="$categories new-external-dep"
+            fi
+          fi
+
+          # Security-relevant paths — narrow to BACKEND auth infrastructure
+          # (Lambda handlers, IAM policy JSON, JWT/secret helpers). Frontend
+          # UI components under src/js/auth/ (permission display, profile UI)
+          # are intentionally excluded — they don't change the security model.
+          security_paths=$(
+            git diff --name-only "origin/${BASE_REF}...HEAD" \
+              | grep -E '^lambda/.*[Aa]uth|^lambda/iam/|^lambda/lib/(resolveCallerId|sentry|secret|crypto)' \
+              || true
+          )
+          if [[ -n "$security_paths" ]]; then
+            requires_adr=true
+            categories="$categories security-relevant"
+          fi
+
+          # Schema changes
+          schema_changes=$(git diff --name-only "origin/${BASE_REF}...HEAD" | grep -E 'schema\.|migrations/|models/' || true)
+          if [[ -n "$schema_changes" ]]; then
+            requires_adr=true
+            categories="$categories schema"
+          fi
+
+          # API contract changes
+          api_changes=$(git diff --name-only "origin/${BASE_REF}...HEAD" | grep -E 'openapi\.(yml|yaml|json)|api/' || true)
+          if [[ -n "$api_changes" ]]; then
+            requires_adr=true
+            categories="$categories api-contract"
+          fi
+
+          echo "requires-adr=$requires_adr" >> "$GITHUB_OUTPUT"
+          echo "categories=$categories" >> "$GITHUB_OUTPUT"
+
+      - name: Label PR if ADR-gated
+        if: steps.detect.outputs.requires-adr == 'true'
+        uses: actions/github-script@v7
+        env:
+          # Pass through env: rather than interpolating ${{ }} into the JS
+          # body, per GitHub's hardening guide. The detector's output is
+          # currently a space-separated whitelist of category names, but
+          # treating any step output as untrusted is the safer default.
+          CATEGORIES: ${{ steps.detect.outputs.categories }}
+        with:
+          script: |
+            const categories = (process.env.CATEGORIES || '').trim().split(/\s+/).filter(Boolean);
+            const labels = categories.map(c => `requires-adr:${c}`);
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: labels,
+            });
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `🛑 This PR contains changes in ADR-gated categories: \`${categories.join(", ")}\`.\n\nMerge is blocked until a paired ADR is Accepted. The architect agent will draft one.`,
+            });
+
+  ensure-labels:
+    # Pre-creates the ADR-0013 label taxonomy so the reviewers can apply
+    # them when filing defect issues. Idempotent — won't fail if labels
+    # already exist. Runs in parallel with the reviewers; reviewers may
+    # need to retry the first gh issue create if labels haven't landed
+    # yet, but in practice this completes in <5s.
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    permissions:
+      issues: write
+    steps:
+      - name: Pre-create labels (idempotent)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Severity labels
+          gh --repo "${{ github.repository }}" label create severity:critical    --color B60205 --description "Critical issue — must fix before merge" 2>/dev/null || true
+          gh --repo "${{ github.repository }}" label create severity:high        --color D93F0B --description "High-severity issue — must fix before merge" 2>/dev/null || true
+          gh --repo "${{ github.repository }}" label create severity:medium      --color FBCA04 --description "Medium-severity issue — should fix soon" 2>/dev/null || true
+          gh --repo "${{ github.repository }}" label create severity:low         --color 0E8A16 --description "Low-severity issue — nice to fix" 2>/dev/null || true
+          gh --repo "${{ github.repository }}" label create severity:nit         --color BFD4F2 --description "Stylistic nit — author's discretion" 2>/dev/null || true
+          # Origin labels (per ADR-0013 trust tiers)
+          gh --repo "${{ github.repository }}" label create origin:internal-review  --color 5319E7 --description "Filed by an internal-review agent (code-reviewer / security-reviewer / test-writer / doc-keeper)" 2>/dev/null || true
+          gh --repo "${{ github.repository }}" label create origin:production-signal --color 1D76DB --description "Filed from a production signal (Sentry / drift / dep advisory)" 2>/dev/null || true
+          gh --repo "${{ github.repository }}" label create origin:external-request --color C5DEF5 --description "Filed from an external request (feedback widget / human prompt)" 2>/dev/null || true
+          # Lifecycle labels
+          gh --repo "${{ github.repository }}" label create defect                 --color D73A4A --description "A defect awaiting fix" 2>/dev/null || true
+          gh --repo "${{ github.repository }}" label create ready-for-implementer  --color 0E8A16 --description "Cleared for implementer agent to engage" 2>/dev/null || true
+          gh --repo "${{ github.repository }}" label create awaiting-dispatch      --color FBCA04 --description "Triaged but awaiting human dispatch decision (Tier 3)" 2>/dev/null || true
+          gh --repo "${{ github.repository }}" label create wontfix                --color FFFFFF --description "Triaged but not actionable" 2>/dev/null || true
+
+  invoke-architect-if-gated:
+    needs: destructive-change-check
+    # Bot-skip removed per ADR-0013 — implementer-authored PRs that
+    # trip destructive-change-detector still need an ADR drafted.
+    if: needs.destructive-change-check.outputs.requires-adr == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20 # slightly higher; architect drafts + commits an ADR
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run architect agent for ADR drafting
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          show_full_output: true
+          # Allow runs initiated by claude[bot] (i.e. implementer-authored
+          # PRs and synchronize events from agent commits). Loop prevention
+          # is done by the implementer's 3-attempt cap, not by skipping
+          # bot-initiated runs here.
+          allowed_bots: 'claude[bot]'
+          prompt: |
+            Act as the architect subagent defined in .claude/agents/architect.md (headless mode).
+
+            This PR contains changes in ADR-gated categories: ${{ needs.destructive-change-check.outputs.categories }}.
+
+            First, inspect the diff (`git diff origin/${{ github.base_ref }}...HEAD`)
+            to confirm the gating is correct. If the categorization is a false
+            positive, post a single PR comment via:
+              gh pr comment ${{ github.event.pull_request.number }} --body-file -
+            saying so, then stop — do not commit a no-op ADR.
+
+            Otherwise, draft a paired ADR in MADR 4.x format addressing the
+            real categories. Commit it as `docs/adr/NNNN-*.md` with
+            `Status: Proposed` and push to the PR's head branch. Then post a
+            PR comment summarizing what you drafted (also via `gh pr comment`).
+          claude_args: |
+            --model claude-opus-4-6
+            --permission-mode bypassPermissions
+            --allowed-tools Bash,Read,Write,Edit,Glob,Grep
+            --append-system-prompt "Follow MADR 4.x format with the platform's three documented extensions."

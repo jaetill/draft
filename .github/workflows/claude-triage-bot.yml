@@ -1,0 +1,91 @@
+name: claude-triage-bot
+# Invokes the triage-bot subagent (.claude/agents/triage-bot.md) when a new
+# issue is opened. The agent classifies, labels, and adds an initial triage
+# comment (severity, suspected component, reproduction sufficiency).
+#
+# This complements the feedback Lambda (per Standard 11) which already files
+# user-feedback issues — triage-bot processes whatever lands in the issues
+# queue regardless of source.
+
+on:
+  issues:
+    types: [opened, reopened]
+
+permissions:
+  contents: read
+  issues: write
+  id-token: write
+
+jobs:
+  triage:
+    # Skip if:
+    #  - the issue was opened by a bot (dep-watcher, drift-detector, feedback
+    #    Lambda — those are pre-classified and don't need re-triage)
+    #  - the issue is labeled incident:p0 (incident-responder owns those —
+    #    triage-bot would just duplicate the work)
+    if: |
+      github.actor != 'claude[bot]'
+      && !endsWith(github.actor, '[bot]')
+      && !contains(github.event.issue.labels.*.name, 'incident:p0')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run triage-bot agent
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          show_full_output: true
+          prompt: |
+            Act as the triage-bot subagent defined in .claude/agents/triage-bot.md.
+
+            A new issue was opened: #${{ github.event.issue.number }}.
+
+            **Trust-tier classification per ADR-0013:**
+            All issues you triage are Tier 3 (external request) UNLESS
+            the actor that opened the issue was the feedback Lambda or
+            a known-trusted bot. Treat all human-opened issues as Tier 3
+            by default — DO NOT apply `ready-for-implementer` yourself.
+            Your job is to summarize, classify, and recommend; the human
+            decides whether to dispatch by adding `ready-for-implementer`
+            manually.
+
+            Steps:
+            1. Read the issue:
+                 gh issue view ${{ github.event.issue.number }}
+            2. Classify the issue:
+               - Type: bug / feature / question / docs / chore
+               - Component (skim CLAUDE.md for the project's component map):
+                 frontend / lambda-<name> / iac / docs / mcp / auth
+               - Severity: severity:critical / high / medium / low / nit
+                 (use the platform's severity label taxonomy, not bug-specific terms)
+               - Reproducibility: clear-repro / needs-info / not-applicable
+               - **Scope judgment**: is this request in-scope for the project's
+                 stated purpose? Default to "yes, looks in-scope" for ambiguous
+                 cases that are clearly related; default to "out-of-scope, recommend wontfix"
+                 only for clearly off-topic or abusive requests.
+            3. Apply labels:
+                 gh issue edit ${{ github.event.issue.number }} \
+                   --add-label "type:<type>,component:<component>,severity:<severity-label>,origin:external-request,awaiting-dispatch"
+               Create labels first if they don't exist via `gh label create`.
+            4. If the issue is missing reproduction steps for a bug, post a
+               comment asking for them.
+            5. Post a SINGLE triage comment via:
+                 gh issue comment ${{ github.event.issue.number }} --body-file -
+
+            Comment must:
+              - Lead with `## Triage (claude-sonnet-4-6)`
+              - Show the classification (type, component, severity, repro)
+              - **Scope judgment**: 1 line. "In scope for this project's purpose"
+                or "Out of scope — recommend close as wontfix."
+              - **Dispatch recommendation**: "Ready for implementer — add
+                `ready-for-implementer` label to dispatch" OR
+                "Needs human review before dispatch (architectural concern, ambiguous scope, etc.)"
+              - Identify likely-relevant files/agents for follow-up
+              - Do NOT add `ready-for-implementer` yourself. That's the human's gate.
+          claude_args: |
+            --model claude-sonnet-4-6
+            --permission-mode bypassPermissions
+            --allowed-tools Bash,Read,Glob,Grep
+            --append-system-prompt "Follow the platform standards in docs/standards/."

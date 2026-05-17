@@ -1,0 +1,61 @@
+name: claude-dep-watcher
+# Invokes the dep-watcher subagent (.claude/agents/dep-watcher.md) to scan
+# package.json + lambda/package.json for outdated or vulnerable deps, then
+# files findings as a single tracked GitHub issue (one issue per run,
+# updated rather than duplicated).
+#
+# Schedule: weekly on Monday 09:00 UTC. Manual trigger via workflow_dispatch.
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  id-token: write
+
+jobs:
+  dep-watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Run dep-watcher agent
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          show_full_output: true
+          prompt: |
+            Act as the dep-watcher subagent defined in .claude/agents/dep-watcher.md.
+
+            Steps:
+            1. Run `npm outdated --json` at the repo root and `npm outdated --json --prefix lambda`.
+            2. Run `npm audit --json --omit=dev` at both locations.
+            3. Classify each finding:
+               - CRITICAL/HIGH security advisory → flag for immediate update
+               - Major version bump available → note + breaking-change risk
+               - Minor/patch bump available → low priority, batch in monthly sweep
+            4. Check if a `dep-watch` issue is already open in the repo:
+                 gh issue list --label dep-watch --state open --json number,title
+               If yes, UPDATE that issue with the current findings via:
+                 gh issue edit <number> --body-file -
+               If no, OPEN a new one with label `dep-watch`:
+                 gh issue create --title "Weekly dependency report — $(date +%Y-%m-%d)" \
+                   --label dep-watch --body-file -
+
+            Issue body must:
+              - Lead with `## Dependency Watch ($(date +%Y-%m-%d))`
+              - Section per package.json (root, lambda/)
+              - Group findings by severity
+              - End with `No actionable findings.` if everything is current
+          claude_args: |
+            --model claude-sonnet-4-6
+            --permission-mode bypassPermissions
+            --allowed-tools Bash,Read,Glob,Grep
+            --append-system-prompt "Follow the platform standards in docs/standards/."
