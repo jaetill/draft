@@ -14,3 +14,15 @@ spike/samples/draft*.json
 
 # Generated at build time from Sleeper
 public/data/players.json
+
+# Claude Code artifacts
+.claude/audit.log
+.claude/sessions/
+.claude/worktrees/
+.claude/settings.local.json
+
+# MkDocs build output
+site/
+
+# ESLint cache
+.eslintcache
