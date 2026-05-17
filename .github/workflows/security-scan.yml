@@ -1,0 +1,51 @@
+name: security-scan
+on:
+  pull_request:
+    branches: [master]
+  schedule:
+    - cron: '0 9 * * 1' # Monday 09:00 UTC
+  workflow_dispatch: # manual trigger for verification
+
+permissions:
+  contents: read
+  security-events: write
+
+# Inlined security scan flow.
+#
+# Original referenced jaetill/agentic-dev-environment/.github/workflows/security-scan.yml@main
+# as a reusable workflow, but that platform repo is local-only — the reference
+# 404'd at startup.
+#
+# Inlining covers the same intent with two scoped scanners:
+#   1. gitleaks  — secret leakage in committed code (mirrors the pre-commit hook,
+#                  but runs on the GitHub side as a defense-in-depth gate).
+#   2. npm audit — dependency vulnerabilities at the configured severity floor.
+#
+# Both run on every PR to master and on a Monday 09:00 UTC cron.
+
+jobs:
+  gitleaks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # gitleaks needs full history to scan all commits
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  npm-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # `npm audit --omit=dev` so we only fail on production-runtime vulnerabilities;
+      # dev-only deps (vitest, eslint, etc.) won't gate releases.
+      # `--audit-level=high` keeps the bar at "high" or "critical" — moderate
+      # findings get reported but don't fail the workflow.
+      - name: Audit root deps
+        run: npm audit --omit=dev --audit-level=high
+      - name: Audit lambda deps
+        run: npm audit --omit=dev --audit-level=high --prefix lambda

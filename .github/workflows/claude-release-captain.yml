@@ -1,0 +1,65 @@
+name: claude-release-captain
+# Invokes the release-captain subagent (.claude/agents/release-captain.md) on
+# release-please PRs to verify release readiness: CHANGELOG completeness,
+# version bump correctness, no unmerged hotfixes, deploy-readiness signals.
+#
+# Trigger: a PR is opened by github-actions[bot] with head branch starting
+# with `release-please--`. That's the release-please bot opening its
+# auto-generated release PR.
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    branches: [master]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+  id-token: write
+
+jobs:
+  release-readiness:
+    # Only run on release-please's PR. Match its conventional branch name.
+    if: startsWith(github.event.pull_request.head.ref, 'release-please--')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run release-captain agent
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          show_full_output: true
+          prompt: |
+            Act as the release-captain subagent defined in .claude/agents/release-captain.md.
+
+            This is a release-please PR. Verify the release is ready to merge:
+
+            1. Inspect the CHANGELOG entries in this PR — do they accurately
+               describe what's been merged since the previous tag?
+                 git log <previous-tag>..HEAD --oneline
+            2. Check the version bump is correct per Conventional Commits
+               (feat → minor, fix → patch, BREAKING CHANGE → major).
+            3. Confirm no in-flight hotfixes are pending merge to master
+               that should be in this release:
+                 gh pr list --state open --label hotfix
+            4. Verify the most recent deploy.yml run on master was green
+               (otherwise we'd be tagging a broken commit):
+                 gh run list --workflow=deploy.yml --branch=master --limit=1 --json conclusion
+            5. Post a SINGLE PR comment via:
+                 gh pr comment ${{ github.event.pull_request.number }} --body-file -
+
+            The comment must:
+              - Lead with `## Release Captain (claude-sonnet-4-6)`
+              - State APPROVE / BLOCK / REVISE with one-line reason
+              - For BLOCK / REVISE: enumerate specific issues
+              - For APPROVE: confirm CHANGELOG accuracy + deploy-readiness
+          claude_args: |
+            --model claude-sonnet-4-6
+            --permission-mode bypassPermissions
+            --allowed-tools Bash,Read,Glob,Grep
+            --append-system-prompt "Follow the platform standards in docs/standards/."

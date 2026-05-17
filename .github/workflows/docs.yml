@@ -1,0 +1,52 @@
+name: docs
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+      - '.github/workflows/docs.yml'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Note: GitHub Pages can only host one site per repo. The frontend is already
+# at https://jaetill.github.io/game-night-pwa/ via the existing deploy.yml.
+# This workflow builds and uploads the docs as a SEPARATE pages artifact —
+# but only ONE pages-artifact upload survives per repo (last-uploaded wins).
+#
+# Path-filtered to docs/ + mkdocs.yml so it only fires on doc changes; the
+# frontend deploy continues to handle frontend pushes.
+#
+# If both workflows trigger on the same commit, deploy.yml (frontend) wins.
+# To make docs viewable, options are: (a) host docs at a separate URL via
+# Vercel/Netlify/Cloudflare Pages; (b) merge frontend dist + docs into one
+# pages artifact in deploy.yml; (c) use a docs-only branch.
+#
+# For now: docs build but won't deploy unless deploy.yml is paused. Phase 1
+# delivers the docs source and the build pipeline; the actual hosting story
+# is a Phase-1.5 follow-up.
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install MkDocs Material
+        run: |
+          pip install \
+            mkdocs-material \
+            mkdocs-mermaid2-plugin
+      - name: Build site
+        run: mkdocs build --strict
+      - name: Upload site as artifact (for download / preview)
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs-site
+          path: site/
+          retention-days: 14
