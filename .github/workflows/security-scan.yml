@@ -48,4 +48,9 @@ jobs:
       - name: Audit root deps
         run: npm audit --omit=dev --audit-level=high
       - name: Audit lambda deps
-        run: npm audit --omit=dev --audit-level=high --prefix lambda
+        run: |
+          if [ -f lambda/package.json ]; then
+            npm audit --omit=dev --audit-level=high --prefix lambda
+          else
+            echo "No lambda/package.json - skipping lambda audit"
+          fi

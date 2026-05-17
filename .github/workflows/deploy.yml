@@ -16,6 +16,9 @@ jobs:
       AWS_REGION: us-east-2
       S3_BUCKET: jaetill-draft
       CLOUDFRONT_DISTRIBUTION_ID: E29VATR5EV095C
+      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+      SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+      SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
 
     steps:
       - uses: actions/checkout@v4
@@ -30,6 +33,24 @@ jobs:
       - run: npm run build
         env:
           VITE_SLEEPER_LEAGUE_ID: ${{ secrets.VITE_SLEEPER_LEAGUE_ID }}
+          VITE_SENTRY_DSN: ${{ secrets.VITE_SENTRY_DSN }}
+          VITE_DEPLOY_ENV: production
+          VITE_RELEASE_VERSION: ${{ github.sha }}
+      - name: Upload source maps to Sentry
+        if: env.SENTRY_AUTH_TOKEN != ''
+        uses: getsentry/action-release@v1
+        with:
+          version: ${{ github.sha }}
+          environment: production
+          sourcemaps: ./dist
+          set_commits: auto
+          finalize: true
+      - name: Strip source maps from dist/ before publish
+        if: always()
+        run: |
+          find dist -name '*.map' -type f -delete
+          find dist -name '*.js' -type f -exec sed -i '/\/\/# sourceMappingURL=/d' {} +
+          find dist -name '*.css' -type f -exec sed -i '/\/\*# sourceMappingURL=/d' {} +
 
       - uses: aws-actions/configure-aws-credentials@v4
         with:
