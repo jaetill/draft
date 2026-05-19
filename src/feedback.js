@@ -2,9 +2,9 @@
 // Renders a small "Feedback" button; opens a modal form on click.
 // Submits to POST /feedback on the meal-planner HTTP API.
 
-import { API_BASE } from './config.js';
+// (no config.js on draft - hardcoded URL below)
 
-const FEEDBACK_ENDPOINT = `${API_BASE}/feedback`;
+const FEEDBACK_ENDPOINT = 'https://yl5ef9ma45.execute-api.us-east-2.amazonaws.com/feedback';
 
 export function initFeedbackWidget() {
   if (document.readyState === 'loading') {
