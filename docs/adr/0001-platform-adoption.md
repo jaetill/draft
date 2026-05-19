@@ -23,13 +23,13 @@ Adopt the platform via the `ai-team` plugin subscription. Phases 1-4 applied imm
 
 | Phase | Status |
 |---|---|
-| 1 - Documentation | In this PR |
-| 2 - AI configuration | In this PR |
-| 3 - Quality gates | Follow-up PR (vanilla JS flavor) |
-| 4 - CI workflows | Follow-up PR (no Lambda; security-scan skips lambda-audit) |
-| 5 - Observability | Deferred — draft is used once per year at the live draft; minimal error surface |
-| 6 - IaC retrofit | Not applicable — AWS infra source-of-truth lives in `.aws/` JSON request bodies, sufficient for re-provisioning |
-| 7 - User feedback | Not applicable — single-user tool |
+| 1 - Documentation | Done |
+| 2 - AI configuration | Done |
+| 3 - Quality gates | Done (vanilla JS flavor) |
+| 4 - CI workflows | Done (security-scan skips lambda-audit) |
+| 5 - Observability | Done (frontend Sentry; feedback Lambda from Phase 7 inherits the platform Sentry pattern) |
+| 6 - IaC retrofit | Done 2026-05-19 - terraform/envs/prod imports S3, CloudFront, IAM github-deploy role, feedback Lambda + dedicated HTTP API + secret container |
+| 7 - User feedback | Done 2026-05-19 - net-new AWS Lambda + dedicated HTTP API (draft-feedback-api). Needs GitHub PAT in secret draft/github-token for the widget to actually file issues. |
 
 ## Deviations from platform defaults
 
@@ -41,9 +41,9 @@ Same as game-night-pwa / meal-planner. Use the JS-flavored ESLint config.
 
 Existing `.github/workflows/deploy.yml`. No Lambda, no API Gateway.
 
-### Backend: none
+### Backend: feedback Lambda only
 
-Draft is purely client-side. Sleeper API is called directly from the browser; no auth, no proxy.
+Draft is mostly client-side (Sleeper API called from browser, no auth). As of 2026-05-19 Phase 7, a single Lambda (`draft-feedback`) exposed through a dedicated HTTP API (`draft-feedback-api`) handles user-submitted feedback per Standard 11. No other backend.
 
 ### Tests: none yet
 
