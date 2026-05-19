@@ -52,6 +52,9 @@ jobs:
           find dist -name '*.js' -type f -exec sed -i '/\/\/# sourceMappingURL=/d' {} +
           find dist -name '*.css' -type f -exec sed -i '/\/\*# sourceMappingURL=/d' {} +
 
+      - name: Install Lambda dependencies
+        run: npm ci --legacy-peer-deps --prefix lambda
+
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
@@ -71,3 +74,13 @@ jobs:
           aws cloudfront create-invalidation \
             --distribution-id $CLOUDFRONT_DISTRIBUTION_ID \
             --paths "/index.html" "/data/*"
+
+      - name: Deploy feedback Lambda
+        run: |
+          pushd lambda
+          zip -r ../feedback.zip feedback.js lib node_modules package.json
+          popd
+          aws lambda update-function-code \
+            --function-name draft-feedback \
+            --zip-file fileb://feedback.zip \
+            --region us-east-2

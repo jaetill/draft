@@ -50,3 +50,43 @@ resource "aws_iam_role_policy" "github_deploy" {
     ]
   })
 }
+
+# ── feedback Lambda execution role ────────────────────────────────────────
+
+data "aws_iam_policy_document" "lambda_trust" {
+  statement {
+    effect  = "Allow"
+    actions = ["sts:AssumeRole"]
+    principals {
+      type        = "Service"
+      identifiers = ["lambda.amazonaws.com"]
+    }
+  }
+}
+
+resource "aws_iam_role" "feedback" {
+  name               = "draft-feedback-role"
+  description        = "Execution role for feedback Lambda (Standard 11)"
+  assume_role_policy = data.aws_iam_policy_document.lambda_trust.json
+}
+
+resource "aws_iam_role_policy_attachment" "feedback_basic_exec" {
+  role       = aws_iam_role.feedback.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
+
+resource "aws_iam_role_policy" "feedback_secrets" {
+  name = "github-token-access"
+  role = aws_iam_role.feedback.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect   = "Allow"
+        Action   = "secretsmanager:GetSecretValue"
+        Resource = aws_secretsmanager_secret.github_token.arn
+      }
+    ]
+  })
+}
