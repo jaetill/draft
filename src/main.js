@@ -1,3 +1,4 @@
+import './feedback.js';
 import { DraftState } from './state.js';
 import { buildRankings } from './rankings.js';
 import { recommend } from './engine/recommend.js';
