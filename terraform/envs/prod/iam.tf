@@ -46,6 +46,16 @@ resource "aws_iam_role_policy" "github_deploy" {
         Effect   = "Allow"
         Action   = "cloudfront:CreateInvalidation"
         Resource = "arn:aws:cloudfront::${var.aws_account_id}:distribution/E29VATR5EV095C"
+      },
+      {
+        Sid    = "LambdaUpdateFeedback"
+        Effect = "Allow"
+        Action = [
+          "lambda:UpdateFunctionCode",
+          "lambda:GetFunction",
+          "lambda:GetFunctionConfiguration",
+        ]
+        Resource = aws_lambda_function.feedback.arn
       }
     ]
   })
