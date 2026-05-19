@@ -26,3 +26,9 @@ site/
 
 # ESLint cache
 .eslintcache
+
+# OpenTofu / Terraform
+.terraform/
+*.tfplan
+*.tfstate
+*.tfstate.backup
