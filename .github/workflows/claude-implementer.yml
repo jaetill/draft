@@ -33,6 +33,10 @@ on:
         description: 'Issue number to implement (for manual dispatch / testing)'
         required: false
         type: string
+      mode:
+        description: 'Set to cleanup-sweep for a deferred-nit cleanup run (no issue_number)'
+        required: false
+        type: string
 
 permissions:
   contents: write       # branch creation + push
@@ -52,7 +56,11 @@ jobs:
     if: |
       github.event_name == 'issues'
       && github.event.action == 'labeled'
-      && contains(fromJSON('["ready-for-implementer", "source:sentry", "severity:critical"]'), github.event.label.name)
+      && (
+           github.event.label.name == 'source:sentry'
+           || github.event.label.name == 'severity:critical'
+           || (github.event.label.name == 'ready-for-implementer' && github.event.sender.type != 'Bot')
+         )
       && !contains(github.event.issue.labels.*.name, 'scope:iac')
     runs-on: ubuntu-latest
     timeout-minutes: 25
@@ -384,3 +392,37 @@ jobs:
             --permission-mode bypassPermissions
             --allowed-tools Bash,Read,Write,Edit,Glob,Grep
             --append-system-prompt "Follow the platform standards in docs/standards/. Adhere strictly to .claude/agents/implementer.md."
+
+  # ── Mode C: cleanup sweep (workflow_dispatch) — drain deferred nits ──────
+  cleanup-sweep:
+    if: github.event_name == 'workflow_dispatch' && inputs.mode == 'cleanup-sweep'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci && npm ci --prefix lambda
+      - name: Configure git author
+        run: |
+          git config user.name 'claude[bot]'
+          git config user.email '41898282+claude[bot]@users.noreply.github.com'
+      - name: Run implementer agent (Mode C — cleanup sweep)
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          show_full_output: true
+          prompt: |
+            Act as the `implementer` subagent, operating in **Mode C — cleanup sweep** (see the implementer spec).
+            There is no originating issue. Open sidecar cleanup PR(s) only: drain a bounded batch of this repo's open `deferred-until-adjacent` nit issues — cap max(floor(total/2), 8), chunked at 12 issues per PR. Branch `cleanup/deferred-sweep-<n>`; PR title `chore: drain deferred-until-adjacent nits`. Each bundled fix must be bounded and unambiguous; skip any that is not.
+          claude_args: |
+            --model claude-sonnet-4-6
+            --permission-mode bypassPermissions
+            --allowed-tools Bash,Read,Write,Edit,Glob,Grep
+            --append-system-prompt "Follow the platform standards. Operate in Mode C cleanup-sweep per the implementer spec."
