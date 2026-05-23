@@ -39,16 +39,16 @@ on:
         type: string
 
 permissions:
-  contents: write       # branch creation + push
-  pull-requests: write  # PR creation
-  issues: write         # commenting on the issue
-  id-token: write       # claude-code-action OIDC
+  contents: write # branch creation + push
+  pull-requests: write # PR creation
+  issues: write # commenting on the issue
+  id-token: write # claude-code-action OIDC
 
 # Cancel previous runs for the same issue; if a new label triggers a re-run,
 # the older one's work is stale.
 concurrency:
   group: implementer-${{ github.event.issue.number || github.event.pull_request.number || github.run_id }}
-  cancel-in-progress: false   # don't kill mid-implementation
+  cancel-in-progress: false # don't kill mid-implementation
 
 jobs:
   # ── Mode A: initial implementation ──────────────────────────────────────
@@ -89,7 +89,6 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           show_full_output: true
           prompt: |
             Act as the `implementer` subagent (see .claude/agents/implementer.md).
@@ -172,7 +171,6 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           show_full_output: true
           prompt: |
             Act as the `iac-implementer` subagent (.claude/agents/iac-implementer.md).
@@ -306,7 +304,6 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           show_full_output: true
           allowed_bots: 'claude[bot]'
           prompt: |
@@ -379,7 +376,7 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          allowed_bots: 'jaetill-ai-triage-team[bot]'
           show_full_output: true
           prompt: |
             Manual dispatch for testing — same as Mode A but the issue
@@ -417,7 +414,7 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          allowed_bots: 'jaetill-ai-triage-team[bot]'
           show_full_output: true
           prompt: |
             Act as the `implementer` subagent, operating in **Mode C — cleanup sweep** (see the implementer spec).
