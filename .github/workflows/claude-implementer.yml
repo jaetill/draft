@@ -56,11 +56,8 @@ jobs:
     if: |
       github.event_name == 'issues'
       && github.event.action == 'labeled'
-      && (
-           github.event.label.name == 'source:sentry'
-           || github.event.label.name == 'severity:critical'
-           || (github.event.label.name == 'ready-for-implementer' && github.event.sender.type != 'Bot')
-         )
+      && github.event.label.name == 'ready-for-implementer'
+      && github.event.sender.type != 'Bot'
       && !contains(github.event.issue.labels.*.name, 'scope:iac')
     runs-on: ubuntu-latest
     timeout-minutes: 25
