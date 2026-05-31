@@ -1,5 +1,5 @@
 name: claude-implementer
-# Phase B of ADR-0013 — invokes the implementer agent in one of two modes:
+# Phase B of ADR-0026 — invokes the implementer agent in one of two modes:
 #
 # Mode A (initial implementation): triggered when an issue gains the
 #   `ready-for-implementer` label. Agent creates a feature branch, writes
@@ -10,7 +10,7 @@ name: claude-implementer
 #   security-reviewer (i.e. our gate steps failed). Agent reads feedback,
 #   addresses each finding, pushes a new commit to the same branch.
 #
-# Hard guardrails (per ADR-0013):
+# Hard guardrails (per ADR-0026):
 #   - 50 LOC / 3 files / 1 component scope cap (enforced in agent prompt)
 #   - Max 3 fix-iteration attempts before escalation
 #   - Daily activation cap (TODO: enforce in workflow)
@@ -295,7 +295,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.issue.number }}
         run: |
-          gh pr comment ${PR_NUMBER} --body "I've made 3 attempts to address review feedback without converging. Escalating to @jaetill for direction. Stopping autonomous fix iteration per ADR-0013."
+          gh pr comment ${PR_NUMBER} --body "I've made 3 attempts to address review feedback without converging. Escalating to @jaetill for direction. Stopping autonomous fix iteration per ADR-0026."
           exit 0
       - name: Run implementer agent (Mode B — fix)
         if: steps.pr.outputs.skip != 'true' && steps.count.outputs.attempts < '3'
