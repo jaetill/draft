@@ -14,6 +14,7 @@ on:
 permissions:
   contents: read
   issues: write
+  contents: write
   id-token: write
 
 jobs:
@@ -41,17 +42,17 @@ jobs:
                - CRITICAL/HIGH security advisory → flag for immediate update
                - Major version bump available → note + breaking-change risk
                - Minor/patch bump available → low priority, batch in monthly sweep
-            4. Check if a `dep-watch` issue is already open in the repo:
-                 gh issue list --label dep-watch --state open --json number,title
-               If yes, UPDATE that issue with the current findings via:
-                 gh issue edit <number> --body-file -
-               If no, OPEN a new one with label `dep-watch`:
-                 gh issue create --title "Weekly dependency report — $(date +%Y-%m-%d)" \
-                   --label dep-watch --body-file -
+            4. Write the rolling report file (ADR-0045 — digest issues are retired):
+                 git config user.name "dep-watch"; git config user.email "dep-watch@users.noreply.github.com"
+                 git fetch origin reports/dep-watch 2>/dev/null && git checkout reports/dep-watch || git checkout -b reports/dep-watch
+                 mkdir -p docs
+                 Write the FULL report to docs/dependency-report.md via a Bash heredoc (replace the whole file — rolling, latest state only).
+                 git add docs/dependency-report.md
+                 git commit -m "dep-watch: weekly report $(date +%Y-%m-%d)" && git push origin reports/dep-watch
 
-            Issue body must:
+            Report file must:
               - Lead with `## Dependency Watch ($(date +%Y-%m-%d))`
-              - Section per package.json (root, lambda/)
+              - Section per package manifest in the repo
               - Group findings by severity
               - End with `No actionable findings.` if everything is current
           claude_args: |
