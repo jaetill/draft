@@ -11,6 +11,7 @@ permissions:
 
 jobs:
   deploy:
+    environment: production   # ADR-0043: prod deploys wait for maintainer approval
     runs-on: ubuntu-latest
     env:
       AWS_REGION: us-east-2
