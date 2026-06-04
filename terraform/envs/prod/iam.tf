@@ -14,7 +14,7 @@ resource "aws_iam_role" "github_deploy" {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
           }
           StringLike = {
-            "token.actions.githubusercontent.com:sub" = "repo:jaetill/draft:ref:refs/heads/master"
+            "token.actions.githubusercontent.com:sub" = ["repo:jaetill/draft:ref:refs/heads/master", "repo:jaetill/draft:environment:production"]
           }
         }
       }
