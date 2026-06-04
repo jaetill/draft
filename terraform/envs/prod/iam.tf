@@ -54,6 +54,9 @@ resource "aws_iam_role_policy" "github_deploy" {
           "lambda:UpdateFunctionCode",
           "lambda:GetFunction",
           "lambda:GetFunctionConfiguration",
+          "lambda:PublishVersion",
+          "lambda:CreateAlias",
+          "lambda:UpdateAlias",
         ]
         Resource = aws_lambda_function.feedback.arn
       }
