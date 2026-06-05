@@ -1,4 +1,11 @@
 name: release
+# Thin caller (ADR-0018) - the release flow lives in the platform reusable:
+# jaetill/agentic-dev-environment/.github/workflows/release.yml
+# Do NOT inline release-please here; edit the reusable instead.
+# The reusable mints a fleet App token (FLEET_APP_ID / FLEET_APP_PRIVATE_KEY
+# repo secrets) so the release PR triggers its review checks; absent secrets
+# it falls back to GITHUB_TOKEN (PR created but check-less).
+
 on:
   push:
     branches: [master]
@@ -8,24 +15,9 @@ permissions:
   pull-requests: write
   id-token: write
 
-# Inlined release-please flow.
-#
-# Original referenced jaetill/agentic-dev-environment/.github/workflows/release.yml@main
-# as a reusable workflow, but that platform repo is local-only (not pushed to
-# GitHub), so the reference 404'd and the workflow failed at startup on every
-# push for the first half of this session.
-#
-# Inlining preserves the same behavior: release-please reads conventional
-# commits since the last tag, opens (or updates) a release PR with the
-# auto-generated CHANGELOG and version bump per release-please-config.json.
-# Merging that PR creates the GitHub release + tag.
-
 jobs:
-  release-please:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: googleapis/release-please-action@v4
-        with:
-          release-type: node
-          config-file: .release-please-config.json
-          manifest-file: .release-please-manifest.json
+  release:
+    uses: jaetill/agentic-dev-environment/.github/workflows/release.yml@main
+    with:
+      release-type: node
+    secrets: inherit
