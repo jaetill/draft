@@ -23,3 +23,13 @@ resource "aws_lambda_function" "feedback" {
     ignore_changes = [filename, source_code_hash]
   }
 }
+
+resource "aws_lambda_alias" "feedback_production" {
+  name             = "production"
+  function_name    = aws_lambda_function.feedback.function_name
+  function_version = "$LATEST"
+
+  lifecycle {
+    ignore_changes = [function_version]
+  }
+}

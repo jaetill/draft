@@ -2,6 +2,15 @@
 
 Draft is a static SPA hosted at `draft.jaetill.com` on S3 + CloudFront. Auto-deploys via `.github/workflows/deploy.yml` on push to `master`.
 
+## Two-stage deploy (ADR-0043 phase 2)
+
+Every push to `master` runs two jobs:
+
+1. **test** (ungated) — builds Vite, uploads source maps to Sentry, syncs `dist/` to `s3://jaetill-draft/preview/`, and deploys Lambda code to `$LATEST`.
+2. **promote** (gated — requires `jaetill` approval in the `production` environment) — syncs `dist/` to `s3://jaetill-draft/` (root), invalidates CloudFront, and publishes a numbered Lambda version pointed to by the `production` alias.
+
+Approving the latest queued run supersedes any earlier waiting runs (GitHub environment behaviour). Reject stale runs in bulk when approving a newer deploy.
+
 ## Manual deploy
 
 ```sh
