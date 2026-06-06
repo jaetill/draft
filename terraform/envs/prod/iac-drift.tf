@@ -18,7 +18,7 @@ data "aws_iam_policy_document" "iac_drift_trust" {
     actions = ["sts:AssumeRoleWithWebIdentity"]
     principals {
       type        = "Federated"
-      identifiers = ["arn:aws:iam::214599503944:oidc-provider/token.actions.githubusercontent.com"]
+      identifiers = ["arn:aws:iam::${var.aws_account_id}:oidc-provider/token.actions.githubusercontent.com"]
     }
     condition {
       test     = "StringEquals"
@@ -52,7 +52,7 @@ data "aws_iam_policy_document" "iac_drift_tfstate" {
     sid       = "TFStateLockRead"
     effect    = "Allow"
     actions   = ["dynamodb:GetItem"]
-    resources = ["arn:aws:dynamodb:us-east-2:214599503944:table/terraform-state-lock"]
+    resources = ["arn:aws:dynamodb:${var.aws_region}:${var.aws_account_id}:table/terraform-state-lock"]
   }
 }
 
