@@ -5,8 +5,8 @@
 //
 // Environment variables:
 //   GITHUB_REPO_OWNER  â€” defaults to "jaetill"
-//   GITHUB_REPO_NAME   â€” defaults to "meal-planner"
-//   GITHUB_SECRET_ID   â€” defaults to "meal-planner/github-token"
+//   GITHUB_REPO_NAME   â€” defaults to "draft"
+//   GITHUB_SECRET_ID   â€” defaults to "draft/github-token"
 //
 // Secrets Manager value at GITHUB_SECRET_ID must be JSON: { "GITHUB_TOKEN": "ghp_..." }
 
@@ -21,14 +21,9 @@ const REPO_OWNER = process.env.GITHUB_REPO_OWNER || 'jaetill';
 const REPO_NAME = process.env.GITHUB_REPO_NAME || 'draft';
 const SECRET_ID = process.env.GITHUB_SECRET_ID || 'draft/github-token';
 
-const ALLOWED_ORIGINS = new Set([
-  'https://meals.jaetill.com',
-  'http://localhost:5173',
-]);
+const ALLOWED_ORIGINS = new Set(['https://draft.jaetill.com', 'http://localhost:5173']);
 
-const SAFE_PAGE_ENTRIES = [
-  { origin: 'https://draft.jaetill.com', pathPrefix: '' },
-];
+const SAFE_PAGE_ENTRIES = [{ origin: 'https://draft.jaetill.com', pathPrefix: '' }];
 
 function isSafePageUrl(url) {
   if (typeof url !== 'string') return false;
@@ -39,7 +34,9 @@ function isSafePageUrl(url) {
     return false;
   }
   return SAFE_PAGE_ENTRIES.some(
-    (e) => parsed.origin === e.origin && (e.pathPrefix === '' || parsed.pathname.startsWith(e.pathPrefix)),
+    (e) =>
+      parsed.origin === e.origin &&
+      (e.pathPrefix === '' || parsed.pathname.startsWith(e.pathPrefix)),
   );
 }
 
@@ -62,7 +59,10 @@ function makeRateLimiter() {
       return { allowed: true };
     }
     if (existing.count >= LIMIT) {
-      return { allowed: false, retryAfter: Math.ceil((WINDOW_MS - (now - existing.windowStart)) / 1000) };
+      return {
+        allowed: false,
+        retryAfter: Math.ceil((WINDOW_MS - (now - existing.windowStart)) / 1000),
+      };
     }
     existing.count += 1;
     return { allowed: true };
@@ -87,10 +87,16 @@ function validate(input) {
       return 'email must be a valid email address';
     }
   }
-  if (input.page_url !== undefined && (typeof input.page_url !== 'string' || input.page_url.length > 2048)) {
+  if (
+    input.page_url !== undefined &&
+    (typeof input.page_url !== 'string' || input.page_url.length > 2048)
+  ) {
     return 'page_url must be a string under 2048 chars';
   }
-  if (input.user_agent !== undefined && (typeof input.user_agent !== 'string' || input.user_agent.length > 512)) {
+  if (
+    input.user_agent !== undefined &&
+    (typeof input.user_agent !== 'string' || input.user_agent.length > 512)
+  ) {
     return 'user_agent must be a string under 512 chars';
   }
   return null;
@@ -99,7 +105,9 @@ function validate(input) {
 function corsHeaders(event) {
   const origin = event.headers?.origin || event.headers?.Origin || '';
   return {
-    'Access-Control-Allow-Origin': ALLOWED_ORIGINS.has(origin) ? origin : 'https://draft.jaetill.com',
+    'Access-Control-Allow-Origin': ALLOWED_ORIGINS.has(origin)
+      ? origin
+      : 'https://draft.jaetill.com',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Methods': 'POST,OPTIONS',
     'Content-Type': 'application/json',
@@ -150,11 +158,13 @@ function createHandler(deps = {}) {
     if (method === 'OPTIONS') return { statusCode: 200, headers: CORS, body: '' };
     if (method !== 'POST') return respond(405, { error: 'method_not_allowed' }, CORS);
 
-    const ip = event.requestContext?.http?.sourceIp || event.requestContext?.identity?.sourceIp || 'unknown';
+    const ip =
+      event.requestContext?.http?.sourceIp || event.requestContext?.identity?.sourceIp || 'unknown';
 
     const rl = checkRateLimit(ip);
     if (!rl.allowed) {
-      return respond(429,
+      return respond(
+        429,
         { error: 'rate_limited', retry_after_seconds: rl.retryAfter },
         { ...CORS, 'Retry-After': String(rl.retryAfter) },
       );
@@ -175,14 +185,19 @@ function createHandler(deps = {}) {
     const violation = validate(body);
     if (violation) return respond(400, { error: 'validation_error', detail: violation }, CORS);
 
-    const titleBody = body.description.length > 60
-      ? body.description.slice(0, 60).trim() + '...'
-      : body.description;
+    const titleBody =
+      body.description.length > 60
+        ? body.description.slice(0, 60).trim() + '...'
+        : body.description;
     const issueTitle = `[${body.type}] ${escapeMarkdown(titleBody)}`;
     const issueBody = [
-      '## Description', escapeMarkdown(body.description), '',
+      '## Description',
+      escapeMarkdown(body.description),
+      '',
       '## Context',
-      body.page_url && isSafePageUrl(body.page_url) ? `- Page: ${escapeMarkdown(body.page_url)}` : null,
+      body.page_url && isSafePageUrl(body.page_url)
+        ? `- Page: ${escapeMarkdown(body.page_url)}`
+        : null,
       body.user_agent ? `- UA: ${escapeMarkdown(body.user_agent)}` : null,
       body.email ? `- Email: ${escapeMarkdown(body.email)}` : null,
       `- Source IP: ${ip}`,
@@ -190,13 +205,18 @@ function createHandler(deps = {}) {
       '',
       '## Triage',
       'Will be classified by `triage-bot` agent on next scheduled scan.',
-    ].filter(Boolean).join('\n');
+    ]
+      .filter(Boolean)
+      .join('\n');
 
     let octokit;
     try {
       octokit = await getOctokit();
     } catch (err) {
-      logger.error('feedback.secrets_failed', { request_id: context?.awsRequestId, error: err.message });
+      logger.error('feedback.secrets_failed', {
+        request_id: context?.awsRequestId,
+        error: err.message,
+      });
       Sentry.captureException(err);
       return respond(500, { error: 'configuration_error' }, CORS);
     }
@@ -212,12 +232,16 @@ function createHandler(deps = {}) {
       const id = `FB-${new Date().getFullYear()}-${String(result.data.number).padStart(6, '0')}`;
       logger.info('feedback.received', {
         request_id: context?.awsRequestId,
-        id, type: body.type, issue_number: result.data.number,
+        id,
+        type: body.type,
+        issue_number: result.data.number,
       });
       return respond(201, { id, status: 'received' }, CORS);
     } catch (err) {
       logger.error('feedback.github_failed', {
-        request_id: context?.awsRequestId, error: err.message, status: err.status,
+        request_id: context?.awsRequestId,
+        error: err.message,
+        status: err.status,
       });
       Sentry.captureException(err);
       return respond(502, { error: 'github_issue_creation_failed' }, CORS);
