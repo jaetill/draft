@@ -34,6 +34,10 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           show_full_output: true
+          # Release-please PRs are now App-authored (jaetill-ai-triage-team[bot])
+          # so the action's default bot-rejection blocks them. Same fix as PR #305
+          # applied to pr-review.
+          allowed_bots: 'claude[bot],jaetill-ai-triage-team[bot]'
           prompt: |
             Act as the release-captain subagent defined in .claude/agents/release-captain.md.
 
