@@ -1,4 +1,4 @@
-// ESLint flat config per platform ADR-0005. Vanilla JS frontend, no Lambda.
+// ESLint flat config per platform ADR-0005.
 
 import js from '@eslint/js';
 import importPlugin from 'eslint-plugin-import';
@@ -52,5 +52,15 @@ export default [
       sourceType: 'module',
       globals: { ...globals.node, ...globals.es2022 },
     },
+  },
+  {
+    files: ['lambda/**/*.js'],
+    ignores: ['lambda/node_modules/**'],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'commonjs',
+      globals: { ...globals.node, ...globals.es2022 },
+    },
+    rules: { 'no-console': 'off' },
   },
 ];
