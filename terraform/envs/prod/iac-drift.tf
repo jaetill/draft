@@ -92,7 +92,11 @@ data "aws_iam_policy_document" "iac_drift_plan" {
       "iam:ListInstanceProfilesForRole",
       "iam:ListRolePolicies",
     ]
-    resources = ["*"]
+    resources = [
+      "arn:aws:iam::${var.aws_account_id}:role/draft-*",
+      "arn:aws:iam::${var.aws_account_id}:policy/draft-*",
+      "arn:aws:iam::aws:policy/*",
+    ]
   }
 
   statement {
