@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.1.0](https://github.com/jaetill/draft/compare/v1.0.0...v1.1.0) (2026-06-13)
+
+
+### Features
+
+* **iac:** add ADR-0035 iac-additive-guard caller ([#280](https://github.com/jaetill/draft/issues/280)) ([#50](https://github.com/jaetill/draft/issues/50)) ([096fcfe](https://github.com/jaetill/draft/commit/096fcfe0d3c7b27ed473cacaf4c7c8f2146e7b2d))
+
+
+### Bug Fixes
+
+* **ci:** allow jaetill-ai-triage-team[bot] in release-captain allowed_bots ([#58](https://github.com/jaetill/draft/issues/58)) ([a92d57f](https://github.com/jaetill/draft/commit/a92d57f7c712ba82f33b8a56329674265d922fbd))
+* **iac:** replace ReadOnlyAccess with scoped plan policy on iac-drift role ([#54](https://github.com/jaetill/draft/issues/54)) ([#61](https://github.com/jaetill/draft/issues/61)) ([88065a6](https://github.com/jaetill/draft/commit/88065a6bb685513d7dd5dff07cd65aa1342e343f))
+* **iac:** scope IAMDescribe to draft-* ARNs, preventing account-wide IAM enumeration (closes [#62](https://github.com/jaetill/draft/issues/62)) ([#64](https://github.com/jaetill/draft/issues/64)) ([4420d62](https://github.com/jaetill/draft/commit/4420d62623bbf52072c53a4842cba649ac6d9954))
+* **iam:** accept environment-scoped OIDC sub for gated prod deploys (ADR-0043) ([#31](https://github.com/jaetill/draft/issues/31)) ([6cccecd](https://github.com/jaetill/draft/commit/6cccecd6495e6462810734d0a4b9ef0bfd780032))
+* **lambda:** correct ALLOWED_ORIGINS to draft.jaetill.com (closes [#57](https://github.com/jaetill/draft/issues/57)) ([#59](https://github.com/jaetill/draft/issues/59)) ([7e73bd8](https://github.com/jaetill/draft/commit/7e73bd80ca4501af69f8efee93222e97d3f0873b))
+
 ## 1.0.0 (2026-05-23)
 
 
