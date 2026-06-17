@@ -62,6 +62,12 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Sync preview to S3
+        # preview/ is served publicly at draft.jaetill.com/preview/ as soon as
+        # this step completes — the promote gate does not restrict pre-approval
+        # visibility. Intentional for this personal app (no sensitive user data;
+        # VITE_SLEEPER_LEAGUE_ID and Sentry DSN are non-secret). If that changes,
+        # add a CloudFront behaviour for /preview/* with signed cookies or an IP
+        # allowlist to enforce the gate.
         run: |
           aws s3 sync dist/ s3://$S3_BUCKET/preview/ --delete \
             --cache-control "public, max-age=31536000, immutable" \
