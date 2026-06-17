@@ -70,21 +70,24 @@ jobs:
             --cache-control "public, max-age=60" \
             --exclude "*" --include "index.html" --include "data/*"
 
-      - name: Deploy feedback Lambda to $LATEST
+      - name: Package feedback Lambda
         run: |
           pushd lambda
           zip -r ../feedback.zip feedback.js lib node_modules package.json
           popd
-          aws lambda update-function-code \
-            --function-name draft-feedback \
-            --zip-file fileb://feedback.zip \
-            --region $AWS_REGION
 
       - name: Upload dist artifact
         uses: actions/upload-artifact@v4
         with:
           name: dist
           path: dist/
+          retention-days: 1
+
+      - name: Upload feedback artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: feedback
+          path: feedback.zip
           retention-days: 1
 
   promote:
@@ -102,6 +105,11 @@ jobs:
         with:
           name: dist
           path: dist/
+
+      - name: Download feedback artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: feedback
 
       - uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -122,6 +130,13 @@ jobs:
           aws cloudfront create-invalidation \
             --distribution-id $CLOUDFRONT_DISTRIBUTION_ID \
             --paths "/index.html" "/data/*"
+
+      - name: Deploy feedback Lambda to $LATEST
+        run: |
+          aws lambda update-function-code \
+            --function-name draft-feedback \
+            --zip-file fileb://feedback.zip \
+            --region $AWS_REGION
 
       - name: Publish Lambda version and update production alias
         run: |
