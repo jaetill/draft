@@ -10,13 +10,11 @@ permissions:
   contents: read
 
 jobs:
-  deploy:
-    environment: production   # ADR-0043: prod deploys wait for maintainer approval
+  test:
     runs-on: ubuntu-latest
     env:
       AWS_REGION: us-east-2
       S3_BUCKET: jaetill-draft
-      CLOUDFRONT_DISTRIBUTION_ID: E29VATR5EV095C
       SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
       SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
       SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
@@ -37,6 +35,7 @@ jobs:
           VITE_SENTRY_DSN: ${{ secrets.VITE_SENTRY_DSN }}
           VITE_DEPLOY_ENV: production
           VITE_RELEASE_VERSION: ${{ github.sha }}
+
       - name: Upload source maps to Sentry
         if: env.SENTRY_AUTH_TOKEN != ''
         uses: getsentry/action-release@v1
@@ -46,6 +45,7 @@ jobs:
           sourcemaps: ./dist
           set_commits: auto
           finalize: true
+
       - name: Strip source maps from dist/ before publish
         if: always()
         run: |
@@ -55,6 +55,53 @@ jobs:
 
       - name: Install Lambda dependencies
         run: npm ci --legacy-peer-deps --prefix lambda
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Sync preview to S3
+        run: |
+          aws s3 sync dist/ s3://$S3_BUCKET/preview/ --delete \
+            --cache-control "public, max-age=31536000, immutable" \
+            --exclude "index.html" --exclude "data/*"
+          aws s3 sync dist/ s3://$S3_BUCKET/preview/ \
+            --cache-control "public, max-age=60" \
+            --exclude "*" --include "index.html" --include "data/*"
+
+      - name: Deploy feedback Lambda to $LATEST
+        run: |
+          pushd lambda
+          zip -r ../feedback.zip feedback.js lib node_modules package.json
+          popd
+          aws lambda update-function-code \
+            --function-name draft-feedback \
+            --zip-file fileb://feedback.zip \
+            --region $AWS_REGION
+
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 1
+
+  promote:
+    needs: test
+    environment: production # ADR-0043: prod deploys wait for maintainer approval
+    runs-on: ubuntu-latest
+    env:
+      AWS_REGION: us-east-2
+      S3_BUCKET: jaetill-draft
+      CLOUDFRONT_DISTRIBUTION_ID: E29VATR5EV095C
+
+    steps:
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
 
       - uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -76,12 +123,17 @@ jobs:
             --distribution-id $CLOUDFRONT_DISTRIBUTION_ID \
             --paths "/index.html" "/data/*"
 
-      - name: Deploy feedback Lambda
+      - name: Publish Lambda version and update production alias
         run: |
-          pushd lambda
-          zip -r ../feedback.zip feedback.js lib node_modules package.json
-          popd
-          aws lambda update-function-code \
+          aws lambda wait function-updated \
             --function-name draft-feedback \
-            --zip-file fileb://feedback.zip \
-            --region us-east-2
+            --region $AWS_REGION
+          VER=$(aws lambda publish-version \
+            --function-name draft-feedback \
+            --region $AWS_REGION \
+            --query Version --output text)
+          aws lambda update-alias \
+            --function-name draft-feedback \
+            --name production \
+            --function-version "$VER" \
+            --region $AWS_REGION
