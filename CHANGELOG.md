@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.1.0](https://github.com/jaetill/draft/compare/v1.0.0...v1.1.0) (2026-06-18)
+
+
+### Features
+
+* **iac:** add ADR-0035 iac-additive-guard caller ([#280](https://github.com/jaetill/draft/issues/280)) ([#50](https://github.com/jaetill/draft/issues/50)) ([096fcfe](https://github.com/jaetill/draft/commit/096fcfe0d3c7b27ed473cacaf4c7c8f2146e7b2d))
+
+
+### Bug Fixes
+
+* **ci:** allow jaetill-ai-triage-team[bot] in release-captain allowed_bots ([#58](https://github.com/jaetill/draft/issues/58)) ([a92d57f](https://github.com/jaetill/draft/commit/a92d57f7c712ba82f33b8a56329674265d922fbd))
+* **ci:** move Lambda update-function-code to gated promote job (closes [#66](https://github.com/jaetill/draft/issues/66)) ([#70](https://github.com/jaetill/draft/issues/70)) ([1f80348](https://github.com/jaetill/draft/commit/1f803481f25ccf1f5fd1fb1069176a3c188a7519))
+* **ci:** scope reusable secrets explicitly (ADR-0048) ([#74](https://github.com/jaetill/draft/issues/74)) ([53f424b](https://github.com/jaetill/draft/commit/53f424b33e84e630afd5cebb2b1ebfe545ca1cbd))
+* **ci:** split deploy into test+promote, publish numbered Lambda version on promote (closes [#41](https://github.com/jaetill/draft/issues/41)) ([#65](https://github.com/jaetill/draft/issues/65)) ([6fe70b5](https://github.com/jaetill/draft/commit/6fe70b50c6b891c203498bd37d392f43fe6da67b))
+* **iac:** replace ReadOnlyAccess with scoped plan policy on iac-drift role ([#54](https://github.com/jaetill/draft/issues/54)) ([#61](https://github.com/jaetill/draft/issues/61)) ([88065a6](https://github.com/jaetill/draft/commit/88065a6bb685513d7dd5dff07cd65aa1342e343f))
+* **iac:** scope IAMDescribe to draft-* ARNs, preventing account-wide IAM enumeration (closes [#62](https://github.com/jaetill/draft/issues/62)) ([#64](https://github.com/jaetill/draft/issues/64)) ([4420d62](https://github.com/jaetill/draft/commit/4420d62623bbf52072c53a4842cba649ac6d9954))
+* **iac:** scope lambda:CreateAlias/UpdateAlias to :production ARN (closes [#40](https://github.com/jaetill/draft/issues/40)) ([#69](https://github.com/jaetill/draft/issues/69)) ([ca421e6](https://github.com/jaetill/draft/commit/ca421e6e77767513fedca36ce5909e7bbde2f231))
+* **iam:** accept environment-scoped OIDC sub for gated prod deploys (ADR-0043) ([#31](https://github.com/jaetill/draft/issues/31)) ([6cccecd](https://github.com/jaetill/draft/commit/6cccecd6495e6462810734d0a4b9ef0bfd780032))
+* **lambda:** correct ALLOWED_ORIGINS to draft.jaetill.com (closes [#57](https://github.com/jaetill/draft/issues/57)) ([#59](https://github.com/jaetill/draft/issues/59)) ([7e73bd8](https://github.com/jaetill/draft/commit/7e73bd80ca4501af69f8efee93222e97d3f0873b))
+
 ## 1.0.0 (2026-05-23)
 
 
