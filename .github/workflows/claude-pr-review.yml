@@ -14,4 +14,5 @@ permissions:
 jobs:
   review:
     uses: jaetill/agentic-dev-environment/.github/workflows/claude-pr-review.yml@main
-    secrets: inherit
+    secrets:
+      CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
