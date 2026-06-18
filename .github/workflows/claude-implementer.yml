@@ -44,4 +44,8 @@ jobs:
       issue_number: ${{ inputs.issue_number }}
       mode: ${{ inputs.mode }}
       bundle_issues: ${{ inputs.bundle_issues }}
-    secrets: inherit
+    secrets:
+      CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+      IMPLEMENTER_PAT: ${{ secrets.IMPLEMENTER_PAT }}
+      FLEET_APP_ID: ${{ secrets.FLEET_APP_ID }}
+      FLEET_APP_PRIVATE_KEY: ${{ secrets.FLEET_APP_PRIVATE_KEY }}
