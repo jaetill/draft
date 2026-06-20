@@ -31,6 +31,14 @@ on:
         required: false
         type: string
 
+concurrency:
+  # cleanup-sweep dispatches share a static group so simultaneous runs are
+  # deduplicated (cancel-in-progress: true). Issue/PR-scoped and other
+  # workflow_dispatch runs each get a unique group via run_id, preserving the
+  # existing no-dedup behaviour for those paths.
+  group: ${{ (github.event_name == 'workflow_dispatch' && inputs.mode == 'cleanup-sweep') && 'implementer-cleanup-sweep' || format('implementer-{0}', github.event.issue.number || github.event.pull_request.number || github.run_id) }}
+  cancel-in-progress: ${{ github.event_name == 'workflow_dispatch' && inputs.mode == 'cleanup-sweep' }}
+
 permissions:
   contents: write
   pull-requests: write
