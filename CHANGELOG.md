@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.1](https://github.com/jaetill/draft/compare/v1.1.0...v1.1.1) (2026-06-20)
+
+
+### Bug Fixes
+
+* **ci:** deduplicate concurrent cleanup-sweep dispatches (closes [#16](https://github.com/jaetill/draft/issues/16)) ([#75](https://github.com/jaetill/draft/issues/75)) ([e626082](https://github.com/jaetill/draft/commit/e6260827b93f44500da5ea6e0d0ffb07c80cf3c8))
+* **ci:** document and script production env branch restriction ([#77](https://github.com/jaetill/draft/issues/77)) ([#79](https://github.com/jaetill/draft/issues/79)) ([436c497](https://github.com/jaetill/draft/commit/436c4970d3c945a829304f2da1380aa332494d9c))
+* **iac:** add environment:production OIDC sub to trust-policy.json (closes [#73](https://github.com/jaetill/draft/issues/73)) ([#76](https://github.com/jaetill/draft/issues/76)) ([c6cf07f](https://github.com/jaetill/draft/commit/c6cf07f7707c042c05ea7219f558d3ed3522f5a6))
+
 ## [1.1.0](https://github.com/jaetill/draft/compare/v1.0.0...v1.1.0) (2026-06-18)
 
 
