@@ -27,17 +27,9 @@ on:
         required: false
         type: string
       bundle_issues:
-        description: 'Comma-separated deferred-until-adjacent nit issue numbers the promoter selected to ride along (same-file, ADR-0029)'
+        description: 'Comma-separated low/nit (severity:low,severity:nit) issue numbers the promoter selected to ride along (same-file, ADR-0029)'
         required: false
         type: string
-
-concurrency:
-  # cleanup-sweep dispatches share a static group so simultaneous runs are
-  # deduplicated (cancel-in-progress: true). Issue/PR-scoped and other
-  # workflow_dispatch runs each get a unique group via run_id, preserving the
-  # existing no-dedup behaviour for those paths.
-  group: ${{ (github.event_name == 'workflow_dispatch' && inputs.mode == 'cleanup-sweep') && 'implementer-cleanup-sweep' || format('implementer-{0}', github.event.issue.number || github.event.pull_request.number || github.run_id) }}
-  cancel-in-progress: ${{ github.event_name == 'workflow_dispatch' && inputs.mode == 'cleanup-sweep' }}
 
 permissions:
   contents: write
@@ -52,6 +44,7 @@ jobs:
       issue_number: ${{ inputs.issue_number }}
       mode: ${{ inputs.mode }}
       bundle_issues: ${{ inputs.bundle_issues }}
+    # ADR-0048: scope secrets explicitly (no `secrets: inherit`).
     secrets:
       CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
       IMPLEMENTER_PAT: ${{ secrets.IMPLEMENTER_PAT }}
