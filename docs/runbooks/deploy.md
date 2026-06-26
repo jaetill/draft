@@ -34,6 +34,36 @@ gh api --method POST repos/jaetill/draft/environments/production/deployment-bran
 
 See `.aws/apply-env-branch-restriction.sh` for the ready-to-run script.
 
+### Production environment required reviewer (security requirement)
+
+The `environment: production` line in the workflow only enforces an approval gate if the `production` GitHub environment is configured with required reviewers. Without at least one required reviewer, any push to `master` deploys immediately — the gate is a no-op. A repo transfer or an environment settings reset silently removes this protection if it is not documented and reapplied.
+
+**Required configuration:**
+
+```
+Settings → Environments → production → Required reviewers → Add: jaetill
+Also: uncheck "Allow administrators to bypass" (prevents silent bypass by admins)
+```
+
+To apply via CLI (requires repo admin token):
+
+```sh
+.aws/apply-env-required-reviewer.sh
+```
+
+Or inline:
+
+```sh
+# Look up your GitHub user ID first: gh api user --jq .id
+gh api --method PUT repos/jaetill/draft/environments/production \
+  --input - <<'EOF'
+{
+  "reviewers": [{"type": "User", "id": 12345678}],
+  "prevent_self_review": false
+}
+EOF
+```
+
 Approving the latest queued run supersedes any earlier waiting runs (GitHub environment behaviour). Reject stale runs in bulk when approving a newer deploy.
 
 ## Manual deploy
