@@ -96,6 +96,7 @@ _TBD when scaffolding starts. Expected shape:_
 - Pre-draft: manually drop fresh CSVs in `data/` and commit before the deploy. Stale rankings on draft day = bad day.
 - CloudFront invalidation must include `/data/*` so updated CSVs aren't served from cache.
 - `index.html` should have short cache headers; bundled assets are fingerprinted and can cache aggressively.
+- The `production` GitHub environment **must** have a required reviewer set in Settings → Environments → production. Without it, `environment: production` in the workflow is a no-op and every push auto-deploys. Run `.aws/apply-env-required-reviewer.sh` to configure (see `docs/runbooks/deploy.md`).
 
 ## Recommendation engine — strategy ladder
 
