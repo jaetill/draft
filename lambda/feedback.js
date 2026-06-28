@@ -252,6 +252,7 @@ function createHandler(deps = {}) {
 exports.handler = createHandler();
 
 exports._createHandler = createHandler;
+exports._corsHeaders = corsHeaders;
 exports._validate = validate;
 exports._makeRateLimiter = makeRateLimiter;
 exports._escapeMarkdown = escapeMarkdown;
