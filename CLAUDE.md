@@ -42,7 +42,10 @@ Live fantasy football draft assistant for Jason's redraft league. Polls the Slee
 
 No Cognito. Sleeper draft data is read directly from the browser; Lambda handles only the feedback endpoint.
 
-**Infra source-of-truth:** the JSON request bodies used to provision these resources are checked in under `.aws/` for reference and re-application.
+**Infra source-of-truth:**
+
+- S3, CloudFront, ACM, OIDC role, Route 53 — JSON request bodies are checked in under `.aws/` for reference and re-application.
+- Lambda and API Gateway — managed by Terraform; source is `terraform/envs/prod/`.
 
 ## External APIs
 
