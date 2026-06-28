@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "description": "Lambda functions for draft - feedback only currently.",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "vitest": "^2.0.0"
+  },
   "dependencies": {
     "@octokit/rest": "^21.0.0",
     "@sentry/aws-serverless": "^9.0.0",

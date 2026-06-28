@@ -63,4 +63,13 @@ export default [
     },
     rules: { 'no-console': 'off' },
   },
+  {
+    files: ['lambda/**/*.test.js', 'lambda/**/*.mjs'],
+    ignores: ['lambda/node_modules/**'],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'module',
+      globals: { ...globals.node, ...globals.es2022 },
+    },
+  },
 ];
