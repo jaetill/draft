@@ -32,7 +32,11 @@ gh api --method PUT "repos/${REPO}/environments/${ENV}" \
 EOF
 
 echo "Adding '${BRANCH}' branch pattern (skipped if already present)..."
-gh api --method POST "repos/${REPO}/environments/${ENV}/deployment-branch-policies" \
-  -f name="${BRANCH}" 2>/dev/null || echo "  (already exists — verify at the URL below)"
+POST_OUT=$(gh api --method POST "repos/${REPO}/environments/${ENV}/deployment-branch-policies" \
+  -f name="${BRANCH}" 2>&1) \
+  && echo "  branch pattern registered" \
+  || { echo "$POST_OUT" | grep -qi "already exists\|already_exists" \
+       && echo "  (already exists — verify at the URL below)" \
+       || { echo "ERROR: branch pattern POST failed: $POST_OUT"; exit 1; }; }
 
 echo "Done. Verify at: https://github.com/${REPO}/settings/environments"
