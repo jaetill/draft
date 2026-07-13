@@ -1,48 +1,48 @@
-## Dependency Watch (2026-07-06)
+## Dependency Watch (2026-07-13)
 
 ---
 
-### `package.json` (root — frontend)
+### `package.json` (root)
 
-**Audit:** 0 vulnerabilities in production dependencies.
+#### Security Advisories
+_None. `npm audit --omit=dev` returned 0 vulnerabilities (564 total deps, 7 prod)._
 
-#### Minor/patch updates (low priority — batch in monthly sweep)
+#### Outdated Packages
 
-| Package | Current | Wanted | Latest | Notes |
+| Package | Installed | Wanted | Latest | Change type |
 |---|---|---|---|---|
-| `@sentry/browser` | 10.53.1 | 10.63.0 | 10.63.0 | Same major; minor feature/fix releases. |
+| `@sentry/browser` | < 10.65.0 | 10.65.0 | 10.65.0 | Minor/patch — batch in monthly sweep |
+
+No major version bumps. No action required before draft day.
 
 ---
 
-### `lambda/package.json` (Lambda function)
+### `lambda/package.json`
 
-**Audit:** 18 moderate vulnerabilities (all rooted in `@opentelemetry/core < 2.8.0`, transitive via `@sentry/aws-serverless@9.x`).
+#### Security Advisories
 
-#### Moderate security advisory — fix requires major version bump
+**Moderate — `@opentelemetry/core` unbounded memory allocation (GHSA-8988-4f7v-96qf)**
 
-| Advisory | GHSA-8988-4f7v-96qf |
-|---|---|
-| Package | `@opentelemetry/core` (transitive, via `@sentry/aws-serverless`) |
-| Severity | **Moderate** (CVSS 5.3) |
-| CWE | CWE-770 — Unbounded memory allocation in W3C Baggage propagation |
-| Affected range | `< 2.8.0` |
-| Fix | Upgrade `@sentry/aws-serverless` from `^9.0.0` → `^10.0.0` (major bump; `10.63.0` resolves the advisory) |
-| Breaking change risk | Yes — Sentry v9→v10 is a major release; review [Sentry migration guide](https://docs.sentry.io/platforms/javascript/migration/) before upgrading |
+- CVSS 5.3 (AV:N/AC:L/PR:N/UI:N — network-reachable, no auth required, DoS)
+- Affects W3C Baggage propagation; a malicious request can cause unbounded memory growth.
+- Root cause: `@opentelemetry/core <2.8.0` pulled in transitively by `@sentry/aws-serverless@9.x`.
+- **Fix:** upgrade `@sentry/aws-serverless` to `^10.65.0` (major bump — see Breaking Changes section below).
+- 18 affected nodes; all are downstream of the same root cause package.
 
-> **Recommendation:** The vulnerability is moderate (network-reachable DoS via crafted Baggage headers, no data exposure). Not critical for the Lambda's use case (it only receives `POST /feedback` from the frontend, not arbitrary external traffic), but should be resolved before the next draft season. Pair the upgrade with `@octokit/rest` v22 work below.
+_No HIGH or CRITICAL advisories._
 
-#### Major version bumps available (note — review breaking changes)
+#### Major Version Bumps
 
-| Package | Installed (range) | Latest in range | Latest available | Breaking change risk |
-|---|---|---|---|---|
-| `@sentry/aws-serverless` | `^9.0.0` (9.47.1) | 9.47.1 | 10.63.0 | High — v10 is a major Sentry SDK rewrite; also required to fix the moderate advisory above |
-| `@octokit/rest` | `^21.0.0` (21.1.1) | 21.1.1 | 22.0.1 | Medium — review Octokit v22 changelog for API changes to `issues.create` |
+| Package | Installed | Latest | Risk |
+|---|---|---|---|
+| `@sentry/aws-serverless` | 9.47.1 | **10.65.0** | Major bump required to resolve the moderate OpenTelemetry advisory above. Review Sentry v10 migration guide before upgrading; API surface changes are expected. |
+| `@octokit/rest` | 21.1.1 | **22.0.1** | Major bump, no known security issue. Review Octokit v22 changelog for any breaking changes to `issues.create` (the only method used in `lambda/feedback.js`). |
 
-#### Minor/patch updates (low priority — batch in monthly sweep)
+#### Minor / Patch Updates (low priority — batch in monthly sweep)
 
-| Package | Installed (range) | Wanted | Latest | Notes |
-|---|---|---|---|---|
-| `@aws-sdk/client-secrets-manager` | `^3.750.0` | 3.1079.0 | 3.1079.0 | AWS SDK v3 minor; backward-compatible. Large jump in patch numbers is normal for AWS SDK's weekly releases. |
+| Package | Installed | Wanted | Latest |
+|---|---|---|---|
+| `@aws-sdk/client-secrets-manager` | < 3.1085.0 | 3.1085.0 | 3.1085.0 |
 
 ---
 
@@ -50,7 +50,9 @@
 
 | Severity | Count | Action |
 |---|---|---|
-| Critical/High security | 0 | — |
-| Moderate security | 18 (all same root cause) | Fix via `@sentry/aws-serverless` v10 major bump; not urgent for this use case |
-| Major version bumps | 2 | Review before next draft season (`@sentry/aws-serverless`, `@octokit/rest`) |
-| Minor/patch updates | 3 | Batch in monthly sweep |
+| CRITICAL / HIGH security | 0 | — |
+| Moderate security | 1 advisory (18 affected nodes) | Upgrade `@sentry/aws-serverless` 9→10 in `lambda/`; validates fix for GHSA-8988-4f7v-96qf |
+| Major version available | 2 | `@sentry/aws-serverless` (fix-linked), `@octokit/rest` (low urgency) |
+| Minor / patch available | 2 | Batch in monthly sweep |
+
+The moderate OpenTelemetry advisory is the only security finding. The fix requires a major version upgrade to `@sentry/aws-serverless`. The Lambda is invoked only on `POST /feedback` (not on the hot draft path), but the vulnerability is network-reachable so the upgrade is recommended before draft day.
