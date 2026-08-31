@@ -39,11 +39,19 @@ function detectSeasonArchetypes(picksByRound) {
   }
 
   let nextRbRound = null;
-  for (let i = 2; i <= 15; i++) if (r[i] === 'RB') { nextRbRound = i; break; }
+  for (let i = 2; i <= 15; i++)
+    if (r[i] === 'RB') {
+      nextRbRound = i;
+      break;
+    }
   if (r[1] === 'RB' && (nextRbRound === null || nextRbRound >= 6)) tags.push('HeroRB');
 
   let anyEarlyRb = false;
-  for (let i = 1; i <= 5; i++) if (r[i] === 'RB') { anyEarlyRb = true; break; }
+  for (let i = 1; i <= 5; i++)
+    if (r[i] === 'RB') {
+      anyEarlyRb = true;
+      break;
+    }
   if (!anyEarlyRb) tags.push('ZeroRB');
 
   const earlyRbCount = [r[1], r[2], r[3]].filter((p) => p === 'RB').length;
@@ -58,7 +66,7 @@ async function processSleeperLeague(leagueId) {
   const [league, users, drafts] = await Promise.all([
     get(`/league/${leagueId}`),
     get(`/league/${leagueId}/users`),
-    get(`/league/${leagueId}/drafts`)
+    get(`/league/${leagueId}/drafts`),
   ]);
   if (!drafts.length) return null;
   const draft = drafts[0];
@@ -66,12 +74,12 @@ async function processSleeperLeague(leagueId) {
 
   const [picks, draftMeta] = await Promise.all([
     get(`/draft/${draft.draft_id}/picks`),
-    get(`/draft/${draft.draft_id}`)
+    get(`/draft/${draft.draft_id}`),
   ]);
 
   const userById = Object.fromEntries(users.map((u) => [u.user_id, u.display_name]));
   const slotToUserId = Object.fromEntries(
-    Object.entries(draftMeta.draft_order || {}).map(([uid, slot]) => [slot, uid])
+    Object.entries(draftMeta.draft_order || {}).map(([uid, slot]) => [slot, uid]),
   );
   const slotToOwner = {};
   for (const [slot, userId] of Object.entries(slotToUserId)) {
@@ -97,7 +105,7 @@ async function processSleeperLeague(leagueId) {
     seasonProfiles[owner] = {
       season: league.season,
       archetypes: detectSeasonArchetypes(positionsByRound),
-      picks: ownerPicks
+      picks: ownerPicks,
     };
   }
 
@@ -108,7 +116,7 @@ async function processSleeperLeague(leagueId) {
     previousLeagueId: league.previous_league_id,
     seasonProfiles,
     slotToOwner,
-    source: 'sleeper'
+    source: 'sleeper',
   };
 }
 
@@ -124,14 +132,17 @@ const OCCASIONAL_AUTODRAFT_OWNERS = new Set(['Bruno2328', 'SethYo', 'cfadden']);
 //   3. Manual team overrides — retired stars Sleeper marks team:null.
 async function buildPlayerInfoMap() {
   const trimmed = JSON.parse(
-    await readFile(join(__dirname, '..', 'public', 'data', 'players.json'), 'utf8')
+    await readFile(join(__dirname, '..', 'public', 'data', 'players.json'), 'utf8'),
   );
   let overrides = {};
   try {
     overrides = JSON.parse(
-      await readFile(join(__dirname, 'yahoo-history', 'team-overrides.json'), 'utf8')
+      await readFile(join(__dirname, 'yahoo-history', 'team-overrides.json'), 'utf8'),
     );
-  } catch {}
+  } catch {
+    // Optional file. Absent is normal; malformed is not — say which.
+    console.warn('[owner-profiles] no team-overrides.json; continuing without manual overrides');
+  }
 
   // Map name → { team, rookieYear }
   const map = new Map();
@@ -157,7 +168,12 @@ async function buildPlayerInfoMap() {
       if (rookieYear) fields.rookieYear = rookieYear;
       if (Object.keys(fields).length) set(key, fields);
     }
-  } catch {}
+  } catch (err) {
+    // Don't fail the build, but don't hide it either — without this fetch the
+    // profiles silently lose team + rookieYear for every player.
+    console.warn(`[owner-profiles] Sleeper /players/nfl fetch failed: ${err.message}`);
+    console.warn('[owner-profiles] team/rookieYear enrichment will be incomplete');
+  }
   for (const [name, team] of Object.entries(overrides)) {
     if (name.startsWith('_') || typeof team !== 'string') continue;
     const key = name.toLowerCase().replace(/[^a-z]/g, '');
@@ -185,7 +201,12 @@ async function processYahoo() {
       if (handle === 'AUTODRAFT') continue; // yahoo no-show filler, not the owner's strategy
       if (typeof handle !== 'string' || handle.startsWith('_')) continue; // metadata keys
       if (!byOwner[handle]) byOwner[handle] = [];
-      byOwner[handle].push({ round: p.round, pick: p.pickNo, pos: p.position, player_name: p.player });
+      byOwner[handle].push({
+        round: p.round,
+        pick: p.pickNo,
+        pos: p.position,
+        player_name: p.player,
+      });
     }
     const seasonProfiles = {};
     for (const [owner, ownerPicks] of Object.entries(byOwner)) {
@@ -194,25 +215,86 @@ async function processYahoo() {
       seasonProfiles[owner] = {
         season,
         archetypes: detectSeasonArchetypes(positionsByRound),
-        picks: ownerPicks
+        picks: ownerPicks,
       };
     }
     seasons.push({
       season,
-      leagueName: 'Plowden\'s Peeps (Yahoo)',
+      leagueName: "Plowden's Peeps (Yahoo)",
       seasonProfiles,
       teamCount: yearData.teamCount,
-      source: 'yahoo'
+      source: 'yahoo',
     });
     console.log(`  ${season} (Yahoo) — ${Object.keys(seasonProfiles).length} owners`);
   }
   return seasons;
 }
 
+// --- Current-season draft order ---
+
+/**
+ * Seating chart for the season we are about to draft.
+ *
+ * This exists because processSleeperLeague() deliberately skips any draft that
+ * isn't `complete` — correct for archetype mining, wrong for seating. Without
+ * this the app inherited the most recent *completed* season's slotToOwner and
+ * modelled every opponent in the wrong chair. Sleeper reshuffles draft_order
+ * between seasons, so those maps agree only by coincidence.
+ *
+ * Returns null (with a warning) rather than throwing: a missing seating chart
+ * should degrade opponent modelling, not fail the whole build.
+ */
+async function fetchCurrentDraftOrder(leagueId) {
+  try {
+    const [league, users, drafts] = await Promise.all([
+      get(`/league/${leagueId}`),
+      get(`/league/${leagueId}/users`),
+      get(`/league/${leagueId}/drafts`),
+    ]);
+    if (!drafts.length) {
+      console.warn('  current league has no draft yet — seating chart unavailable');
+      return null;
+    }
+    const draft = drafts[0];
+    const order = draft.draft_order || {};
+    if (!Object.keys(order).length) {
+      console.warn(
+        `  draft ${draft.draft_id} has no draft_order set yet (status: ${draft.status})`,
+      );
+      return null;
+    }
+    const userById = Object.fromEntries(users.map((u) => [u.user_id, u.display_name]));
+    const slotToOwner = {};
+    for (const [userId, slot] of Object.entries(order)) {
+      slotToOwner[String(slot)] = userById[userId] || `slot${slot}`;
+    }
+    return {
+      season: league.season,
+      draftId: draft.draft_id,
+      draftStatus: draft.status,
+      rounds: draft.settings?.rounds ?? null,
+      startTime: draft.start_time ? new Date(draft.start_time).toISOString() : null,
+      slotToOwner,
+    };
+  } catch (err) {
+    console.warn(`  could not read current draft order: ${err.message}`);
+    return null;
+  }
+}
+
 // --- Main ---
 
 console.log('Walking Sleeper league chain...');
 const cfg = JSON.parse(await readFile(CFG_PATH, 'utf8'));
+
+console.log('Reading current-season draft order...');
+const currentDraft = await fetchCurrentDraftOrder(cfg.sleeper_league_id);
+if (currentDraft) {
+  console.log(
+    `  ${currentDraft.season} draft ${currentDraft.draftId} (${currentDraft.draftStatus}) — ${Object.keys(currentDraft.slotToOwner).length} seats`,
+  );
+}
+
 let leagueId = cfg.sleeper_league_id;
 const completed = [];
 const seen = new Set();
@@ -221,7 +303,9 @@ while (leagueId && !seen.has(leagueId)) {
   try {
     const result = await processSleeperLeague(leagueId);
     if (result) {
-      console.log(`  ${result.season} (Sleeper) — ${Object.keys(result.seasonProfiles).length} owners`);
+      console.log(
+        `  ${result.season} (Sleeper) — ${Object.keys(result.seasonProfiles).length} owners`,
+      );
       completed.push(result);
       leagueId = result.previousLeagueId;
     } else {
@@ -248,7 +332,14 @@ if (allSeasons.length === 0) {
 const owners = {};
 for (const season of allSeasons) {
   for (const [name, prof] of Object.entries(season.seasonProfiles)) {
-    if (!owners[name]) owners[name] = { seasons: [], archetypeHits: {}, lastSeen: null, picks: {}, sources: new Set() };
+    if (!owners[name])
+      owners[name] = {
+        seasons: [],
+        archetypeHits: {},
+        lastSeen: null,
+        picks: {},
+        sources: new Set(),
+      };
     owners[name].seasons.push(season.season);
     owners[name].sources.add(season.source);
     for (const arch of prof.archetypes) {
@@ -295,7 +386,7 @@ for (const season of allSeasons) {
         teamCounts: {},
         playerCounts: {}, // for loyalty
         total: 0,
-        rookieCount: 0
+        rookieCount: 0,
       };
     }
     const stats = ownerStats[name];
@@ -352,7 +443,7 @@ for (const [name, owner] of Object.entries(owners)) {
     totalPicks: stats.total,
     rate: +ownerRookieRate.toFixed(3),
     leagueRate: +leagueRookieRate.toFixed(3),
-    ratio: leagueRookieRate > 0 ? +(ownerRookieRate / leagueRookieRate).toFixed(2) : 0
+    ratio: leagueRookieRate > 0 ? +(ownerRookieRate / leagueRookieRate).toFixed(2) : 0,
   };
 
   // Loyalty: players the owner drafted in 2+ different seasons.
@@ -372,18 +463,39 @@ for (const [name, owner] of Object.entries(owners)) {
   }
 }
 
-// Slot→owner map from the most recent Sleeper season (for mock-harness defaults).
 const latestSleeperSeason = completed.sort((a, b) => b.season.localeCompare(a.season))[0];
-const slotToOwner = latestSleeperSeason?.slotToOwner || {};
+
+// Seating chart. Prefer the season we're actually drafting; only fall back to
+// last year's chairs if Sleeper hasn't published an order yet, and say so
+// loudly when we do — a stale chart points every opponent model at the wrong
+// person, which is worse than having no opponent model at all.
+const slotToOwner = currentDraft?.slotToOwner ?? latestSleeperSeason?.slotToOwner ?? {};
+const slotSource = currentDraft ? 'current-season draft' : 'previous completed season (STALE)';
+
+if (!currentDraft && latestSleeperSeason) {
+  console.warn(
+    `\n⚠ Seating chart falls back to ${latestSleeperSeason.season}. Sleeper reshuffles draft_order\n` +
+      '  between seasons, so opponent predictions are probably pointed at the wrong chairs.\n' +
+      "  Re-run once the commissioner sets this season's order.",
+  );
+}
 
 const out = {
   generated_at: new Date().toISOString(),
   seasons: allSeasons.map((s) => s.season).sort(),
   latestSeason: latestSleeperSeason?.season,
+  draftSeason: currentDraft?.season ?? null,
+  draftStatus: currentDraft?.draftStatus ?? null,
+  draftStartTime: currentDraft?.startTime ?? null,
+  slotSource,
   slotToOwner,
-  owners
+  owners,
 };
 
 await writeFile(OUT_PATH, JSON.stringify(out, null, 2));
 console.log(`\nWrote ${OUT_PATH}`);
 console.log(`Owners: ${Object.keys(owners).length} · Seasons: ${out.seasons.length}`);
+console.log(`Seating chart: ${slotSource}`);
+for (const [slot, owner] of Object.entries(slotToOwner).sort((a, b) => a[0] - b[0])) {
+  console.log(`  ${String(slot).padStart(2)}. ${owner}`);
+}

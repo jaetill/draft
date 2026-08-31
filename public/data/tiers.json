@@ -1,0 +1,3537 @@
+{
+  "generatedAt": "2026-08-28T03:03:50.422Z",
+  "sources": {
+    "sleeper-adp": "live draft-room adp_ppr, scraped 2026-08-27",
+    "ffc-adp": "fantasyfootballcalculator.com, 7986 PPR drafts, 2026-08-20..27",
+    "boris-chen-ecr": "Boris Chen consensus tiers (fftiers)"
+  },
+  "tierCounts": {
+    "RB": {
+      "1": 2,
+      "2": 4,
+      "3": 6,
+      "4": 5,
+      "5": 4,
+      "6": 4,
+      "7": 6,
+      "8": 22
+    },
+    "WR": {
+      "1": 2,
+      "2": 2,
+      "3": 2,
+      "4": 2,
+      "5": 5,
+      "6": 7,
+      "7": 6,
+      "8": 39
+    },
+    "TE": {
+      "1": 2,
+      "2": 2,
+      "3": 4,
+      "4": 6,
+      "5": 5,
+      "6": 1
+    },
+    "QB": {
+      "1": 1,
+      "2": 3,
+      "3": 4,
+      "4": 6,
+      "5": 2,
+      "6": 5
+    },
+    "DEF": {
+      "1": 3,
+      "2": 2,
+      "3": 2,
+      "4": 3
+    }
+  },
+  "players": [
+    {
+      "id": "9221",
+      "name": "Jahmyr Gibbs",
+      "position": "RB",
+      "team": "DET",
+      "bye": 6,
+      "consensus": 1.8,
+      "spread": 1.3,
+      "uncertainty": 1.4,
+      "ranks": {
+        "sleeper": 1.3,
+        "ffc": 1.5,
+        "ecr": 2.63
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 1
+    },
+    {
+      "id": "9509",
+      "name": "Bijan Robinson",
+      "position": "RB",
+      "team": "ATL",
+      "bye": 11,
+      "consensus": 2.8,
+      "spread": 1.7,
+      "uncertainty": 1.5,
+      "ranks": {
+        "sleeper": 2.2,
+        "ffc": 2.2,
+        "ecr": 3.92
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 1
+    },
+    {
+      "id": "7564",
+      "name": "Ja'Marr Chase",
+      "position": "WR",
+      "team": "CIN",
+      "bye": 6,
+      "consensus": 3,
+      "spread": 2.3,
+      "uncertainty": 0.9,
+      "ranks": {
+        "sleeper": 3.6,
+        "ffc": 3.8,
+        "ecr": 1.55
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 1
+    },
+    {
+      "id": "9493",
+      "name": "Puka Nacua",
+      "position": "WR",
+      "team": "LAR",
+      "bye": 11,
+      "consensus": 3.5,
+      "spread": 1,
+      "uncertainty": 1.4,
+      "ranks": {
+        "sleeper": 4.1,
+        "ffc": 3.1,
+        "ecr": 3.36
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 1
+    },
+    {
+      "id": "9488",
+      "name": "Jaxon Smith-Njigba",
+      "position": "WR",
+      "team": "SEA",
+      "bye": 11,
+      "consensus": 5.6,
+      "spread": 1.9,
+      "uncertainty": 1.4,
+      "ranks": {
+        "sleeper": 6.6,
+        "ffc": 5.5,
+        "ecr": 4.67
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 2
+    },
+    {
+      "id": "7547",
+      "name": "Amon-Ra St. Brown",
+      "position": "WR",
+      "team": "DET",
+      "bye": 6,
+      "consensus": 6.9,
+      "spread": 3.5,
+      "uncertainty": 1.2,
+      "ranks": {
+        "sleeper": 8.9,
+        "ffc": 6.4,
+        "ecr": 5.45
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 2
+    },
+    {
+      "id": "4034",
+      "name": "Christian McCaffrey",
+      "position": "RB",
+      "team": "SF",
+      "bye": 8,
+      "consensus": 7.2,
+      "spread": 4.6,
+      "uncertainty": 4.9,
+      "ranks": {
+        "sleeper": 5.2,
+        "ffc": 6.6,
+        "ecr": 9.78
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 2
+    },
+    {
+      "id": "6813",
+      "name": "Jonathan Taylor",
+      "position": "RB",
+      "team": "IND",
+      "bye": 13,
+      "consensus": 8.8,
+      "spread": 4.5,
+      "uncertainty": 5.2,
+      "ranks": {
+        "sleeper": 7.2,
+        "ffc": 7.5,
+        "ecr": 11.68
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 2
+    },
+    {
+      "id": "6786",
+      "name": "CeeDee Lamb",
+      "position": "WR",
+      "team": "DAL",
+      "bye": 14,
+      "consensus": 9.3,
+      "spread": 2.5,
+      "uncertainty": 2,
+      "ranks": {
+        "sleeper": 8.2,
+        "ffc": 10.7,
+        "ecr": 8.9
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 3
+    },
+    {
+      "id": "6794",
+      "name": "Justin Jefferson",
+      "position": "WR",
+      "team": "MIN",
+      "bye": 6,
+      "consensus": 10.7,
+      "spread": 2.3,
+      "uncertainty": 2.6,
+      "ranks": {
+        "sleeper": 11,
+        "ffc": 11.7,
+        "ecr": 9.36
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 3
+    },
+    {
+      "id": "8138",
+      "name": "James Cook",
+      "position": "RB",
+      "team": "BUF",
+      "bye": 7,
+      "consensus": 13.3,
+      "spread": 5.8,
+      "uncertainty": 6.8,
+      "ranks": {
+        "sleeper": 10.8,
+        "ffc": 12.6,
+        "ecr": 16.58
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 2
+    },
+    {
+      "id": "8112",
+      "name": "Drake London",
+      "position": "WR",
+      "team": "ATL",
+      "bye": 11,
+      "consensus": 13.4,
+      "spread": 7.1,
+      "uncertainty": 3.5,
+      "ranks": {
+        "sleeper": 17.3,
+        "ffc": 10.2,
+        "ecr": 12.59
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 4
+    },
+    {
+      "id": "9226",
+      "name": "De'Von Achane",
+      "position": "RB",
+      "team": "MIA",
+      "bye": 6,
+      "consensus": 14.8,
+      "spread": 10.4,
+      "uncertainty": 6.8,
+      "ranks": {
+        "sleeper": 12.8,
+        "ffc": 10.6,
+        "ecr": 21
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 2
+    },
+    {
+      "id": "9224",
+      "name": "Chase Brown",
+      "position": "RB",
+      "team": "CIN",
+      "bye": 6,
+      "consensus": 15.9,
+      "spread": 4.7,
+      "uncertainty": 6.1,
+      "ranks": {
+        "sleeper": 16.1,
+        "ffc": 13.4,
+        "ecr": 18.06
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 3
+    },
+    {
+      "id": "5859",
+      "name": "A.J. Brown",
+      "position": "WR",
+      "team": "NE",
+      "bye": 11,
+      "consensus": 16.3,
+      "spread": 3.7,
+      "uncertainty": 4.7,
+      "ranks": {
+        "sleeper": 17.5,
+        "ffc": 17.6,
+        "ecr": 13.89
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 4
+    },
+    {
+      "id": "4866",
+      "name": "Saquon Barkley",
+      "position": "RB",
+      "team": "PHI",
+      "bye": 10,
+      "consensus": 19,
+      "spread": 10.9,
+      "uncertainty": 6.7,
+      "ranks": {
+        "sleeper": 13.4,
+        "ffc": 19.3,
+        "ecr": 24.27
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 3
+    },
+    {
+      "id": "12527",
+      "name": "Ashton Jeanty",
+      "position": "RB",
+      "team": "LV",
+      "bye": 13,
+      "consensus": 20.1,
+      "spread": 14.4,
+      "uncertainty": 11,
+      "ranks": {
+        "sleeper": 14.1,
+        "ffc": 17.6,
+        "ecr": 28.51
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 3
+    },
+    {
+      "id": "7569",
+      "name": "Nico Collins",
+      "position": "WR",
+      "team": "HOU",
+      "bye": 8,
+      "consensus": 20.6,
+      "spread": 9.5,
+      "uncertainty": 3.5,
+      "ranks": {
+        "sleeper": 25.4,
+        "ffc": 20.4,
+        "ecr": 15.91
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 5
+    },
+    {
+      "id": "12507",
+      "name": "Omarion Hampton",
+      "position": "RB",
+      "team": "LAC",
+      "bye": 7,
+      "consensus": 21.4,
+      "spread": 10.2,
+      "uncertainty": 7.3,
+      "ranks": {
+        "sleeper": 15.4,
+        "ffc": 23.3,
+        "ecr": 25.58
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 3
+    },
+    {
+      "id": "10229",
+      "name": "Rashee Rice",
+      "position": "WR",
+      "team": "KC",
+      "bye": 5,
+      "consensus": 21.8,
+      "spread": 12,
+      "uncertainty": 8.8,
+      "ranks": {
+        "sleeper": 26.9,
+        "ffc": 14.9,
+        "ecr": 23.67
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 5
+    },
+    {
+      "id": "8137",
+      "name": "George Pickens",
+      "position": "WR",
+      "team": "DAL",
+      "bye": 14,
+      "consensus": 21.9,
+      "spread": 4.5,
+      "uncertainty": 5.7,
+      "ranks": {
+        "sleeper": 24.7,
+        "ffc": 20.7,
+        "ecr": 20.18
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 5
+    },
+    {
+      "id": "8151",
+      "name": "Kenneth Walker",
+      "position": "RB",
+      "team": "KC",
+      "bye": 5,
+      "consensus": 22.7,
+      "spread": 7.8,
+      "uncertainty": 9.6,
+      "ranks": {
+        "sleeper": 19.3,
+        "ffc": 21.6,
+        "ecr": 27.14
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 3
+    },
+    {
+      "id": "8144",
+      "name": "Chris Olave",
+      "position": "WR",
+      "team": "NO",
+      "bye": 8,
+      "consensus": 23.1,
+      "spread": 12,
+      "uncertainty": 6.1,
+      "ranks": {
+        "sleeper": 30.8,
+        "ffc": 19.8,
+        "ecr": 18.81
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 5
+    },
+    {
+      "id": "8130",
+      "name": "Trey McBride",
+      "position": "TE",
+      "team": "ARI",
+      "bye": 14,
+      "consensus": 23.7,
+      "spread": 7.9,
+      "uncertainty": 4.4,
+      "ranks": {
+        "sleeper": 21,
+        "ffc": 28.9,
+        "ecr": 21.26
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 1
+    },
+    {
+      "id": "3198",
+      "name": "Derrick Henry",
+      "position": "RB",
+      "team": "BAL",
+      "bye": 13,
+      "consensus": 25.2,
+      "spread": 19.8,
+      "uncertainty": 8.7,
+      "ranks": {
+        "sleeper": 20.9,
+        "ffc": 17.4,
+        "ecr": 37.19
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 3
+    },
+    {
+      "id": "11604",
+      "name": "Brock Bowers",
+      "position": "TE",
+      "team": "LV",
+      "bye": 13,
+      "consensus": 25.4,
+      "spread": 16.9,
+      "uncertainty": 5,
+      "ranks": {
+        "sleeper": 23,
+        "ffc": 35,
+        "ecr": 18.09
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 1
+    },
+    {
+      "id": "11632",
+      "name": "Malik Nabers",
+      "position": "WR",
+      "team": "NYG",
+      "bye": 8,
+      "consensus": 26.5,
+      "spread": 3.8,
+      "uncertainty": 9.1,
+      "ranks": {
+        "sleeper": 28.2,
+        "ffc": 26.8,
+        "ecr": 24.41
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 5
+    },
+    {
+      "id": "4984",
+      "name": "Josh Allen",
+      "position": "QB",
+      "team": "BUF",
+      "bye": 7,
+      "consensus": 27.2,
+      "spread": 11.6,
+      "uncertainty": 2.7,
+      "ranks": {
+        "sleeper": 22.1,
+        "ffc": 33.7,
+        "ecr": 25.88
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 1
+    },
+    {
+      "id": "7525",
+      "name": "DeVonta Smith",
+      "position": "WR",
+      "team": "PHI",
+      "bye": 10,
+      "consensus": 29.6,
+      "spread": 11.4,
+      "uncertainty": 7.1,
+      "ranks": {
+        "sleeper": 35.3,
+        "ffc": 29.5,
+        "ecr": 23.89
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 6
+    },
+    {
+      "id": "13287",
+      "name": "Jeremiyah Love",
+      "position": "RB",
+      "team": "ARI",
+      "bye": 14,
+      "consensus": 31.9,
+      "spread": 14.1,
+      "uncertainty": 8.2,
+      "ranks": {
+        "sleeper": 26.9,
+        "ffc": 27.8,
+        "ecr": 40.96
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 4
+    },
+    {
+      "id": "9997",
+      "name": "Zay Flowers",
+      "position": "WR",
+      "team": "BAL",
+      "bye": 13,
+      "consensus": 32.7,
+      "spread": 16.1,
+      "uncertainty": 7.9,
+      "ranks": {
+        "sleeper": 42,
+        "ffc": 25.9,
+        "ecr": 30.14
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 6
+    },
+    {
+      "id": "8146",
+      "name": "Garrett Wilson",
+      "position": "WR",
+      "team": "NYJ",
+      "bye": 13,
+      "consensus": 33.4,
+      "spread": 19,
+      "uncertainty": 7.6,
+      "ranks": {
+        "sleeper": 44.6,
+        "ffc": 25.6,
+        "ecr": 30.03
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 6
+    },
+    {
+      "id": "8150",
+      "name": "Kyren Williams",
+      "position": "RB",
+      "team": "LAR",
+      "bye": 11,
+      "consensus": 34.3,
+      "spread": 12.4,
+      "uncertainty": 6.9,
+      "ranks": {
+        "sleeper": 29.2,
+        "ffc": 32,
+        "ecr": 41.6
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 4
+    },
+    {
+      "id": "12526",
+      "name": "Tetairoa McMillan",
+      "position": "WR",
+      "team": "CAR",
+      "bye": 5,
+      "consensus": 34.7,
+      "spread": 6,
+      "uncertainty": 6.6,
+      "ranks": {
+        "sleeper": 37.5,
+        "ffc": 31.5,
+        "ecr": 35.08
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 6
+    },
+    {
+      "id": "6801",
+      "name": "Tee Higgins",
+      "position": "WR",
+      "team": "CIN",
+      "bye": 6,
+      "consensus": 35.6,
+      "spread": 2.6,
+      "uncertainty": 6.7,
+      "ranks": {
+        "sleeper": 34,
+        "ffc": 36.6,
+        "ecr": 36.34
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 6
+    },
+    {
+      "id": "5850",
+      "name": "Josh Jacobs",
+      "position": "RB",
+      "team": "GB",
+      "bye": 11,
+      "consensus": 35.7,
+      "spread": 13.6,
+      "uncertainty": 7.1,
+      "ranks": {
+        "sleeper": 31.4,
+        "ffc": 31.1,
+        "ecr": 44.73
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 4
+    },
+    {
+      "id": "8155",
+      "name": "Breece Hall",
+      "position": "RB",
+      "team": "NYJ",
+      "bye": 13,
+      "consensus": 36.2,
+      "spread": 6,
+      "uncertainty": 6.7,
+      "ranks": {
+        "sleeper": 33.9,
+        "ffc": 34.7,
+        "ecr": 39.93
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 4
+    },
+    {
+      "id": "11635",
+      "name": "Ladd McConkey",
+      "position": "WR",
+      "team": "LAC",
+      "bye": 7,
+      "consensus": 37.4,
+      "spread": 2.1,
+      "uncertainty": 6.9,
+      "ranks": {
+        "sleeper": 38.3,
+        "ffc": 37.7,
+        "ecr": 36.18
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 6
+    },
+    {
+      "id": "12514",
+      "name": "Emeka Egbuka",
+      "position": "WR",
+      "team": "TB",
+      "bye": 10,
+      "consensus": 38.2,
+      "spread": 5.4,
+      "uncertainty": 7.4,
+      "ranks": {
+        "sleeper": 39.7,
+        "ffc": 34.8,
+        "ecr": 40.23
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 6
+    },
+    {
+      "id": "7588",
+      "name": "Javonte Williams",
+      "position": "RB",
+      "team": "DAL",
+      "bye": 14,
+      "consensus": 39.2,
+      "spread": 9.5,
+      "uncertainty": 6.2,
+      "ranks": {
+        "sleeper": 35.5,
+        "ffc": 37,
+        "ecr": 44.95
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 4
+    },
+    {
+      "id": "4881",
+      "name": "Lamar Jackson",
+      "position": "QB",
+      "team": "BAL",
+      "bye": 13,
+      "consensus": 40.4,
+      "spread": 24.9,
+      "uncertainty": 8.3,
+      "ranks": {
+        "sleeper": 32.8,
+        "ffc": 56.6,
+        "ecr": 31.72
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 2
+    },
+    {
+      "id": "7526",
+      "name": "Jaylen Waddle",
+      "position": "WR",
+      "team": "DEN",
+      "bye": 10,
+      "consensus": 42.6,
+      "spread": 10.7,
+      "uncertainty": 7.5,
+      "ranks": {
+        "sleeper": 46.6,
+        "ffc": 45.2,
+        "ecr": 35.9
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 7
+    },
+    {
+      "id": "7543",
+      "name": "Travis Etienne",
+      "position": "RB",
+      "team": "NO",
+      "bye": 8,
+      "consensus": 43.9,
+      "spread": 9.4,
+      "uncertainty": 7,
+      "ranks": {
+        "sleeper": 44.9,
+        "ffc": 38.7,
+        "ecr": 48.1
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 5
+    },
+    {
+      "id": "12517",
+      "name": "Colston Loveland",
+      "position": "TE",
+      "team": "CHI",
+      "bye": 10,
+      "consensus": 45.1,
+      "spread": 18.5,
+      "uncertainty": 13.2,
+      "ranks": {
+        "sleeper": 40.9,
+        "ffc": 56.5,
+        "ecr": 37.98
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 2
+    },
+    {
+      "id": "11564",
+      "name": "Drake Maye",
+      "position": "QB",
+      "team": "NE",
+      "bye": 11,
+      "consensus": 45.9,
+      "spread": 13,
+      "uncertainty": 13.7,
+      "ranks": {
+        "sleeper": 48.3,
+        "ffc": 51.2,
+        "ecr": 38.19
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 2
+    },
+    {
+      "id": "12481",
+      "name": "Cam Skattebo",
+      "position": "RB",
+      "team": "NYG",
+      "bye": 8,
+      "consensus": 46.6,
+      "spread": 18.3,
+      "uncertainty": 8.6,
+      "ranks": {
+        "sleeper": 43.8,
+        "ffc": 38.8,
+        "ecr": 57.08
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 5
+    },
+    {
+      "id": "2133",
+      "name": "Davante Adams",
+      "position": "WR",
+      "team": "LAR",
+      "bye": 11,
+      "consensus": 47.4,
+      "spread": 8.5,
+      "uncertainty": 7.6,
+      "ranks": {
+        "sleeper": 50.5,
+        "ffc": 42,
+        "ecr": 49.79
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 7
+    },
+    {
+      "id": "11584",
+      "name": "Bucky Irving",
+      "position": "RB",
+      "team": "TB",
+      "bye": 10,
+      "consensus": 48.6,
+      "spread": 17.5,
+      "uncertainty": 8.6,
+      "ranks": {
+        "sleeper": 41.6,
+        "ffc": 45.2,
+        "ecr": 59.1
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 5
+    },
+    {
+      "id": "5927",
+      "name": "Terry McLaurin",
+      "position": "WR",
+      "team": "WAS",
+      "bye": 7,
+      "consensus": 50,
+      "spread": 9.5,
+      "uncertainty": 5.8,
+      "ranks": {
+        "sleeper": 56.1,
+        "ffc": 47.4,
+        "ecr": 46.59
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 7
+    },
+    {
+      "id": "6770",
+      "name": "Joe Burrow",
+      "position": "QB",
+      "team": "CIN",
+      "bye": 6,
+      "consensus": 51.9,
+      "spread": 10.3,
+      "uncertainty": 12.6,
+      "ranks": {
+        "sleeper": 51.6,
+        "ffc": 57.2,
+        "ecr": 46.91
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 2
+    },
+    {
+      "id": "6790",
+      "name": "D'Andre Swift",
+      "position": "RB",
+      "team": "CHI",
+      "bye": 10,
+      "consensus": 52.2,
+      "spread": 10,
+      "uncertainty": 7.9,
+      "ranks": {
+        "sleeper": 55.1,
+        "ffc": 45.8,
+        "ecr": 55.82
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 5
+    },
+    {
+      "id": "12519",
+      "name": "Luther Burden",
+      "position": "WR",
+      "team": "CHI",
+      "bye": 10,
+      "consensus": 52.3,
+      "spread": 8.3,
+      "uncertainty": 8.9,
+      "ranks": {
+        "sleeper": 52.7,
+        "ffc": 56.2,
+        "ecr": 47.9
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 7
+    },
+    {
+      "id": "4983",
+      "name": "DJ Moore",
+      "position": "WR",
+      "team": "BUF",
+      "bye": 7,
+      "consensus": 52.3,
+      "spread": 9.3,
+      "uncertainty": 13,
+      "ranks": {
+        "sleeper": 57.1,
+        "ffc": 47.8,
+        "ecr": 51.91
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 7
+    },
+    {
+      "id": "8148",
+      "name": "Jameson Williams",
+      "position": "WR",
+      "team": "DET",
+      "bye": 6,
+      "consensus": 52.7,
+      "spread": 14,
+      "uncertainty": 9.6,
+      "ranks": {
+        "sleeper": 58.5,
+        "ffc": 44.5,
+        "ecr": 55.17
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 7
+    },
+    {
+      "id": "12512",
+      "name": "Quinshon Judkins",
+      "position": "RB",
+      "team": "CLE",
+      "bye": 11,
+      "consensus": 55.3,
+      "spread": 10.6,
+      "uncertainty": 8.8,
+      "ranks": {
+        "sleeper": 53.6,
+        "ffc": 50.8,
+        "ecr": 61.38
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 6
+    },
+    {
+      "id": "12518",
+      "name": "Tyler Warren",
+      "position": "TE",
+      "team": "IND",
+      "bye": 13,
+      "consensus": 55.5,
+      "spread": 18,
+      "uncertainty": 10.8,
+      "ranks": {
+        "sleeper": 47.2,
+        "ffc": 65.2,
+        "ecr": 54.21
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 2
+    },
+    {
+      "id": "5892",
+      "name": "David Montgomery",
+      "position": "RB",
+      "team": "HOU",
+      "bye": 8,
+      "consensus": 56.2,
+      "spread": 11.8,
+      "uncertainty": 8.5,
+      "ranks": {
+        "sleeper": 49.3,
+        "ffc": 58.2,
+        "ecr": 61.08
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 6
+    },
+    {
+      "id": "2216",
+      "name": "Mike Evans",
+      "position": "WR",
+      "team": "SF",
+      "bye": 8,
+      "consensus": 57,
+      "spread": 6.9,
+      "uncertainty": 10.2,
+      "ranks": {
+        "sleeper": 61.4,
+        "ffc": 54.5,
+        "ecr": 54.95
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "11620",
+      "name": "Rome Odunze",
+      "position": "WR",
+      "team": "CHI",
+      "bye": 10,
+      "consensus": 58.6,
+      "spread": 11.2,
+      "uncertainty": 8.8,
+      "ranks": {
+        "sleeper": 65.1,
+        "ffc": 53.9,
+        "ecr": 56.85
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "12490",
+      "name": "Bhayshul Tuten",
+      "position": "RB",
+      "team": "JAX",
+      "bye": 7,
+      "consensus": 60.9,
+      "spread": 14.7,
+      "uncertainty": 10.3,
+      "ranks": {
+        "sleeper": 62.2,
+        "ffc": 52.9,
+        "ecr": 67.57
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 6
+    },
+    {
+      "id": "12529",
+      "name": "TreVeyon Henderson",
+      "position": "RB",
+      "team": "NE",
+      "bye": 11,
+      "consensus": 61.7,
+      "spread": 15.7,
+      "uncertainty": 9.9,
+      "ranks": {
+        "sleeper": 53.2,
+        "ffc": 63,
+        "ecr": 68.92
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 6
+    },
+    {
+      "id": "8167",
+      "name": "Christian Watson",
+      "position": "WR",
+      "team": "GB",
+      "bye": 11,
+      "consensus": 62.7,
+      "spread": 12.5,
+      "uncertainty": 10.6,
+      "ranks": {
+        "sleeper": 70.9,
+        "ffc": 58.9,
+        "ecr": 58.42
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "11566",
+      "name": "Jayden Daniels",
+      "position": "QB",
+      "team": "WAS",
+      "bye": 7,
+      "consensus": 62.7,
+      "spread": 20.5,
+      "uncertainty": 15.7,
+      "ranks": {
+        "sleeper": 64.9,
+        "ffc": 71.9,
+        "ecr": 51.37
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 3
+    },
+    {
+      "id": "6904",
+      "name": "Jalen Hurts",
+      "position": "QB",
+      "team": "PHI",
+      "bye": 10,
+      "consensus": 65.6,
+      "spread": 20.5,
+      "uncertainty": 11.1,
+      "ranks": {
+        "sleeper": 60.6,
+        "ffc": 78.4,
+        "ecr": 57.88
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 3
+    },
+    {
+      "id": "9487",
+      "name": "Parker Washington",
+      "position": "WR",
+      "team": "JAX",
+      "bye": 7,
+      "consensus": 68.6,
+      "spread": 11.9,
+      "uncertainty": 16.1,
+      "ranks": {
+        "sleeper": 76,
+        "ffc": 64.1,
+        "ecr": 65.66
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "8228",
+      "name": "Jaylen Warren",
+      "position": "RB",
+      "team": "PIT",
+      "bye": 9,
+      "consensus": 69.3,
+      "spread": 18,
+      "uncertainty": 8.1,
+      "ranks": {
+        "sleeper": 71.8,
+        "ffc": 59,
+        "ecr": 77
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 7
+    },
+    {
+      "id": "11628",
+      "name": "Marvin Harrison",
+      "position": "WR",
+      "team": "ARI",
+      "bye": 14,
+      "consensus": 69.8,
+      "spread": 10,
+      "uncertainty": 11.4,
+      "ranks": {
+        "sleeper": 75.3,
+        "ffc": 65.3,
+        "ecr": 68.77
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "13279",
+      "name": "Carnell Tate",
+      "position": "WR",
+      "team": "TEN",
+      "bye": 9,
+      "consensus": 70.8,
+      "spread": 11.5,
+      "uncertainty": 14.9,
+      "ranks": {
+        "sleeper": 66.9,
+        "ffc": 78.4,
+        "ecr": 67.21
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "13286",
+      "name": "Jadarian Price",
+      "position": "RB",
+      "team": "SEA",
+      "bye": 11,
+      "consensus": 71.9,
+      "spread": 7.7,
+      "uncertainty": 8.9,
+      "ranks": {
+        "sleeper": 67.5,
+        "ffc": 75.2,
+        "ecr": 72.98
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 7
+    },
+    {
+      "id": "5846",
+      "name": "DK Metcalf",
+      "position": "WR",
+      "team": "PIT",
+      "bye": 9,
+      "consensus": 72.7,
+      "spread": 14.4,
+      "uncertainty": 13.1,
+      "ranks": {
+        "sleeper": 74.9,
+        "ffc": 64.4,
+        "ecr": 78.77
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "12506",
+      "name": "Harold Fannin",
+      "position": "TE",
+      "team": "CLE",
+      "bye": 11,
+      "consensus": 73.5,
+      "spread": 8.8,
+      "uncertainty": 11.1,
+      "ranks": {
+        "sleeper": 68.7,
+        "ffc": 77.5,
+        "ecr": 74.29
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 3
+    },
+    {
+      "id": "3294",
+      "name": "Dak Prescott",
+      "position": "QB",
+      "team": "DAL",
+      "bye": 14,
+      "consensus": 73.9,
+      "spread": 13.3,
+      "uncertainty": 13.1,
+      "ranks": {
+        "sleeper": 78.4,
+        "ffc": 65.1,
+        "ecr": 78.06
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 3
+    },
+    {
+      "id": "5045",
+      "name": "Courtland Sutton",
+      "position": "WR",
+      "team": "DEN",
+      "bye": 10,
+      "consensus": 74.5,
+      "spread": 23,
+      "uncertainty": 14.9,
+      "ranks": {
+        "sleeper": 80,
+        "ffc": 60.2,
+        "ecr": 83.18
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "7611",
+      "name": "Rhamondre Stevenson",
+      "position": "RB",
+      "team": "NE",
+      "bye": 11,
+      "consensus": 74.7,
+      "spread": 15.7,
+      "uncertainty": 9.3,
+      "ranks": {
+        "sleeper": 80.6,
+        "ffc": 64.9,
+        "ecr": 78.7
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 7
+    },
+    {
+      "id": "11631",
+      "name": "Brian Thomas",
+      "position": "WR",
+      "team": "JAX",
+      "bye": 7,
+      "consensus": 74.9,
+      "spread": 5.5,
+      "uncertainty": 14.9,
+      "ranks": {
+        "sleeper": 73.9,
+        "ffc": 72.7,
+        "ecr": 78.22
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "7553",
+      "name": "Kyle Pitts",
+      "position": "TE",
+      "team": "ATL",
+      "bye": 11,
+      "consensus": 75.1,
+      "spread": 11.7,
+      "uncertainty": 9.6,
+      "ranks": {
+        "sleeper": 69.1,
+        "ffc": 75.3,
+        "ecr": 80.77
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 3
+    },
+    {
+      "id": "11560",
+      "name": "Caleb Williams",
+      "position": "QB",
+      "team": "CHI",
+      "bye": 10,
+      "consensus": 76.6,
+      "spread": 22.6,
+      "uncertainty": 13.4,
+      "ranks": {
+        "sleeper": 71.9,
+        "ffc": 90.2,
+        "ecr": 67.6
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 3
+    },
+    {
+      "id": "9484",
+      "name": "Tucker Kraft",
+      "position": "TE",
+      "team": "GB",
+      "bye": 11,
+      "consensus": 79.4,
+      "spread": 35.3,
+      "uncertainty": 14,
+      "ranks": {
+        "sleeper": 62.8,
+        "ffc": 98.1,
+        "ecr": 77.19
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 3
+    },
+    {
+      "id": "5967",
+      "name": "Tony Pollard",
+      "position": "RB",
+      "team": "TEN",
+      "bye": 9,
+      "consensus": 79.7,
+      "spread": 14.1,
+      "uncertainty": 9.8,
+      "ranks": {
+        "sleeper": 84.3,
+        "ffc": 70.3,
+        "ecr": 84.36
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 7
+    },
+    {
+      "id": "10232",
+      "name": "Michael Wilson",
+      "position": "WR",
+      "team": "ARI",
+      "bye": 14,
+      "consensus": 82.7,
+      "spread": 11.9,
+      "uncertainty": 16.1,
+      "ranks": {
+        "sleeper": 83.6,
+        "ffc": 76.3,
+        "ecr": 88.19
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "7021",
+      "name": "Rico Dowdle",
+      "position": "RB",
+      "team": "PIT",
+      "bye": 9,
+      "consensus": 83.1,
+      "spread": 13.9,
+      "uncertainty": 12.7,
+      "ranks": {
+        "sleeper": 85,
+        "ffc": 75.2,
+        "ecr": 89.13
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 7
+    },
+    {
+      "id": "4037",
+      "name": "Chris Godwin",
+      "position": "WR",
+      "team": "TB",
+      "bye": 10,
+      "consensus": 83.9,
+      "spread": 18.4,
+      "uncertainty": 13.3,
+      "ranks": {
+        "sleeper": 95.4,
+        "ffc": 79.3,
+        "ecr": 77.05
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "7594",
+      "name": "Chuba Hubbard",
+      "position": "RB",
+      "team": "CAR",
+      "bye": 5,
+      "consensus": 85.6,
+      "spread": 20.3,
+      "uncertainty": 16.2,
+      "ranks": {
+        "sleeper": 77.6,
+        "ffc": 81.2,
+        "ecr": 97.86
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 7
+    },
+    {
+      "id": "6819",
+      "name": "Michael Pittman",
+      "position": "WR",
+      "team": "PIT",
+      "bye": 9,
+      "consensus": 85.9,
+      "spread": 27.6,
+      "uncertainty": 13.7,
+      "ranks": {
+        "sleeper": 102.3,
+        "ffc": 74.7,
+        "ecr": 80.74
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "10859",
+      "name": "Sam LaPorta",
+      "position": "TE",
+      "team": "DET",
+      "bye": 6,
+      "consensus": 85.9,
+      "spread": 54.8,
+      "uncertainty": 13.9,
+      "ranks": {
+        "sleeper": 59,
+        "ffc": 113.8,
+        "ecr": 85.04
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 3
+    },
+    {
+      "id": "6797",
+      "name": "Justin Herbert",
+      "position": "QB",
+      "team": "LAC",
+      "bye": 7,
+      "consensus": 86.8,
+      "spread": 32.9,
+      "uncertainty": 12.7,
+      "ranks": {
+        "sleeper": 82.8,
+        "ffc": 105.2,
+        "ecr": 72.27
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 4
+    },
+    {
+      "id": "12489",
+      "name": "RJ Harvey",
+      "position": "RB",
+      "team": "DEN",
+      "bye": 10,
+      "consensus": 89.2,
+      "spread": 16.3,
+      "uncertainty": 16.5,
+      "ranks": {
+        "sleeper": 79.5,
+        "ffc": 92.3,
+        "ecr": 95.83
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "7523",
+      "name": "Trevor Lawrence",
+      "position": "QB",
+      "team": "JAX",
+      "bye": 7,
+      "consensus": 89.7,
+      "spread": 23,
+      "uncertainty": 13.6,
+      "ranks": {
+        "sleeper": 100.4,
+        "ffc": 91.4,
+        "ecr": 77.42
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 4
+    },
+    {
+      "id": "8142",
+      "name": "Alec Pierce",
+      "position": "WR",
+      "team": "IND",
+      "bye": 13,
+      "consensus": 90.1,
+      "spread": 32.4,
+      "uncertainty": 20.9,
+      "ranks": {
+        "sleeper": 101.1,
+        "ffc": 68.7,
+        "ecr": 100.41
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "421",
+      "name": "Matthew Stafford",
+      "position": "QB",
+      "team": "LAR",
+      "bye": 11,
+      "consensus": 92.5,
+      "spread": 27.1,
+      "uncertainty": 13.1,
+      "ranks": {
+        "sleeper": 96.2,
+        "ffc": 77.1,
+        "ecr": 104.22
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 4
+    },
+    {
+      "id": "9500",
+      "name": "Josh Downs",
+      "position": "WR",
+      "team": "IND",
+      "bye": 13,
+      "consensus": 94,
+      "spread": 20.8,
+      "uncertainty": 14.9,
+      "ranks": {
+        "sleeper": 107.5,
+        "ffc": 87.7,
+        "ecr": 86.72
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "6806",
+      "name": "J.K. Dobbins",
+      "position": "RB",
+      "team": "DEN",
+      "bye": 10,
+      "consensus": 94.3,
+      "spread": 12.8,
+      "uncertainty": 15,
+      "ranks": {
+        "sleeper": 94.6,
+        "ffc": 87.7,
+        "ecr": 100.49
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "8126",
+      "name": "Wan'Dale Robinson",
+      "position": "WR",
+      "team": "TEN",
+      "bye": 9,
+      "consensus": 96.8,
+      "spread": 30,
+      "uncertainty": 14.4,
+      "ranks": {
+        "sleeper": 116.7,
+        "ffc": 86.7,
+        "ecr": 87.04
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "1466",
+      "name": "Travis Kelce",
+      "position": "TE",
+      "team": "KC",
+      "bye": 5,
+      "consensus": 98,
+      "spread": 11.8,
+      "uncertainty": 14.9,
+      "ranks": {
+        "sleeper": 92.2,
+        "ffc": 104,
+        "ecr": 97.81
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 4
+    },
+    {
+      "id": "11583",
+      "name": "Jonathon Brooks",
+      "position": "RB",
+      "team": "CAR",
+      "bye": 5,
+      "consensus": 98.1,
+      "spread": 14.2,
+      "uncertainty": 24.1,
+      "ranks": {
+        "sleeper": 106.9,
+        "ffc": 94.6,
+        "ecr": 92.68
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "2449",
+      "name": "Stefon Diggs",
+      "position": "WR",
+      "team": "WAS",
+      "bye": 7,
+      "consensus": 99.5,
+      "spread": 19.4,
+      "uncertainty": 31,
+      "ranks": {
+        "sleeper": 110.9,
+        "ffc": 91.5,
+        "ecr": 96.15
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "4217",
+      "name": "George Kittle",
+      "position": "TE",
+      "team": "SF",
+      "bye": 8,
+      "consensus": 99.7,
+      "spread": 19.9,
+      "uncertainty": 21.3,
+      "ranks": {
+        "sleeper": 89.9,
+        "ffc": 109.8,
+        "ecr": 99.45
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 4
+    },
+    {
+      "id": "10236",
+      "name": "Dalton Kincaid",
+      "position": "TE",
+      "team": "BUF",
+      "bye": 7,
+      "consensus": 100,
+      "spread": 24.5,
+      "uncertainty": 15.6,
+      "ranks": {
+        "sleeper": 87.7,
+        "ecr": 112.25
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 4
+    },
+    {
+      "id": "5947",
+      "name": "Jakobi Meyers",
+      "position": "WR",
+      "team": "JAX",
+      "bye": 7,
+      "consensus": 100.9,
+      "spread": 26.9,
+      "uncertainty": 16.8,
+      "ranks": {
+        "sleeper": 113.4,
+        "ffc": 86.5,
+        "ecr": 102.67
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "8183",
+      "name": "Brock Purdy",
+      "position": "QB",
+      "team": "SF",
+      "bye": 8,
+      "consensus": 101.4,
+      "spread": 34,
+      "uncertainty": 10.2,
+      "ranks": {
+        "sleeper": 121.2,
+        "ffc": 87.2,
+        "ecr": 95.84
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 4
+    },
+    {
+      "id": "7567",
+      "name": "Kenny Gainwell",
+      "position": "RB",
+      "team": "TB",
+      "bye": 10,
+      "consensus": 101.5,
+      "spread": 19.3,
+      "uncertainty": 14,
+      "ranks": {
+        "sleeper": 111.6,
+        "ffc": 92.3,
+        "ecr": 100.6
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "12508",
+      "name": "Jaxson Dart",
+      "position": "QB",
+      "team": "NYG",
+      "bye": 8,
+      "consensus": 102,
+      "spread": 25.1,
+      "uncertainty": 14.1,
+      "ranks": {
+        "sleeper": 91.8,
+        "ffc": 116.9,
+        "ecr": 97.19
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 4
+    },
+    {
+      "id": "9756",
+      "name": "Jordan Addison",
+      "position": "WR",
+      "team": "MIN",
+      "bye": 6,
+      "consensus": 102.9,
+      "spread": 9.4,
+      "uncertainty": 18.2,
+      "ranks": {
+        "sleeper": 104.5,
+        "ffc": 97.4,
+        "ecr": 106.76
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "9754",
+      "name": "Quentin Johnston",
+      "position": "WR",
+      "team": "LAC",
+      "bye": 7,
+      "consensus": 103,
+      "spread": 18.1,
+      "uncertainty": 14.1,
+      "ranks": {
+        "sleeper": 114.8,
+        "ffc": 97.4,
+        "ecr": 96.65
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "4046",
+      "name": "Patrick Mahomes",
+      "position": "QB",
+      "team": "KC",
+      "bye": 5,
+      "consensus": 103.2,
+      "spread": 6.8,
+      "uncertainty": 12.4,
+      "ranks": {
+        "sleeper": 107.1,
+        "ffc": 102.2,
+        "ecr": 100.25
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 4
+    },
+    {
+      "id": "10222",
+      "name": "Jayden Reed",
+      "position": "WR",
+      "team": "GB",
+      "bye": 11,
+      "consensus": 103.8,
+      "spread": 18.3,
+      "uncertainty": 14.3,
+      "ranks": {
+        "sleeper": 112.1,
+        "ffc": 93.8,
+        "ecr": 105.64
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "13294",
+      "name": "Makai Lemon",
+      "position": "WR",
+      "team": "PHI",
+      "bye": 10,
+      "consensus": 104,
+      "spread": 29.4,
+      "uncertainty": 18.4,
+      "ranks": {
+        "sleeper": 86.5,
+        "ffc": 115.9,
+        "ecr": 109.62
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "12534",
+      "name": "Kyle Monangai",
+      "position": "RB",
+      "team": "CHI",
+      "bye": 10,
+      "consensus": 108.3,
+      "spread": 17.9,
+      "uncertainty": 15.4,
+      "ranks": {
+        "sleeper": 98.1,
+        "ffc": 110.8,
+        "ecr": 115.98
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "13281",
+      "name": "Jordyn Tyson",
+      "position": "WR",
+      "team": "NO",
+      "bye": 8,
+      "consensus": 110.1,
+      "spread": 42.2,
+      "uncertainty": 27.4,
+      "ranks": {
+        "sleeper": 89,
+        "ecr": 131.22
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "11563",
+      "name": "Bo Nix",
+      "position": "QB",
+      "team": "DEN",
+      "bye": 10,
+      "consensus": 111.2,
+      "spread": 19.4,
+      "uncertainty": 8.8,
+      "ranks": {
+        "sleeper": 120.7,
+        "ffc": 111.5,
+        "ecr": 101.32
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 5
+    },
+    {
+      "id": "11586",
+      "name": "Blake Corum",
+      "position": "RB",
+      "team": "LAR",
+      "bye": 11,
+      "consensus": 112.8,
+      "spread": 18.9,
+      "uncertainty": 13.7,
+      "ranks": {
+        "sleeper": 103.6,
+        "ffc": 122.5,
+        "ecr": 112.2
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "4199",
+      "name": "Aaron Jones",
+      "position": "RB",
+      "team": "MIN",
+      "bye": 6,
+      "consensus": 114,
+      "spread": 19.9,
+      "uncertainty": 15.8,
+      "ranks": {
+        "sleeper": 124.2,
+        "ffc": 104.3,
+        "ecr": 113.52
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "3163",
+      "name": "Jared Goff",
+      "position": "QB",
+      "team": "DET",
+      "bye": 6,
+      "consensus": 114,
+      "spread": 32.7,
+      "uncertainty": 9.7,
+      "ranks": {
+        "sleeper": 133.3,
+        "ffc": 100.6,
+        "ecr": 108
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 5
+    },
+    {
+      "id": "12533",
+      "name": "Jacory Croskey-Merritt",
+      "position": "RB",
+      "team": "WAS",
+      "bye": 7,
+      "consensus": 115.2,
+      "spread": 0.2,
+      "uncertainty": 13.8,
+      "ranks": {
+        "sleeper": 115.1,
+        "ffc": 115.2,
+        "ecr": 115.28
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "8110",
+      "name": "Jake Ferguson",
+      "position": "TE",
+      "team": "DAL",
+      "bye": 14,
+      "consensus": 115.5,
+      "spread": 32.4,
+      "uncertainty": 19.1,
+      "ranks": {
+        "sleeper": 98.6,
+        "ffc": 131,
+        "ecr": 116.77
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 4
+    },
+    {
+      "id": "5022",
+      "name": "Dallas Goedert",
+      "position": "TE",
+      "team": "PHI",
+      "bye": 10,
+      "consensus": 115.7,
+      "spread": 17.1,
+      "uncertainty": 17.3,
+      "ranks": {
+        "sleeper": 123,
+        "ffc": 105.9,
+        "ecr": 118.33
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 4
+    },
+    {
+      "id": "8408",
+      "name": "Jordan Mason",
+      "position": "RB",
+      "team": "MIN",
+      "bye": 6,
+      "consensus": 117,
+      "spread": 0.9,
+      "uncertainty": 15.5,
+      "ranks": {
+        "sleeper": 116.9,
+        "ffc": 116.6,
+        "ecr": 117.52
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "8136",
+      "name": "Rachaad White",
+      "position": "RB",
+      "team": "WAS",
+      "bye": 7,
+      "consensus": 118.1,
+      "spread": 21.9,
+      "uncertainty": 14.8,
+      "ranks": {
+        "sleeper": 131.3,
+        "ffc": 113.5,
+        "ecr": 109.36
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "12501",
+      "name": "Matthew Golden",
+      "position": "WR",
+      "team": "GB",
+      "bye": 11,
+      "consensus": 120.8,
+      "spread": 22,
+      "uncertainty": 19.8,
+      "ranks": {
+        "sleeper": 127.3,
+        "ffc": 106.6,
+        "ecr": 128.62
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "13298",
+      "name": "KC Concepcion",
+      "position": "WR",
+      "team": "CLE",
+      "bye": 11,
+      "consensus": 121.5,
+      "spread": 1.4,
+      "uncertainty": 28.4,
+      "ranks": {
+        "sleeper": 122.4,
+        "ffc": 121,
+        "ecr": 121.08
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "8134",
+      "name": "Khalil Shakir",
+      "position": "WR",
+      "team": "BUF",
+      "bye": 7,
+      "consensus": 121.9,
+      "spread": 39.5,
+      "uncertainty": 17,
+      "ranks": {
+        "sleeper": 141.9,
+        "ffc": 102.4,
+        "ecr": 121.26
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "8131",
+      "name": "Isaiah Likely",
+      "position": "TE",
+      "team": "NYG",
+      "bye": 8,
+      "consensus": 122.4,
+      "spread": 27.3,
+      "uncertainty": 27.5,
+      "ranks": {
+        "sleeper": 109,
+        "ffc": 136.3,
+        "ecr": 121.92
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 4
+    },
+    {
+      "id": "11624",
+      "name": "Xavier Worthy",
+      "position": "WR",
+      "team": "KC",
+      "bye": 5,
+      "consensus": 124.6,
+      "spread": 35.1,
+      "uncertainty": 15.6,
+      "ranks": {
+        "sleeper": 140.4,
+        "ffc": 105.3,
+        "ecr": 127.99
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "8121",
+      "name": "Romeo Doubs",
+      "position": "WR",
+      "team": "NE",
+      "bye": 11,
+      "consensus": 125.2,
+      "spread": 19.2,
+      "uncertainty": 16.6,
+      "ranks": {
+        "sleeper": 132.4,
+        "ffc": 113.2,
+        "ecr": 130.12
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "HOU",
+      "name": "Houston Texans",
+      "position": "DEF",
+      "team": "HOU",
+      "bye": 8,
+      "consensus": 125.3,
+      "spread": 55.2,
+      "uncertainty": 5.5,
+      "ranks": {
+        "sleeper": 97.7,
+        "ecr": 152.94
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 1
+    },
+    {
+      "id": "5872",
+      "name": "Deebo Samuel",
+      "position": "WR",
+      "team": "SF",
+      "bye": 8,
+      "consensus": 127.5,
+      "spread": 30.7,
+      "uncertainty": 31.1,
+      "ranks": {
+        "sleeper": 138,
+        "ffc": 107.3,
+        "ecr": 137.2
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "LAR",
+      "name": "Los Angeles Rams",
+      "position": "DEF",
+      "team": "LAR",
+      "bye": 11,
+      "consensus": 128.5,
+      "spread": 79.3,
+      "uncertainty": 7.7,
+      "ranks": {
+        "sleeper": 88.8,
+        "ecr": 168.1
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 1
+    },
+    {
+      "id": "5012",
+      "name": "Mark Andrews",
+      "position": "TE",
+      "team": "BAL",
+      "bye": 13,
+      "consensus": 129.6,
+      "spread": 2,
+      "uncertainty": 23.6,
+      "ranks": {
+        "sleeper": 129.9,
+        "ffc": 128.4,
+        "ecr": 130.4
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 5
+    },
+    {
+      "id": "12545",
+      "name": "Tyler Shough",
+      "position": "QB",
+      "team": "NO",
+      "bye": 8,
+      "consensus": 130.2,
+      "spread": 9.8,
+      "uncertainty": 16.1,
+      "ranks": {
+        "ffc": 135.1,
+        "ecr": 125.28
+      },
+      "sources": [
+        "ffc",
+        "ecr"
+      ],
+      "tier": 6
+    },
+    {
+      "id": "4892",
+      "name": "Baker Mayfield",
+      "position": "QB",
+      "team": "TB",
+      "bye": 10,
+      "consensus": 130.6,
+      "spread": 25.5,
+      "uncertainty": 10.6,
+      "ranks": {
+        "sleeper": 143.7,
+        "ffc": 129.9,
+        "ecr": 118.24
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 6
+    },
+    {
+      "id": "11646",
+      "name": "Jalen Coker",
+      "position": "WR",
+      "team": "CAR",
+      "bye": 5,
+      "consensus": 130.7,
+      "spread": 24.1,
+      "uncertainty": 17.6,
+      "ranks": {
+        "sleeper": 145.7,
+        "ffc": 121.6,
+        "ecr": 124.78
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "5849",
+      "name": "Kyler Murray",
+      "position": "QB",
+      "team": "MIN",
+      "bye": 6,
+      "consensus": 135.5,
+      "spread": 45.5,
+      "uncertainty": 10.2,
+      "ranks": {
+        "sleeper": 159,
+        "ffc": 134,
+        "ecr": 113.54
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 6
+    },
+    {
+      "id": "13417",
+      "name": "De'Zhaun Stribling",
+      "position": "WR",
+      "team": "SF",
+      "bye": 8,
+      "consensus": 136.7,
+      "spread": 7.5,
+      "uncertainty": 46.6,
+      "ranks": {
+        "sleeper": 137,
+        "ffc": 132.8,
+        "ecr": 140.29
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "SEA",
+      "name": "Seattle Seahawks",
+      "position": "DEF",
+      "team": "SEA",
+      "bye": 11,
+      "consensus": 136.9,
+      "spread": 62.8,
+      "uncertainty": 12.4,
+      "ranks": {
+        "sleeper": 105.5,
+        "ecr": 168.27
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 1
+    },
+    {
+      "id": "6804",
+      "name": "Jordan Love",
+      "position": "QB",
+      "team": "GB",
+      "bye": 11,
+      "consensus": 138.7,
+      "spread": 30,
+      "uncertainty": 10.2,
+      "ranks": {
+        "sleeper": 149.5,
+        "ffc": 147,
+        "ecr": 119.5
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 6
+    },
+    {
+      "id": "7002",
+      "name": "Juwan Johnson",
+      "position": "TE",
+      "team": "NO",
+      "bye": 8,
+      "consensus": 141.5,
+      "spread": 11.1,
+      "uncertainty": 21.2,
+      "ranks": {
+        "ffc": 147,
+        "ecr": 135.93
+      },
+      "sources": [
+        "ffc",
+        "ecr"
+      ],
+      "tier": 5
+    },
+    {
+      "id": "DEN",
+      "name": "Denver Broncos",
+      "position": "DEF",
+      "team": "DEN",
+      "bye": 10,
+      "consensus": 141.5,
+      "spread": 44.9,
+      "uncertainty": 7.7,
+      "ranks": {
+        "sleeper": 119.1,
+        "ecr": 163.96
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 2
+    },
+    {
+      "id": "10219",
+      "name": "Chris Rodriguez",
+      "position": "RB",
+      "team": "JAX",
+      "bye": 7,
+      "consensus": 141.6,
+      "spread": 0.9,
+      "uncertainty": 18.2,
+      "ranks": {
+        "sleeper": 142.1,
+        "ecr": 141.18
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "8676",
+      "name": "Rashid Shaheed",
+      "position": "WR",
+      "team": "SEA",
+      "bye": 11,
+      "consensus": 142.1,
+      "spread": 21,
+      "uncertainty": 15.5,
+      "ranks": {
+        "sleeper": 148.4,
+        "ffc": 128.5,
+        "ecr": 149.47
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "8132",
+      "name": "Tyler Allgeier",
+      "position": "RB",
+      "team": "ARI",
+      "bye": 14,
+      "consensus": 143.3,
+      "spread": 6.9,
+      "uncertainty": 13.3,
+      "ranks": {
+        "sleeper": 146.7,
+        "ecr": 139.81
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "9753",
+      "name": "Zach Charbonnet",
+      "position": "RB",
+      "team": "SEA",
+      "bye": 11,
+      "consensus": 145.2,
+      "spread": 20.1,
+      "uncertainty": 29.3,
+      "ranks": {
+        "sleeper": 147.1,
+        "ffc": 134.2,
+        "ecr": 154.29
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "9508",
+      "name": "Tyjae Spears",
+      "position": "RB",
+      "team": "TEN",
+      "bye": 9,
+      "consensus": 145.4,
+      "spread": 34.9,
+      "uncertainty": 16.3,
+      "ranks": {
+        "sleeper": 166.2,
+        "ffc": 131.3,
+        "ecr": 138.64
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "12474",
+      "name": "Woody Marks",
+      "position": "RB",
+      "team": "HOU",
+      "bye": 8,
+      "consensus": 146,
+      "spread": 23.2,
+      "uncertainty": 15.1,
+      "ranks": {
+        "sleeper": 160.5,
+        "ffc": 140.2,
+        "ecr": 137.31
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "6783",
+      "name": "Jerry Jeudy",
+      "position": "WR",
+      "team": "CLE",
+      "bye": 11,
+      "consensus": 146.6,
+      "spread": 39,
+      "uncertainty": 29.3,
+      "ranks": {
+        "ffc": 127.1,
+        "ecr": 166.12
+      },
+      "sources": [
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "10213",
+      "name": "Tre Tucker",
+      "position": "WR",
+      "team": "LV",
+      "bye": 13,
+      "consensus": 149,
+      "spread": 33.9,
+      "uncertainty": 24.3,
+      "ranks": {
+        "ffc": 132,
+        "ecr": 165.91
+      },
+      "sources": [
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "PHI",
+      "name": "Philadelphia Eagles",
+      "position": "DEF",
+      "team": "PHI",
+      "bye": 10,
+      "consensus": 149.9,
+      "spread": 49.1,
+      "uncertainty": 9.2,
+      "ranks": {
+        "sleeper": 125.4,
+        "ecr": 174.46
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 2
+    },
+    {
+      "id": "13346",
+      "name": "Denzel Boston",
+      "position": "WR",
+      "team": "CLE",
+      "bye": 11,
+      "consensus": 151.5,
+      "spread": 27,
+      "uncertainty": 34.6,
+      "ranks": {
+        "sleeper": 165,
+        "ffc": 138,
+        "ecr": 151.52
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "3214",
+      "name": "Hunter Henry",
+      "position": "TE",
+      "team": "NE",
+      "bye": 11,
+      "consensus": 151.5,
+      "spread": 23.4,
+      "uncertainty": 22,
+      "ranks": {
+        "sleeper": 139.8,
+        "ecr": 163.19
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 5
+    },
+    {
+      "id": "4943",
+      "name": "Sam Darnold",
+      "position": "QB",
+      "team": "SEA",
+      "bye": 11,
+      "consensus": 153.1,
+      "spread": 34.2,
+      "uncertainty": 17.5,
+      "ranks": {
+        "sleeper": 175,
+        "ffc": 143.4,
+        "ecr": 140.84
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 6
+    },
+    {
+      "id": "11618",
+      "name": "Jalen McMillan",
+      "position": "WR",
+      "team": "TB",
+      "bye": 10,
+      "consensus": 153.5,
+      "spread": 37.3,
+      "uncertainty": 26.3,
+      "ranks": {
+        "ffc": 134.8,
+        "ecr": 172.1
+      },
+      "sources": [
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "9480",
+      "name": "Brenton Strange",
+      "position": "TE",
+      "team": "JAX",
+      "bye": 7,
+      "consensus": 155.8,
+      "spread": 6.5,
+      "uncertainty": 23.9,
+      "ranks": {
+        "sleeper": 152.6,
+        "ecr": 159.09
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 5
+    },
+    {
+      "id": "13305",
+      "name": "Mike Washington",
+      "position": "RB",
+      "team": "LV",
+      "bye": 13,
+      "consensus": 158.9,
+      "spread": 24.7,
+      "uncertainty": 40.4,
+      "ranks": {
+        "sleeper": 170.5,
+        "ffc": 145.8,
+        "ecr": 160.53
+      },
+      "sources": [
+        "sleeper",
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "11655",
+      "name": "Tyrone Tracy",
+      "position": "RB",
+      "team": "NYG",
+      "bye": 8,
+      "consensus": 159.1,
+      "spread": 8.8,
+      "uncertainty": 29.7,
+      "ranks": {
+        "sleeper": 163.5,
+        "ecr": 154.71
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "4035",
+      "name": "Alvin Kamara",
+      "position": "RB",
+      "team": "NO",
+      "bye": 8,
+      "consensus": 160.1,
+      "spread": 2.4,
+      "uncertainty": 31,
+      "ranks": {
+        "sleeper": 161.3,
+        "ecr": 158.88
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "NE",
+      "name": "New England Patriots",
+      "position": "DEF",
+      "team": "NE",
+      "bye": 11,
+      "consensus": 160.7,
+      "spread": 48.3,
+      "uncertainty": 7.7,
+      "ranks": {
+        "sleeper": 136.5,
+        "ecr": 184.81
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 3
+    },
+    {
+      "id": "13345",
+      "name": "Jonah Coleman",
+      "position": "RB",
+      "team": "DEN",
+      "bye": 10,
+      "consensus": 162.9,
+      "spread": 11.5,
+      "uncertainty": 29,
+      "ranks": {
+        "sleeper": 168.6,
+        "ecr": 157.11
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "1479",
+      "name": "Keenan Allen",
+      "position": "WR",
+      "team": "IND",
+      "bye": 13,
+      "consensus": 163.6,
+      "spread": 63,
+      "uncertainty": 60,
+      "ranks": {
+        "ffc": 132.1,
+        "ecr": 195.1
+      },
+      "sources": [
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "12493",
+      "name": "Oronde Gadsden",
+      "position": "TE",
+      "team": "LAC",
+      "bye": 7,
+      "consensus": 165.2,
+      "spread": 74.3,
+      "uncertainty": 43.3,
+      "ranks": {
+        "sleeper": 128.1,
+        "ecr": 202.38
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 5
+    },
+    {
+      "id": "9511",
+      "name": "Keaton Mitchell",
+      "position": "RB",
+      "team": "LAC",
+      "bye": 7,
+      "consensus": 166.3,
+      "spread": 26.1,
+      "uncertainty": 27.4,
+      "ranks": {
+        "sleeper": 179.4,
+        "ecr": 153.27
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "8154",
+      "name": "Brian Robinson",
+      "position": "RB",
+      "team": "ATL",
+      "bye": 11,
+      "consensus": 168.1,
+      "spread": 25.5,
+      "uncertainty": 22.1,
+      "ranks": {
+        "sleeper": 155.4,
+        "ecr": 180.86
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "MIN",
+      "name": "Minnesota Vikings",
+      "position": "DEF",
+      "team": "MIN",
+      "bye": 6,
+      "consensus": 168.7,
+      "spread": 33.9,
+      "uncertainty": 10.3,
+      "ranks": {
+        "sleeper": 151.7,
+        "ecr": 185.64
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 3
+    },
+    {
+      "id": "PIT",
+      "name": "Pittsburgh Steelers",
+      "position": "DEF",
+      "team": "PIT",
+      "bye": 9,
+      "consensus": 173.9,
+      "spread": 24.7,
+      "uncertainty": 8.4,
+      "ranks": {
+        "sleeper": 161.6,
+        "ecr": 186.26
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 4
+    },
+    {
+      "id": "4981",
+      "name": "Calvin Ridley",
+      "position": "WR",
+      "team": "TEN",
+      "bye": 9,
+      "consensus": 174,
+      "spread": 58.4,
+      "uncertainty": 33.9,
+      "ranks": {
+        "ffc": 144.8,
+        "ecr": 203.24
+      },
+      "sources": [
+        "ffc",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "9225",
+      "name": "Tank Bigsby",
+      "position": "RB",
+      "team": "PHI",
+      "bye": 10,
+      "consensus": 175.3,
+      "spread": 2.5,
+      "uncertainty": 25.4,
+      "ranks": {
+        "sleeper": 176.5,
+        "ecr": 174
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "12530",
+      "name": "Travis Hunter",
+      "position": "WR",
+      "team": "JAX",
+      "bye": 7,
+      "consensus": 176.4,
+      "spread": 18.5,
+      "uncertainty": 40.4,
+      "ranks": {
+        "sleeper": 167.2,
+        "ecr": 185.69
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "5844",
+      "name": "T.J. Hockenson",
+      "position": "TE",
+      "team": "MIN",
+      "bye": 6,
+      "consensus": 176.6,
+      "spread": 23.8,
+      "uncertainty": 26.4,
+      "ranks": {
+        "sleeper": 164.7,
+        "ecr": 188.46
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 6
+    },
+    {
+      "id": "JAX",
+      "name": "Jacksonville Jaguars",
+      "position": "DEF",
+      "team": "JAX",
+      "bye": 7,
+      "consensus": 179.3,
+      "spread": 20.6,
+      "uncertainty": 17.5,
+      "ranks": {
+        "sleeper": 169,
+        "ecr": 189.59
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 4
+    },
+    {
+      "id": "8180",
+      "name": "Jalen Nailor",
+      "position": "WR",
+      "team": "LV",
+      "bye": 13,
+      "consensus": 185.3,
+      "spread": 8.1,
+      "uncertainty": 32.6,
+      "ranks": {
+        "sleeper": 181.2,
+        "ecr": 189.32
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 8
+    },
+    {
+      "id": "LAC",
+      "name": "Los Angeles Chargers",
+      "position": "DEF",
+      "team": "LAC",
+      "bye": 7,
+      "consensus": 185.6,
+      "spread": 16.1,
+      "uncertainty": 22.4,
+      "ranks": {
+        "sleeper": 177.5,
+        "ecr": 193.6
+      },
+      "sources": [
+        "sleeper",
+        "ecr"
+      ],
+      "tier": 4
+    }
+  ]
+}

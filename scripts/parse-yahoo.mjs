@@ -38,10 +38,38 @@ for (const p of Object.values(playersRaw)) {
 
 // DEF detection: city names, nicknames, and a hardcoded set of NFL team identifiers.
 const DEF_NAMES = new Set([
-  '49ers','bears','bengals','bills','broncos','browns','buccaneers','cardinals',
-  'chargers','chiefs','colts','cowboys','dolphins','eagles','falcons','giants',
-  'jaguars','jets','lions','packers','panthers','patriots','raiders','rams',
-  'ravens','saints','seahawks','steelers','texans','titans','vikings','commanders'
+  '49ers',
+  'bears',
+  'bengals',
+  'bills',
+  'broncos',
+  'browns',
+  'buccaneers',
+  'cardinals',
+  'chargers',
+  'chiefs',
+  'colts',
+  'cowboys',
+  'dolphins',
+  'eagles',
+  'falcons',
+  'giants',
+  'jaguars',
+  'jets',
+  'lions',
+  'packers',
+  'panthers',
+  'patriots',
+  'raiders',
+  'rams',
+  'ravens',
+  'saints',
+  'seahawks',
+  'steelers',
+  'texans',
+  'titans',
+  'vikings',
+  'commanders',
 ]);
 
 function resolvePosition(playerName) {
@@ -82,7 +110,10 @@ function parseOneYear(text, season) {
     let team = m[3].trim();
     // The simple regex sometimes splits "Player Name Team Name" wrong if there's
     // no tab. Try splitting by tab when present for higher accuracy.
-    const tabSplit = line.split('\t').map((s) => s.trim()).filter(Boolean);
+    const tabSplit = line
+      .split('\t')
+      .map((s) => s.trim())
+      .filter(Boolean);
     if (tabSplit.length >= 3) {
       // tabSplit[0] = "1." or "1", tabSplit[1] = player, tabSplit[2] = team
       pickInRound = parseInt(tabSplit[0], 10);
@@ -149,7 +180,7 @@ for (const [team, seasonsSet] of uniqueTeams) {
 const out = {
   years,
   uniqueTeams: teamsOut,
-  unresolvedPlayers: [...unresolved].sort()
+  unresolvedPlayers: [...unresolved].sort(),
 };
 await writeFile(OUT, JSON.stringify(out, null, 2));
 

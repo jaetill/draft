@@ -1,9 +1,18 @@
 {
   "_comment": "Maps Yahoo team names → current Sleeper display_name. Locked after user confirmation. 'AUTODRAFT' = Yahoo filler (NuttySequel no-showed in 2018, picks excluded from archetypes since they're not real choices). null = former owner no longer in league.",
   "_sleeper_handles_for_reference": [
-    "wfadden", "Bruno2328", "CarstonT", "ForSkins25",
-    "till1025", "PaTilley", "SethYo", "RockNRollDr",
-    "NuttySequel", "cfadden", "Tilleydmt", "jaetill"
+    "wfadden",
+    "Bruno2328",
+    "CarstonT",
+    "ForSkins25",
+    "till1025",
+    "PaTilley",
+    "SethYo",
+    "RockNRollDr",
+    "NuttySequel",
+    "cfadden",
+    "Tilleydmt",
+    "jaetill"
   ],
 
   "_owner_chains_summary": {
