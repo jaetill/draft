@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.2.0](https://github.com/jaetill/draft/compare/v1.1.1...v1.2.0) (2026-08-31)
+
+
+### Features
+
+* **cli:** watch-draft terminal watcher for live and mock rehearsal ([63cbe9a](https://github.com/jaetill/draft/commit/63cbe9a4b4f13cf2362de7536812b424ea304958))
+* **data:** rankings, tiers, byes, tendencies and value-curve pipeline with committed snapshots ([879a92f](https://github.com/jaetill/draft/commit/879a92f5c75f7665461bf66b6729dbd2e4e26341))
+* **engine:** slot-aware VBD, tier cliffs, bye impact, availability, backfields, opponent model ([8c390c1](https://github.com/jaetill/draft/commit/8c390c10b03b24315f02c9a7128f79b8e664084b))
+* **web:** add portal back-link per workspace miniapp convention ([2d7407c](https://github.com/jaetill/draft/commit/2d7407cc70f660672891d2cb3f2272f4b2fe5cf6))
+* **web:** bring the app to CLI parity for iPad draft day ([8ec0390](https://github.com/jaetill/draft/commit/8ec0390eccf0bdf84011c4faff8cac7864a083d5))
+
+
+### Bug Fixes
+
+* **.aws:** distinguish real POST errors from already-exists on branch policy ([#93](https://github.com/jaetill/draft/issues/93)) ([41e5ab9](https://github.com/jaetill/draft/commit/41e5ab979c43bd4c6d9168701482cc00f3fb2db3)), closes [#92](https://github.com/jaetill/draft/issues/92)
+* **ci:** bootstrap production Lambda alias on first deploy; authorize alias actions on function arn ([346028a](https://github.com/jaetill/draft/commit/346028a6c60d56eb73f478b2183297d14f0e7cf3))
+* **ci:** drop unused IMPLEMENTER_PAT forwarding from implementer caller (refs [#363](https://github.com/jaetill/draft/issues/363)) ([#87](https://github.com/jaetill/draft/issues/87)) ([0274189](https://github.com/jaetill/draft/commit/0274189a31e0ecf564aa20d7ab64bf614d18dec4))
+* **ci:** make claude-implementer caller thin (remove drifted concurrency block) ([#484](https://github.com/jaetill/draft/issues/484)) ([#84](https://github.com/jaetill/draft/issues/84)) ([1a5b0bb](https://github.com/jaetill/draft/commit/1a5b0bb41a02ce9fb33d61b154a82f5e3fdf2e7d))
+* **ci:** make env PUT body atomic — include both controls in each script ([#90](https://github.com/jaetill/draft/issues/90)) ([#91](https://github.com/jaetill/draft/issues/91)) ([2c019ea](https://github.com/jaetill/draft/commit/2c019eaeea9a08b8bac8b6a24bdd709b9edb9a2a))
+* **web:** explicit go-live button and reload-safe live sessions for app-switching ([874e99c](https://github.com/jaetill/draft/commit/874e99caf6dabff7ad934393c8daf5f7ad26b7eb))
+
 ## [1.1.1](https://github.com/jaetill/draft/compare/v1.1.0...v1.1.1) (2026-06-20)
 
 ### Bug Fixes
