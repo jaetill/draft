@@ -1,0 +1,22 @@
+# Line-ending policy. The repo is LF-canonical — .editorconfig (end_of_line = lf)
+# and .prettierrc.json (endOfLine: "lf") already say so; this makes git enforce it
+# so a Windows checkout can't reintroduce CRLF churn across the whole tree.
+* text=auto eol=lf
+
+# Binary — never touch these.
+*.zip   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.webp  binary
+*.pdf   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.mp3   binary
+
+# Generated / vendored — keep out of language stats and diffs.
+package-lock.json  -diff linguist-generated
+dist/**            linguist-generated

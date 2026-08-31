@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write   # ceiling for the reusable's publish job; generate job downgrades to read
+  contents: write # ceiling for the reusable's publish job; generate job downgrades to read
   id-token: write
 
 jobs:

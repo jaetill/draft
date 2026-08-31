@@ -12,10 +12,10 @@ theme:
     - search.highlight
     - search.suggest
   palette:
-    - media: "(prefers-color-scheme: light)"
+    - media: '(prefers-color-scheme: light)'
       scheme: default
       primary: indigo
-    - media: "(prefers-color-scheme: dark)"
+    - media: '(prefers-color-scheme: dark)'
       scheme: slate
       primary: indigo
 
@@ -33,10 +33,10 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Architecture:
-    - Overview: architecture/overview.md
+      - Overview: architecture/overview.md
   - ADRs:
-    - Index: adr/index.md
-    - "ADR-0001 Platform adoption": adr/0001-platform-adoption.md
+      - Index: adr/index.md
+      - 'ADR-0001 Platform adoption': adr/0001-platform-adoption.md
   - Runbooks:
-    - Index: runbooks/index.md
-    - Deploy: runbooks/deploy.md
+      - Index: runbooks/index.md
+      - Deploy: runbooks/deploy.md

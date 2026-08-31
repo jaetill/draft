@@ -27,7 +27,7 @@ async function probe(label, url, file) {
       ? `object keys=${Object.keys(body).slice(0, 6).join(',')}${Object.keys(body).length > 6 ? ',...' : ''}`
       : typeof body;
   console.log(
-    `${label.padEnd(28)} ${String(res.status).padEnd(4)} ${String(ms + 'ms').padEnd(8)} ${(size / 1024).toFixed(1).padStart(7)} KB  CORS=${cors}  ${summary}`
+    `${label.padEnd(28)} ${String(res.status).padEnd(4)} ${String(ms + 'ms').padEnd(8)} ${(size / 1024).toFixed(1).padStart(7)} KB  CORS=${cors}  ${summary}`,
   );
 }
 
@@ -40,20 +40,16 @@ await probe('GET /state/nfl', `${BASE}/state/nfl`, 'state-nfl.json');
 await probe('GET /players/nfl', `${BASE}/players/nfl`, 'players-nfl.json');
 
 if (leagueId) {
-  await probe(
-    `GET /league/${leagueId}`,
-    `${BASE}/league/${leagueId}`,
-    'league.json'
-  );
+  await probe(`GET /league/${leagueId}`, `${BASE}/league/${leagueId}`, 'league.json');
   await probe(
     `GET /league/${leagueId}/users`,
     `${BASE}/league/${leagueId}/users`,
-    'league-users.json'
+    'league-users.json',
   );
   await probe(
     `GET /league/${leagueId}/drafts`,
     `${BASE}/league/${leagueId}/drafts`,
-    'league-drafts.json'
+    'league-drafts.json',
   );
 
   const draftsRes = await fetch(`${BASE}/league/${leagueId}/drafts`);
@@ -64,7 +60,7 @@ if (leagueId) {
     await probe(
       `GET /draft/${draftId}/picks`,
       `${BASE}/draft/${draftId}/picks`,
-      'draft-picks.json'
+      'draft-picks.json',
     );
   }
 } else {

@@ -9,7 +9,7 @@
 
 ## Context and Problem Statement
 
-What's the problem? What needs deciding? Anyone reading 2 years from now should understand *why this decision needed to be made* without external context.
+What's the problem? What needs deciding? Anyone reading 2 years from now should understand _why this decision needed to be made_ without external context.
 
 State the problem in 2–3 sentences, ideally as a question you're answering.
 
@@ -24,11 +24,13 @@ The forces shaping the decision — constraints, requirements, considerations th
 ## Considered Options
 
 For a single-decision ADR:
+
 - Option A: {short title}
 - Option B: {short title}
 - Option C: {short title}
 
 For a bundled-sub-decision ADR, list the sub-decisions instead:
+
 - Sub-decision 1: {what's being chosen}
 - Sub-decision 2: {what's being chosen}
 - Sub-decision 3: {what's being chosen}
@@ -87,11 +89,11 @@ The bundle is internally consistent because {the coupling that makes the choices
 
 ### Sub-decision 1: {name}
 
-| Option | Pros | Cons |
-|---|---|---|
-| **A** | ... | ... |
-| **B** (chosen) | ... | ... |
-| **C** | ... | ... |
+| Option         | Pros | Cons |
+| -------------- | ---- | ---- |
+| **A**          | ...  | ...  |
+| **B** (chosen) | ...  | ...  |
+| **C**          | ...  | ...  |
 
 (Tables are an acceptable alternative to bulleted pros/cons when comparing >2 options on the same axes — they read better at scale.)
 

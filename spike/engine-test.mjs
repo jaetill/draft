@@ -11,12 +11,16 @@ import { recommend } from '../src/engine/recommend.js';
 import { simulateUntilMyTurn, seededRng } from '../src/mock/draft-sim.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const cfg = JSON.parse(await readFile(join(__dirname, '..', 'public', 'data', 'league.json'), 'utf8'));
-const players = JSON.parse(await readFile(join(__dirname, '..', 'public', 'data', 'players.json'), 'utf8'));
+const cfg = JSON.parse(
+  await readFile(join(__dirname, '..', 'public', 'data', 'league.json'), 'utf8'),
+);
+const players = JSON.parse(
+  await readFile(join(__dirname, '..', 'public', 'data', 'players.json'), 'utf8'),
+);
 let ownerProfiles = null;
 try {
   ownerProfiles = JSON.parse(
-    await readFile(join(__dirname, '..', 'public', 'data', 'owner-profiles.json'), 'utf8')
+    await readFile(join(__dirname, '..', 'public', 'data', 'owner-profiles.json'), 'utf8'),
   );
 } catch {}
 
@@ -36,7 +40,9 @@ for (let round = 1; round <= 6; round++) {
   console.log(`--- Round ${round}, pick ${state.currentPick} (slot ${state.currentSlot}) ---`);
   recs.forEach((r, i) => {
     const sigs = r.signals?.length ? `  [${r.signals.join(', ')}]` : '';
-    console.log(`  ${i + 1}. ${r.player.name.padEnd(22)} ${r.player.position}${String(r.posRank).padEnd(3)} t${r.tier} ${r.rationale}${sigs}`);
+    console.log(
+      `  ${i + 1}. ${r.player.name.padEnd(22)} ${r.player.position}${String(r.posRank).padEnd(3)} t${r.tier} ${r.rationale}${sigs}`,
+    );
   });
 
   state.addPick(recs[0].player.id);
@@ -49,4 +55,6 @@ for (const [pos, list] of Object.entries(r)) {
   console.log(`  ${pos}: ${list.map((p) => p.name).join(', ') || '—'}`);
 }
 const needs = state.myNeeds();
-console.log(`\nNeeds: starter shortfall ${JSON.stringify(needs.starterShortfall)}, flex ${needs.flexShortfall}, bench ${needs.benchRoom}`);
+console.log(
+  `\nNeeds: starter shortfall ${JSON.stringify(needs.starterShortfall)}, flex ${needs.flexShortfall}, bench ${needs.benchRoom}`,
+);

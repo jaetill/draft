@@ -21,15 +21,15 @@ Adopt the platform via the `ai-team` plugin subscription. Phases 1-4 applied imm
 
 ### Phase status
 
-| Phase | Status |
-|---|---|
-| 1 - Documentation | Done |
-| 2 - AI configuration | Done |
-| 3 - Quality gates | Done (vanilla JS flavor) |
-| 4 - CI workflows | Done (security-scan skips lambda-audit) |
-| 5 - Observability | Done (frontend Sentry; feedback Lambda from Phase 7 inherits the platform Sentry pattern) |
-| 6 - IaC retrofit | Done 2026-05-19 - terraform/envs/prod imports S3, CloudFront, IAM github-deploy role, feedback Lambda + dedicated HTTP API + secret container |
-| 7 - User feedback | Done 2026-05-19 - net-new AWS Lambda + dedicated HTTP API (draft-feedback-api). Needs GitHub PAT in secret draft/github-token for the widget to actually file issues. |
+| Phase                | Status                                                                                                                                                                |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1 - Documentation    | Done                                                                                                                                                                  |
+| 2 - AI configuration | Done                                                                                                                                                                  |
+| 3 - Quality gates    | Done (vanilla JS flavor)                                                                                                                                              |
+| 4 - CI workflows     | Done (security-scan skips lambda-audit)                                                                                                                               |
+| 5 - Observability    | Done (frontend Sentry; feedback Lambda from Phase 7 inherits the platform Sentry pattern)                                                                             |
+| 6 - IaC retrofit     | Done 2026-05-19 - terraform/envs/prod imports S3, CloudFront, IAM github-deploy role, feedback Lambda + dedicated HTTP API + secret container                         |
+| 7 - User feedback    | Done 2026-05-19 - net-new AWS Lambda + dedicated HTTP API (draft-feedback-api). Needs GitHub PAT in secret draft/github-token for the widget to actually file issues. |
 
 ## Deviations from platform defaults
 
