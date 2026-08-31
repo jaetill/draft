@@ -23,10 +23,18 @@ function injectButton() {
   btn.textContent = 'Feedback';
   btn.setAttribute('aria-label', 'Send feedback');
   btn.style.cssText = [
-    'position:fixed', 'bottom:5rem', 'right:1rem', 'z-index:9999',
-    'padding:.5rem 1rem', 'background:#16a34a', 'color:white',
-    'border:none', 'border-radius:6px', 'cursor:pointer',
-    'font-size:.875rem', 'box-shadow:0 2px 8px rgba(0,0,0,0.15)',
+    'position:fixed',
+    'bottom:5rem',
+    'right:1rem',
+    'z-index:9999',
+    'padding:.5rem 1rem',
+    'background:#16a34a',
+    'color:white',
+    'border:none',
+    'border-radius:6px',
+    'cursor:pointer',
+    'font-size:.875rem',
+    'box-shadow:0 2px 8px rgba(0,0,0,0.15)',
   ].join(';');
   btn.addEventListener('click', openForm);
   document.body.appendChild(btn);
@@ -34,7 +42,10 @@ function injectButton() {
 
 function openForm() {
   const existing = document.getElementById('draft-feedback-dialog');
-  if (existing) { existing.focus(); return; }
+  if (existing) {
+    existing.focus();
+    return;
+  }
 
   const dialog = document.createElement('dialog');
   dialog.id = 'draft-feedback-dialog';
@@ -109,7 +120,10 @@ function openForm() {
       if (res.ok) {
         const data = await res.json();
         status.textContent = `Thanks! Reference: ${data.id}`;
-        setTimeout(() => { dialog.close(); dialog.remove(); }, 1800);
+        setTimeout(() => {
+          dialog.close();
+          dialog.remove();
+        }, 1800);
       } else if (res.status === 429) {
         status.textContent = 'Too many submissions; please try again later.';
         submitBtn.disabled = false;
