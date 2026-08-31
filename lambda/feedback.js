@@ -5,8 +5,8 @@
 //
 // Environment variables:
 //   GITHUB_REPO_OWNER  â€” defaults to "jaetill"
-//   GITHUB_REPO_NAME   â€” defaults to "meal-planner"
-//   GITHUB_SECRET_ID   â€” defaults to "meal-planner/github-token"
+//   GITHUB_REPO_NAME   â€” defaults to "draft"
+//   GITHUB_SECRET_ID   â€” defaults to "draft/github-token"
 //
 // Secrets Manager value at GITHUB_SECRET_ID must be JSON: { "GITHUB_TOKEN": "ghp_..." }
 
@@ -21,7 +21,7 @@ const REPO_OWNER = process.env.GITHUB_REPO_OWNER || 'jaetill';
 const REPO_NAME = process.env.GITHUB_REPO_NAME || 'draft';
 const SECRET_ID = process.env.GITHUB_SECRET_ID || 'draft/github-token';
 
-const ALLOWED_ORIGINS = new Set(['https://meals.jaetill.com', 'http://localhost:5173']);
+const ALLOWED_ORIGINS = new Set(['https://draft.jaetill.com', 'http://localhost:5173']);
 
 const SAFE_PAGE_ENTRIES = [{ origin: 'https://draft.jaetill.com', pathPrefix: '' }];
 

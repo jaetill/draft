@@ -18,28 +18,34 @@ Live fantasy football draft assistant for Jason's redraft league. Polls the Slee
 
 ## Tech stack & hosting
 
-| Layer    | Technology                                                              | Notes                                                                 |
-| -------- | ----------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| Frontend | Vite + vanilla JS (or lightweight framework — TBD when we start coding) | Mobile-first; must work in iPad Safari.                               |
-| Backend  | None                                                                    | Static site. Browser calls Sleeper API directly.                      |
-| Auth     | None                                                                    | Sleeper read API is public; draft IDs are not sensitive.              |
-| Storage  | S3 (static assets only)                                                 | No user data persisted. Draft state is ephemeral, comes from Sleeper. |
-| Hosting  | S3 + CloudFront                                                         | At `draft.jaetill.com`.                                               |
-| Deploy   | GitHub Actions (OIDC)                                                   | Same pattern as meal-planner / carto.                                 |
+| Layer           | Technology                                                              | Notes                                                                  |
+| --------------- | ----------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Frontend        | Vite + vanilla JS (or lightweight framework — TBD when we start coding) | Mobile-first; must work in iPad Safari.                                |
+| Backend         | None (for draft data)                                                   | Static site. Browser calls Sleeper API directly.                       |
+| Feedback Lambda | AWS Lambda (Node.js 22.x) + API Gateway HTTP                            | `POST /feedback` → files a GitHub Issue. Source: `lambda/feedback.js`. |
+| Auth            | None                                                                    | Sleeper read API is public; draft IDs are not sensitive.               |
+| Storage         | S3 (static assets only)                                                 | No user data persisted. Draft state is ephemeral, comes from Sleeper.  |
+| Hosting         | S3 + CloudFront                                                         | At `draft.jaetill.com`.                                                |
+| Deploy          | GitHub Actions (OIDC)                                                   | Same pattern as meal-planner / carto.                                  |
 
 ## AWS resources
 
-| Resource                | ID / ARN                                                                              | Region    | Notes                                                                                               |
-| ----------------------- | ------------------------------------------------------------------------------------- | --------- | --------------------------------------------------------------------------------------------------- |
-| S3 Bucket               | `jaetill-draft`                                                                       | us-east-2 | Public access blocked; CloudFront OAC only.                                                         |
-| CloudFront Distribution | `E29VATR5EV095C` (`d2nlqjswb9m35y.cloudfront.net`)                                    | global    | Origin: S3 via OAC `E3NDD0LFUQNJ8J`. CNAME: draft.jaetill.com. SPA fallback: 403/404 → /index.html. |
-| ACM Certificate         | `arn:aws:acm:us-east-1:214599503944:certificate/ac71c7d9-5a8a-4597-a08c-f1b6bf7d58eb` | us-east-1 | For draft.jaetill.com. DNS-validated.                                                               |
-| OIDC Deploy Role        | `arn:aws:iam::214599503944:role/draft-github-deploy`                                  | global    | Trust scoped to `repo:jaetill/draft:ref:refs/heads/master`.                                         |
-| Route 53 Records        | A + AAAA alias `draft.jaetill.com` → CloudFront                                       | global    | Hosted zone `Z0736006XR97Z1TWPWN7` (jaetill.com). CloudFront alias zone Z2FDTNDATAQYW2.             |
+| Resource                | ID / ARN                                                                              | Region    | Notes                                                                                                             |
+| ----------------------- | ------------------------------------------------------------------------------------- | --------- | ----------------------------------------------------------------------------------------------------------------- |
+| S3 Bucket               | `jaetill-draft`                                                                       | us-east-2 | Public access blocked; CloudFront OAC only.                                                                       |
+| CloudFront Distribution | `E29VATR5EV095C` (`d2nlqjswb9m35y.cloudfront.net`)                                    | global    | Origin: S3 via OAC `E3NDD0LFUQNJ8J`. CNAME: draft.jaetill.com. SPA fallback: 403/404 → /index.html.               |
+| ACM Certificate         | `arn:aws:acm:us-east-1:214599503944:certificate/ac71c7d9-5a8a-4597-a08c-f1b6bf7d58eb` | us-east-1 | For draft.jaetill.com. DNS-validated.                                                                             |
+| OIDC Deploy Role        | `arn:aws:iam::214599503944:role/draft-github-deploy`                                  | global    | Trust scoped to `repo:jaetill/draft:ref:refs/heads/master`.                                                       |
+| Route 53 Records        | A + AAAA alias `draft.jaetill.com` → CloudFront                                       | global    | Hosted zone `Z0736006XR97Z1TWPWN7` (jaetill.com). CloudFront alias zone Z2FDTNDATAQYW2.                           |
+| Lambda Function         | `arn:aws:lambda:us-east-2:214599503944:function:draft-feedback` (alias: `production`) | us-east-2 | Node.js 22.x. `POST /feedback` — files GitHub Issues via Secrets Manager token. Exec role: `draft-feedback-role`. |
+| API Gateway (HTTP)      | `draft-feedback-api` (endpoint: Terraform output `feedback_api_url`)                  | us-east-2 | HTTP API v2. Route: `POST /feedback`. CORS: `draft.jaetill.com` + `localhost:5173`.                               |
 
-No Lambda, no API Gateway, no Cognito. Sleeper API is hit directly from the browser.
+No Cognito. Sleeper draft data is read directly from the browser; Lambda handles only the feedback endpoint.
 
-**Infra source-of-truth:** the JSON request bodies used to provision these resources are checked in under `.aws/` for reference and re-application.
+**Infra source-of-truth:**
+
+- S3, CloudFront, ACM, OIDC role, Route 53 — JSON request bodies are checked in under `.aws/` for reference and re-application.
+- Lambda and API Gateway — managed by Terraform; source is `terraform/envs/prod/`.
 
 ## External APIs
 
@@ -486,13 +492,14 @@ Live-mode specifics, all in service of draft day on an iPad:
 
 1. Push to `master` triggers GitHub Actions workflow.
 2. Workflow assumes `draft-github-deploy` role via OIDC, builds with Vite, syncs `dist/` to S3, invalidates CloudFront.
-3. No Lambda step (no backend).
+3. Packages `lambda/feedback.js` and deploys it to `draft-feedback`; publishes a numbered version and updates the `production` alias.
 
 **Gotchas:**
 
 - Pre-draft: run `npm run refresh-data` and commit the regenerated `data/` files before the deploy. Stale rankings on draft day = bad day.
 - CloudFront invalidation must include `/data/*` so updated data isn't served from cache.
 - `index.html` should have short cache headers; bundled assets are fingerprinted and can cache aggressively.
+- The `production` GitHub environment **must** have a required reviewer set in Settings → Environments → production. Without it, `environment: production` in the workflow is a no-op and every push auto-deploys. Run `.aws/apply-env-required-reviewer.sh` to configure (see `docs/runbooks/deploy.md`).
 
 ## Recommendation engine — strategy ladder
 

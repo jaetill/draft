@@ -27,7 +27,7 @@ on:
         required: false
         type: string
       bundle_issues:
-        description: 'Comma-separated deferred-until-adjacent nit issue numbers the promoter selected to ride along (same-file, ADR-0029)'
+        description: 'Comma-separated low/nit (severity:low,severity:nit) issue numbers the promoter selected to ride along (same-file, ADR-0029)'
         required: false
         type: string
 
@@ -44,4 +44,8 @@ jobs:
       issue_number: ${{ inputs.issue_number }}
       mode: ${{ inputs.mode }}
       bundle_issues: ${{ inputs.bundle_issues }}
-    secrets: inherit
+    # ADR-0048: scope secrets explicitly (no `secrets: inherit`).
+    secrets:
+      CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+      FLEET_APP_ID: ${{ secrets.FLEET_APP_ID }}
+      FLEET_APP_PRIVATE_KEY: ${{ secrets.FLEET_APP_PRIVATE_KEY }}
