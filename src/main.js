@@ -247,51 +247,109 @@ function releaseWakeLock() {
 }
 
 document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible' && uiState.mode === 'live' && !wakeLock) {
-    acquireWakeLock();
-  }
+  if (document.visibilityState !== 'visible' || uiState.mode !== 'live') return;
+  if (!wakeLock) acquireWakeLock();
+  // Draft-day usage is bouncing between the Sleeper app and this page, so the
+  // page spends most of its life backgrounded — where Safari freezes timers.
+  // Poll NOW rather than waiting out a stale timer, so the board is current
+  // the moment he switches back.
+  live?.poll();
 });
+
+/**
+ * A live session survives a page reload. Bouncing to the Sleeper app and back
+ * can evict this page from memory, and iPad Safari then reloads it from
+ * scratch — without this, an app-switch mid-draft silently dropped the user
+ * back into mock mode with an empty board.
+ */
+const LIVE_SESSION_KEY = 'draft-live-session';
+
+function saveLiveSession() {
+  try {
+    localStorage.setItem(
+      LIVE_SESSION_KEY,
+      JSON.stringify({
+        draftId: (uiState.draftIdInput || '').trim() || null,
+        mySlot: state.mySlot,
+      }),
+    );
+  } catch {
+    /* private browsing — reconnect stays manual */
+  }
+}
+
+function clearLiveSession() {
+  try {
+    localStorage.removeItem(LIVE_SESSION_KEY);
+  } catch {
+    /* nothing to clear */
+  }
+}
+
+function savedLiveSession() {
+  try {
+    return JSON.parse(localStorage.getItem(LIVE_SESSION_KEY));
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Attach (or re-attach) to Sleeper. The explicit entry point — the "go live" /
+ * "reconnect" button and the mode select both land here, and it is safe to
+ * call while already live: the old poller is stopped and replaced.
+ */
+async function connectLive() {
+  // A pasted draft id (the last path segment of the Sleeper room URL) attaches
+  // straight to that draft — the only way to rehearse against a MOCK, which
+  // has no league to resolve. Empty falls back to league → current draft.
+  const draftId = (uiState.draftIdInput || '').trim() || null;
+  if (!draftId && !state.cfg.sleeper_league_id) {
+    $('status').textContent = 'no sleeper_league_id in league.json — cannot go live';
+    return;
+  }
+  live?.stop();
+  live = null;
+  state.picks = [];
+  state.taken = new Set();
+  uiState.mode = 'live';
+  try {
+    live = new SleeperLive(
+      draftId ? null : state.cfg.sleeper_league_id,
+      state,
+      () => {
+        uiState.live = live.status();
+        render();
+      },
+      { draftId },
+    );
+    await live.init();
+    live.start();
+    uiState.live = live.status();
+    saveLiveSession();
+    acquireWakeLock();
+    render();
+  } catch (err) {
+    $('status').textContent = `live mode failed: ${err.message}`;
+    // Don't retry a dead id on every reload — but keep it in the input so a
+    // fix-and-reconnect is one tap.
+    clearLiveSession();
+    uiState.mode = 'mock';
+    live?.stop();
+    live = null;
+    render();
+  }
+}
 
 async function setMode(newMode) {
   if (newMode === uiState.mode) return;
   if (newMode === 'live') {
-    // A pasted draft id (the last path segment of the Sleeper room URL) attaches
-    // straight to that draft — the only way to rehearse against a MOCK, which
-    // has no league to resolve. Empty falls back to league → current draft.
-    const draftId = (uiState.draftIdInput || '').trim() || null;
-    if (!draftId && !state.cfg.sleeper_league_id) {
-      $('status').textContent = 'no sleeper_league_id in league.json — cannot go live';
-      return;
-    }
-    state.picks = [];
-    state.taken = new Set();
-    uiState.mode = 'live';
-    try {
-      live = new SleeperLive(
-        draftId ? null : state.cfg.sleeper_league_id,
-        state,
-        () => {
-          uiState.live = live.status();
-          render();
-        },
-        { draftId },
-      );
-      await live.init();
-      live.start();
-      uiState.live = live.status();
-      acquireWakeLock();
-      render();
-    } catch (err) {
-      $('status').textContent = `live mode failed: ${err.message}`;
-      uiState.mode = 'mock';
-      live?.stop();
-      live = null;
-      render();
-    }
+    await connectLive();
   } else {
     live?.stop();
     live = null;
     releaseWakeLock();
+    clearLiveSession();
     state.picks = [];
     state.taken = new Set();
     uiState.mode = 'mock';
@@ -302,11 +360,14 @@ async function setMode(newMode) {
 
 function attachHandlers() {
   $('mode-select')?.addEventListener('change', (e) => setMode(e.target.value));
+  $('connect-btn')?.addEventListener('click', () => connectLive());
   $('draft-id-input')?.addEventListener('input', (e) => {
     uiState.draftIdInput = e.target.value;
   });
   $('slot-select')?.addEventListener('change', (e) => {
     state.mySlot = Number(e.target.value);
+    // The slot survives an app-switch reload along with the connection.
+    if (uiState.mode === 'live') saveLiveSession();
     render();
   });
   $('level-select')?.addEventListener('change', (e) => {
@@ -393,6 +454,14 @@ async function init() {
     const staleHint = age === null ? '' : age > 14 ? ` · ⚠ roster data ${age}d old` : '';
     $('status').textContent =
       `${Object.keys(players).length} players · ${rankHint}${tiersHint}${liveHint}${profileHint}${byeHint}${staleHint}`;
+
+    // Re-attach a live session after a reload — see LIVE_SESSION_KEY.
+    const saved = savedLiveSession();
+    if (saved) {
+      uiState.draftIdInput = saved.draftId || '';
+      if (saved.mySlot) state.mySlot = saved.mySlot;
+      await connectLive();
+    }
   } catch (err) {
     $('status').textContent = `error: ${err.message}`;
 

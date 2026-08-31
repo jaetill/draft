@@ -473,9 +473,11 @@ across re-renders and refreshes exactly when the real board changes.
 
 Live-mode specifics, all in service of draft day on an iPad:
 
-- **Draft id input** (controls card): paste the last path segment of any
-  Sleeper room URL to attach directly — the only way to rehearse against a
-  MOCK, which has no league to resolve. Empty falls back to league → draft.
+- **Draft id input + "go live" button** (controls card): paste the last path
+  segment of any Sleeper room URL and tap the button to attach directly — the
+  only way to rehearse against a MOCK, which has no league to resolve. Empty
+  falls back to league → draft. The button reads "reconnect" while live and is
+  safe to mash: the old poller is stopped and replaced.
 - **The draft is the authority on shape.** `SleeperLive.init()` overrides
   teams/rounds/totalPicks from the draft object (a 10-team mock would otherwise
   break `isMyTurn` math) and takes your seat from `draft_order` when it knows
@@ -484,9 +486,13 @@ Live-mode specifics, all in service of draft day on an iPad:
   gets NO personas rather than wrong ones.
 - **Poll cadence:** picks every 4s while drafting; draft metadata only on a
   pick change or every 4th poll (the CLI's meta-throttling pattern).
-- **Screen wake lock** is acquired in live mode and re-acquired on
-  visibilitychange (iPad Safari 16.4+). Still true that iPad Safari suspends
-  background tabs — at the draft, run Split View, not tab-switching.
+- **Built for bouncing between the Sleeper app and Safari.** A live session is
+  persisted to localStorage and re-attached on boot, because iPad Safari can
+  evict and reload the backgrounded page mid-draft — without this an
+  app-switch silently dropped back to mock mode. Returning to the page also
+  triggers an immediate poll (background timers are frozen) and re-acquires
+  the screen wake lock (iPad Safari 16.4+). Switching to mock, or a failed
+  connect, clears the saved session.
 
 ## Deployment
 

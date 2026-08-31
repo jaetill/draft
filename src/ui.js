@@ -112,9 +112,9 @@ export function renderControls(ui, state, opts = {}) {
           inputmode="numeric"
           placeholder="mock room URL id (optional)"
           value="${esc(ui.draftIdInput || '')}"
-          ${ui.mode === 'live' ? 'disabled' : ''}
         />
       </label>
+      <button id="connect-btn">${isLive ? 'reconnect' : 'go live'}</button>
     </div>
     <div class="controls-row" style="margin-top:8px;">
       <button id="step-btn" ${isLive || onClock ? 'disabled' : ''}>auto-pick to my turn</button>
