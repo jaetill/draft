@@ -30,7 +30,13 @@ function picksUntilMyNextTurn(state) {
  * @returns {Array} — same shape as L1/L2 recs, plus { futureBest, futureVbd, totalScore }
  */
 export function lookaheadRecommend(state, rankings, opts = {}) {
-  const { level = 'l2', n = 5, ownerProfiles = null, candidatePoolSize = 10 } = opts;
+  const {
+    level = 'l2',
+    n = 5,
+    ownerProfiles = null,
+    candidatePoolSize = 10,
+    tendencies = null,
+  } = opts;
   const baseEngine = level === 'l1' ? recommendL1 : recommendL2;
   const candidates = baseEngine(state, rankings, candidatePoolSize);
 
@@ -51,20 +57,28 @@ export function lookaheadRecommend(state, rankings, opts = {}) {
     // Simulate opponents until my next turn (or draft end / unexpected my-turn).
     let simmed = 0;
     while (simmed < gap && !cloned.isComplete && !cloned.isMyTurn) {
-      const opp = pickForOpponent(cloned, ownerProfiles, DETERMINISTIC);
+      // Pass rankings so opponents draft off consensus, not search popularity.
+      const opp = pickForOpponent(cloned, ownerProfiles, DETERMINISTIC, rankings, tendencies);
       cloned.addPick(opp.id);
       simmed++;
     }
     // Evaluate best pick at my next turn from the cloned state.
     const nextOpts = baseEngine(cloned, rankings, 1);
     const nextBest = nextOpts[0] || null;
-    const futureVbd = nextBest ? nextBest.vbd ?? 0 : 0;
+    const futureVbd = nextBest ? (nextBest.vbd ?? 0) : 0;
     return {
       ...rec,
-      futureBest: nextBest ? { name: nextBest.player.name, position: nextBest.player.position, posRank: nextBest.posRank, tier: nextBest.tier } : null,
+      futureBest: nextBest
+        ? {
+            name: nextBest.player.name,
+            position: nextBest.player.position,
+            posRank: nextBest.posRank,
+            tier: nextBest.tier,
+          }
+        : null,
       futureVbd,
       futureScore: nextBest ? nextBest.score : 0,
-      totalScore: rec.score + (nextBest ? nextBest.score : 0)
+      totalScore: rec.score + (nextBest ? nextBest.score : 0),
     };
   });
 

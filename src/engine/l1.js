@@ -29,7 +29,7 @@ function needMultiplier(player, state) {
 function rationale(player, state, rankings) {
   const pos = player.position;
   const r = rankings.posRank.get(player.id);
-  const t = rankings.tier(player);
+  const t = rankings.posTier(player);
   const needs = state.myNeeds();
   const reasons = [];
 
@@ -67,14 +67,16 @@ export function recommend(state, rankings, n = 5) {
       score,
       vbd,
       mult,
-      tier: rankings.tier(p),
-      posRank: rankings.posRank.get(p.id) ?? 999
+      tier: rankings.posTier(p),
+      posRank: rankings.posRank.get(p.id) ?? 999,
     });
   }
 
-  scored.sort((a, b) => b.score - a.score);
+  // Same consensus tiebreak as L2 — see the note there.
+  const ecrOf = (p) => rankings.meta?.ecr?.(p) ?? Number.POSITIVE_INFINITY;
+  scored.sort((a, b) => b.score - a.score || ecrOf(a.player) - ecrOf(b.player));
   return scored.slice(0, n).map((s) => ({
     ...s,
-    rationale: rationale(s.player, state, rankings)
+    rationale: rationale(s.player, state, rankings),
   }));
 }

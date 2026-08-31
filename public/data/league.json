@@ -12,6 +12,19 @@
     "BENCH": 6
   },
   "flex_eligible": ["RB", "WR", "TE"],
+  "roster_strategy": {
+    "_comment": "How Jason actually manages this roster in-season. These change what a DRAFTED player is worth to him and are deliberately NOT applied to opponents — the tendency data shows other owners do draft backup QBs and TEs.",
+    "streams_def": true,
+    "streams_bye_replacements": true,
+    "flex_te_discount": 0.9,
+    "max_flex_te": 1,
+    "backup_qb_value": 0.05,
+    "backup_te_value": 0.05,
+    "_max_flex_te": "At most this many TEs valued into flex slots at once. The per-player flex comparison is right for the first TE past the starter, but it has no memory — without a cap the engine built a three-TE starting lineup. TEs past the cap are valued as bench (backup_te_value). Remove the key to disable the cap.",
+    "_streams_def": "DEF is replaced week to week against the worst offense on the schedule. The drafted DEF is a placeholder, so its identity barely matters — take the last one.",
+    "_streams_bye_replacements": "Bye weeks are covered by dropping the worst rostered player and adding a one-week fill-in, not by drafting backups. A bye collision costs waiver moves, not a forfeited lineup slot.",
+    "_flex_te_discount": "A TE is eligible for the flex on merit — no hard gate. He goes in if his projected points match the RB/WR he is competing against, which is exactly what the flex baseline already measures. This discount only encodes a mild preference for an RB/WR blend, so a TE has to be clearly comparable rather than a coin flip. Set to 1.0 for pure point comparison, lower to bias harder toward skill players. NOTE: under this rule the engine WILL sometimes surface a mid TE (LaPorta, Kelce) whose season points beat the available receivers. That is the rule working as stated. If it turns out to be wrong in practice, the cause is weekly TE variance, which season totals cannot see and which would need game-level data to model."
+  },
   "no_kicker": true,
   "def_earliest_round": 15,
   "te_flex_penalty": 0.5,
@@ -23,7 +36,13 @@
     "TE": 15,
     "DEF": 12
   },
+  "season": "2026",
   "sleeper_league_id": "1347230924131041280",
   "sleeper_league_name": "Plowden's Peeps",
-  "sleeper_league_notes": "Settings need commissioner fix before draft day: draft_rounds is 3 (should be 15), max_keepers is 1 (should be 0). League uses Sleeper's auto_continue chain — previous_league_id 1261484943775629312 was 2025 inaugural season."
+  "sleeper_draft_id": "1347230924139417600",
+  "my_sleeper_user_id": "1264057153128239104",
+  "my_draft_slot": 12,
+  "draft_start": "2026-09-06T19:00:00Z",
+  "sleeper_league_notes": "Verified against the Sleeper API on 2026-08-27. The DRAFT object is correct: rounds=15, snake, 120s pick timer, slots QB1/RB2/WR2/TE1/FLEX2/DEF1/BN6. The LEAGUE object still carries draft_rounds=3 and max_keepers=1, but those are vestigial — the draft object governs an already-created draft, and keeper_deadline is 0 with no keepers designated. Worth a commissioner sanity-check, not a blocker. previous_league_id 1261484943775629312 was the 2025 inaugural season.",
+  "my_draft_slot_notes": "jaetill drew slot 12 — the turn. Back-to-back picks at 12/13, 36/37, 60/61 etc. means tier cliffs matter more than ADP: you can let a tier ride knowing you get two bites, but you eat the full gap between turns. Re-verify the slot before draft day; Sleeper commissioners can reshuffle draft_order until it starts."
 }

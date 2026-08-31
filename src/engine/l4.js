@@ -7,14 +7,14 @@ export const THESES = {
   none: {
     label: 'No thesis (BPA + need)',
     description: 'Best player available, weighted by roster need. The default.',
-    adjust: () => 1
+    adjust: () => 1,
   },
 
   heroRb: {
     label: 'Hero RB',
     description:
       'Lock down one elite RB in round 1, then go heavy WR/TE. Bet: RB is scarce but injury-prone, so anchor with one and hedge with WRs.',
-    adjust(player, state, ctx) {
+    adjust(player, state) {
       const round = Math.ceil(state.currentPick / state.teams);
       const myRbs = state.myRoster().RB.length;
       if (player.position === 'RB') {
@@ -26,7 +26,7 @@ export const THESES = {
         return 1.15; // load skill while ignoring RB
       }
       return 1.0;
-    }
+    },
   },
 
   zeroRb: {
@@ -41,7 +41,7 @@ export const THESES = {
       }
       if (round <= 5 && (player.position === 'WR' || player.position === 'TE')) return 1.2;
       return 1.0;
-    }
+    },
   },
 
   robustRb: {
@@ -53,7 +53,7 @@ export const THESES = {
       const myRbs = state.myRoster().RB.length;
       if (player.position === 'RB' && round <= 3 && myRbs < 2) return 1.4;
       return 1.0;
-    }
+    },
   },
 
   lateRoundQb: {
@@ -65,7 +65,7 @@ export const THESES = {
       if (player.position === 'QB' && round < 8) return 0.3;
       if (player.position === 'QB' && round >= 8) return 1.3;
       return 1.0;
-    }
+    },
   },
 
   anchorTe: {
@@ -76,13 +76,16 @@ export const THESES = {
       const round = Math.ceil(state.currentPick / state.teams);
       const myTes = state.myRoster().TE.length;
       if (player.position === 'TE' && round >= 2 && round <= 4 && myTes === 0) {
-        const tier = ctx.rankings.tier(player);
-        if (tier === 1) return 1.5;
-        if (tier === 2) return 1.2;
+        // posTier, not tier: this thesis is about being elite *among TEs*.
+        // On the overall board even the best TE sits around tier 3, so an
+        // overall-tier check here would silently never fire.
+        const t = ctx.rankings.posTier(player);
+        if (t === 1) return 1.5;
+        if (t === 2) return 1.2;
       }
       return 1.0;
-    }
-  }
+    },
+  },
 };
 
 /**

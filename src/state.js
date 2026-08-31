@@ -122,7 +122,7 @@ export class DraftState {
       RB: roster.RB.length,
       WR: roster.WR.length,
       TE: roster.TE.length,
-      DEF: roster.DEF.length
+      DEF: roster.DEF.length,
     };
     const totalSlots = r.QB + r.RB + r.WR + r.TE + r.FLEX + r.DEF + r.BENCH;
     const filled = have.QB + have.RB + have.WR + have.TE + have.DEF;
@@ -133,15 +133,12 @@ export class DraftState {
       RB: Math.max(0, r.RB - have.RB),
       WR: Math.max(0, r.WR - have.WR),
       TE: Math.max(0, r.TE - have.TE),
-      DEF: Math.max(0, r.DEF - have.DEF)
+      DEF: Math.max(0, r.DEF - have.DEF),
     };
 
     // Flex slots we haven't covered yet (FLEX absorbs surplus RB/WR/TE).
     const flexEligible = this.cfg.flex_eligible; // ['RB','WR','TE']
-    const flexSurplus = flexEligible.reduce(
-      (sum, pos) => sum + Math.max(0, have[pos] - r[pos]),
-      0
-    );
+    const flexSurplus = flexEligible.reduce((sum, pos) => sum + Math.max(0, have[pos] - r[pos]), 0);
     const flexShortfall = Math.max(0, r.FLEX - flexSurplus);
 
     return {
@@ -150,7 +147,7 @@ export class DraftState {
       flexShortfall,
       benchRoom: totalSlots - filled,
       filled,
-      totalSlots
+      totalSlots,
     };
   }
 }

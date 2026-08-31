@@ -39,7 +39,7 @@ function annotateAnticipation(recs, state, profiles) {
       }
       // Loyalty match
       const loyaltyMatch = (profile.loyaltyPicks || []).find(
-        (l) => l.player.toLowerCase() === playerNameLower
+        (l) => l.player.toLowerCase() === playerNameLower,
       );
       if (loyaltyMatch && loyaltyMatch.seasons.length >= 3) {
         tags.add(`${profile.name} (drafted ${loyaltyMatch.seasons.length}x)`);
@@ -52,13 +52,20 @@ function annotateAnticipation(recs, state, profiles) {
 }
 
 export function recommend(state, rankings, opts = {}) {
-  const { level = 'l2', thesis = 'none', n = 5, ownerProfiles = null, lookahead = false } = opts;
+  const {
+    level = 'l2',
+    thesis = 'none',
+    n = 5,
+    ownerProfiles = null,
+    lookahead = false,
+    tendencies = null,
+  } = opts;
 
   let recs;
   if (lookahead) {
     // Lookahead picks its own candidate pool and re-ranks by current+future value.
     // Thesis/L4 still applied as a re-weight on the resulting set.
-    recs = lookaheadRecommend(state, rankings, { level, n: n * 2, ownerProfiles });
+    recs = lookaheadRecommend(state, rankings, { level, n: n * 2, ownerProfiles, tendencies });
     recs = applyThesis(recs, state, rankings, thesis);
     recs = recs.slice(0, n);
   } else {

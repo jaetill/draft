@@ -5,7 +5,7 @@
 // These produce flags the UI surfaces alongside recommendations. They don't
 // override the ranking, but they tell you *why* a pick is suddenly urgent.
 
-const RUN_WINDOW = 10;  // picks to look back
+const RUN_WINDOW = 10; // picks to look back
 const RUN_THRESHOLD = 5; // ≥5 of N at one position triggers a "run"
 const FALLER_THRESHOLD = 10; // picks below ADP to flag as value
 

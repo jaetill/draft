@@ -9,7 +9,7 @@ export const ARCHETYPE_LABELS = {
   EarlyQB: 'Early QB',
   HeroRB: 'Hero RB',
   ZeroRB: 'Zero RB',
-  RobustRB: 'Robust RB'
+  RobustRB: 'Robust RB',
 };
 
 /**
@@ -98,7 +98,7 @@ export function profileForSlot(profiles, slot) {
     primary: primaryArchetype(owner),
     seasons: owner.seasons || [],
     confidence: owner.confidence || {},
-    teamAffinities: owner.teamAffinities || []
+    teamAffinities: owner.teamAffinities || [],
   };
 }
 
@@ -124,6 +124,39 @@ export function archetypeTargets(archetype, position, round) {
 }
 
 /**
+ * Seat your leaguemates around a mock table.
+ *
+ * owner-profiles.json maps REAL draft slots to owners. A mock puts you in
+ * whatever chair it feels like, so applying that chart unrotated would sit
+ * Bruno2328 in your seat and shift everyone relative to you — which is exactly
+ * the relationship that matters, since what you care about is who picks in the
+ * gap before your next turn.
+ *
+ * Rotating by (mockSlot − realSlot) keeps the ordering intact and puts you
+ * back in your own chair, so whoever picks immediately before you in the mock
+ * is whoever picks immediately before you on draft day.
+ *
+ * What this buys and what it does not: mock drafters are strangers and
+ * autopickers, and they will not behave like your friends. This makes the
+ * engine run the code path it will run live and makes the output look like
+ * draft day. It does not make the predictions true.
+ */
+export function rotatePersonas(profiles, mockSlot, realSlot, teamCount) {
+  if (!profiles?.slotToOwner) return profiles;
+  const chart = profiles.slotToOwner;
+  const chartSlots = Object.keys(chart).length;
+  if (chartSlots !== teamCount) return profiles; // shapes differ — don't guess
+  if (mockSlot === realSlot) return profiles;
+
+  const rotated = {};
+  for (let s = 1; s <= teamCount; s++) {
+    const idx = ((s - mockSlot + realSlot - 1 + teamCount * 2) % teamCount) + 1;
+    rotated[String(s)] = chart[String(idx)];
+  }
+  return { ...profiles, slotToOwner: rotated, rotatedFrom: { mockSlot, realSlot } };
+}
+
+/**
  * Predict which positions the next N opponent picks are most likely to favor
  * based on archetypes. Used for reasoning text on user's recommendations
  * ("NuttySequel up next, Anchor-TE: likely TE before your turn").
@@ -140,7 +173,7 @@ export function anticipateUpcoming(state, profiles, n = 5) {
       pick,
       slot,
       round: Math.ceil(pick / state.teams),
-      profile
+      profile,
     });
   }
   return out;
