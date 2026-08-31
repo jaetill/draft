@@ -59,10 +59,19 @@ resource "aws_iam_role_policy" "github_deploy" {
         Resource = aws_lambda_function.feedback.arn
       },
       {
-        Sid    = "LambdaAliasProductionOnly"
+        # IAM authorizes UpdateAlias against the FUNCTION arn, not the alias-
+        # qualified arn — scoping to ":production" alone can never match, and
+        # the deploy failed with AccessDenied until the bare arn was added
+        # (verified live 2026-08-31). Alias-level scoping is not enforceable
+        # at the resource level for these actions; both arns are listed so the
+        # intent stays documented.
+        Sid    = "LambdaAliasFeedback"
         Effect = "Allow"
-        Action = ["lambda:CreateAlias", "lambda:UpdateAlias"]
-        Resource = "${aws_lambda_function.feedback.arn}:production"
+        Action = ["lambda:CreateAlias", "lambda:UpdateAlias", "lambda:GetAlias"]
+        Resource = [
+          aws_lambda_function.feedback.arn,
+          "${aws_lambda_function.feedback.arn}:production",
+        ]
       }
     ]
   })

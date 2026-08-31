@@ -153,8 +153,21 @@ jobs:
             --function-name draft-feedback \
             --region $AWS_REGION \
             --query Version --output text)
-          aws lambda update-alias \
+          # First deploy bootstraps the alias; every later one updates it.
+          # update-alias on a missing alias is ResourceNotFound, not upsert.
+          if aws lambda get-alias \
             --function-name draft-feedback \
             --name production \
-            --function-version "$VER" \
-            --region $AWS_REGION
+            --region $AWS_REGION >/dev/null 2>&1; then
+            aws lambda update-alias \
+              --function-name draft-feedback \
+              --name production \
+              --function-version "$VER" \
+              --region $AWS_REGION
+          else
+            aws lambda create-alias \
+              --function-name draft-feedback \
+              --name production \
+              --function-version "$VER" \
+              --region $AWS_REGION
+          fi
